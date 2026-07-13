@@ -1,0 +1,63 @@
+-- Run this file in the Supabase SQL editor.
+-- The quoted identifier preserves the requested hyphenated table name.
+
+create table if not exists public."d6v-characters" (
+  id text primary key check (id ~ '^[a-z0-9]+(?:-[a-z0-9]+)*$'),
+  owner_id uuid references auth.users(id) on delete set null default auth.uid(),
+  character_data jsonb not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  constraint character_data_is_object check (jsonb_typeof(character_data) = 'object'),
+  constraint character_data_required_fields check (
+    character_data ?& array['name', 'experiencePoints', 'tagline', 'playerName', 'imageUrl']
+  )
+);
+
+alter table public."d6v-characters" enable row level security;
+
+grant select on table public."d6v-characters" to anon;
+grant select, update, delete on table public."d6v-characters" to authenticated;
+
+drop policy if exists "Authenticated users can view characters" on public."d6v-characters";
+drop policy if exists "Anyone can view characters" on public."d6v-characters";
+create policy "Anyone can view characters"
+  on public."d6v-characters"
+  for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists "Authenticated users can update characters" on public."d6v-characters";
+drop policy if exists "Owners and admins can update characters" on public."d6v-characters";
+create policy "Owners and admins can update characters"
+  on public."d6v-characters"
+  for update
+  to authenticated
+  using (
+    owner_id = (select auth.uid())
+    or (select auth.jwt() -> 'app_metadata' ->> 'role') = 'admin'
+  )
+  with check (
+    owner_id = (select auth.uid())
+    or (select auth.jwt() -> 'app_metadata' ->> 'role') = 'admin'
+  );
+
+drop policy if exists "Owners and admins can delete characters" on public."d6v-characters";
+create policy "Owners and admins can delete characters"
+  on public."d6v-characters"
+  for delete
+  to authenticated
+  using (
+    owner_id = (select auth.uid())
+    or (select auth.jwt() -> 'app_metadata' ->> 'role') = 'admin'
+  );
+
+insert into public."d6v-characters" (id, character_data)
+values
+  ('mara-vale', '{"name":"Mara Vale","experiencePoints":18,"totalExperiencePoints":42,"currentHealth":9,"totalHealth":12,"tagline":"Every locked door is just a question waiting for the right answer.","playerName":"Alex","imageUrl":"https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"}'::jsonb),
+  ('orrin-voss', '{"name":"Orrin Voss","experiencePoints":12,"totalExperiencePoints":31,"currentHealth":14,"totalHealth":16,"tagline":"Keep the engines warm. We may need to leave quickly.","playerName":"Jordan","imageUrl":"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80"}'::jsonb),
+  ('sable-reyes', '{"name":"Sable Reyes","experiencePoints":25,"totalExperiencePoints":58,"currentHealth":10,"totalHealth":10,"tagline":"The odds only matter if you plan on playing fair.","playerName":"Morgan","imageUrl":"https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80"}'::jsonb),
+  ('tovan-rusk', '{"name":"Tovan Rusk","experiencePoints":9,"totalExperiencePoints":23,"currentHealth":17,"totalHealth":20,"tagline":"Stand behind me, and try not to blink.","playerName":"Casey","imageUrl":"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"}'::jsonb),
+  ('nyx-calder', '{"name":"Nyx Calder","experiencePoints":16,"totalExperiencePoints":37,"currentHealth":8,"totalHealth":11,"tagline":"I have a plan. The quiet part is optional.","playerName":"Riley","imageUrl":"https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=600&q=80"}'::jsonb)
+on conflict (id) do update
+set character_data = excluded.character_data,
+    updated_at = now();
