@@ -1,0 +1,1 @@
+Okay, characters should also start with 2/5 meta dice. At the top of additional information we need to add a button forcing the player to roll for health. Roll strength and add 20. Only only 1 reroll (allow additional rerolls if the strength attribute changes). Set health when created as 100% with rolled health / rolled health.

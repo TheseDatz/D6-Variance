@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({
   attribute: { type: Object, required: true },
+  characterName: { type: String, default: '' },
   disabled: { type: Boolean, default: false },
   name: { type: String, required: true },
 })
@@ -36,7 +37,7 @@ function roll(value, label) {
   if (!rating) return
 
   window.dispatchEvent(new CustomEvent('d6v-roll-dice', {
-    detail: { ...rating, rollLabel: label },
+    detail: { ...rating, rollLabel: label, characterName: props.characterName },
   }))
 }
 </script>

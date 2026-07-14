@@ -12,7 +12,7 @@ const imageFailed = ref(false)
   <RouterLink
     :aria-label="`View ${character.name || 'character'} sheet`"
     class="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300"
-    :to="{ name: 'character-sheet', params: { slug: character.id } }"
+    :to="{ name: 'character-sheet', params: { id: character.id } }"
   >
   <article class="relative overflow-hidden border border-amber-300/30 bg-[#050807]/80 p-4 shadow-[inset_0_0_24px_rgba(251,191,36,0.025)] transition duration-300 group-hover:-translate-y-0.5 group-hover:border-amber-200/60 group-hover:shadow-[0_14px_38px_rgba(0,0,0,0.35),0_0_24px_rgba(251,191,36,0.08)] sm:p-5">
     <div aria-hidden="true" class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-200/55 to-transparent opacity-60 transition group-hover:opacity-100"></div>

@@ -5,17 +5,19 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
   items: { type: Array, required: true },
   title: { type: String, required: true },
+  withDiceModifier: { type: Boolean, default: false },
 })
 
 const modalMode = ref('')
 const selectedIndex = ref(null)
-const draft = reactive({ name: '', description: '' })
+const draft = reactive({ name: '', description: '', diceModifier: '' })
 
 function openAdd() {
   if (props.disabled) return
   selectedIndex.value = null
   draft.name = ''
   draft.description = ''
+  draft.diceModifier = ''
   modalMode.value = 'edit'
 }
 
@@ -29,12 +31,17 @@ function openEdit() {
   const item = props.items[selectedIndex.value]
   draft.name = item?.name || ''
   draft.description = item?.description || ''
+  draft.diceModifier = item?.diceModifier || ''
   modalMode.value = 'edit'
 }
 
 function saveDraft() {
   if (props.disabled || !draft.name.trim()) return
-  const entry = { name: draft.name.trim(), description: draft.description.trim() }
+  const entry = {
+    name: draft.name.trim(),
+    description: draft.description.trim(),
+    ...(props.withDiceModifier ? { diceModifier: draft.diceModifier.trim() } : {}),
+  }
 
   if (selectedIndex.value === null) {
     props.items.push(entry)
@@ -76,6 +83,7 @@ function closeModal() {
     <div v-if="items.length" class="detail-rows">
       <div v-for="(item, index) in items" :key="index" class="detail-row">
         <span>{{ item.name || 'Unnamed detail' }}</span>
+        <span v-if="withDiceModifier && item.diceModifier" class="dice-modifier">{{ item.diceModifier }}</span>
         <button :aria-label="`View ${item.name || title} information`" class="info-button" type="button" @click="openInfo(index)">
           i
         </button>
@@ -91,6 +99,9 @@ function closeModal() {
           <template v-if="modalMode === 'view'">
             <p class="modal-kicker">{{ title }}</p>
             <h2>{{ items[selectedIndex]?.name || 'Unnamed detail' }}</h2>
+            <p v-if="withDiceModifier && items[selectedIndex]?.diceModifier" class="modifier-display">
+              Dice modifier: <strong>{{ items[selectedIndex].diceModifier }}</strong>
+            </p>
             <p class="detail-description">{{ items[selectedIndex]?.description || 'No description provided.' }}</p>
 
             <div class="modal-actions">
@@ -108,6 +119,10 @@ function closeModal() {
             <label class="modal-field mt-4">
               <span>Description</span>
               <textarea v-model="draft.description" rows="7"></textarea>
+            </label>
+            <label v-if="withDiceModifier" class="modal-field mt-4">
+              <span>Dice Modifier</span>
+              <input v-model="draft.diceModifier" placeholder="e.g. +1D or -2D" type="text" />
             </label>
 
             <div class="modal-actions">
@@ -202,6 +217,18 @@ function closeModal() {
   font-size: 0.85rem;
 }
 
+.detail-row > span:first-child {
+  min-width: 0;
+  flex: 1;
+}
+
+.dice-modifier {
+  flex: 0 0 auto;
+  color: rgb(186 230 253);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
 .info-button {
   display: grid;
   width: 1.55rem;
@@ -284,6 +311,18 @@ function closeModal() {
   font-size: 0.9rem;
   line-height: 1.7;
   white-space: pre-wrap;
+}
+
+.modifier-display {
+  margin-top: 0.75rem;
+  color: rgb(161 161 170);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.modifier-display strong {
+  color: rgb(186 230 253);
 }
 
 .modal-field {

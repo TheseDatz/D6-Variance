@@ -71,10 +71,13 @@ function connectRollLog() {
   unsubscribeRolls = subscribeToDiceRolls(addRoll)
 }
 
-async function rollDice(source = 'manual', rollLabel = null) {
+async function rollDice(source = 'manual', rollLabel = null, characterName = null) {
   const dice = Number(diceCount.value)
   const mod = Number(modifier.value)
-  if (source !== 'sheet') rollLabel = null
+  if (source !== 'sheet') {
+    rollLabel = null
+    characterName = null
+  }
 
   if (!Number.isInteger(dice) || dice < 1 || dice > 30) {
     errorMessage.value = 'Enter 1 to 30 dice.'
@@ -117,6 +120,7 @@ async function rollDice(source = 'manual', rollLabel = null) {
     wildTotal,
     wildStatusCode: result.value.wildStatus === 'critical' ? 1 : result.value.wildStatus === 'exploded' ? 2 : 0,
     rollLabel,
+    characterName,
   })
   if (data) addRoll(data)
   if (error) logError.value = `Roll was not logged: ${error.message}`
@@ -126,6 +130,7 @@ function rollRequestedDice(event) {
   const nextDiceCount = Number(event.detail?.diceCount)
   const nextModifier = Number(event.detail?.modifier ?? 0)
   const rollLabel = typeof event.detail?.rollLabel === 'string' ? event.detail.rollLabel.trim().slice(0, 80) : null
+  const characterName = typeof event.detail?.characterName === 'string' ? event.detail.characterName.trim().slice(0, 80) : null
 
   if (!Number.isInteger(nextDiceCount) || nextDiceCount < 1 || nextDiceCount > 30) return
   if (!Number.isInteger(nextModifier) || nextModifier < -99 || nextModifier > 99) return
@@ -133,7 +138,7 @@ function rollRequestedDice(event) {
   diceCount.value = nextDiceCount
   modifier.value = nextModifier
   isOpen.value = true
-  rollDice('sheet', rollLabel)
+  rollDice('sheet', rollLabel, characterName)
 }
 
 function handleKeydown(event) {
@@ -201,7 +206,7 @@ onUnmounted(() => {
         <div v-else class="roll-log-list">
           <article v-for="roll in rolls" :key="roll.id" class="roll-log-entry" :class="`roll-log-entry-${wildStatus(roll.wild_status_code)}`">
             <div class="roll-log-entry-top">
-              <div><strong>{{ roll.roller_username }}</strong><time :datetime="roll.created_at">{{ formatDate(roll.created_at) }}</time></div>
+              <div><strong>{{ roll.roller_username }}<template v-if="roll.character_name"> - {{ roll.character_name }}</template></strong><time :datetime="roll.created_at">{{ formatDate(roll.created_at) }}</time></div>
               <b>{{ roll.total }}</b>
             </div>
             <p v-if="roll.roll_label" class="roll-log-entry-label">{{ roll.roll_label }}</p>

@@ -23,7 +23,7 @@ export async function loadCharacters() {
   }))
 }
 
-export async function loadCharacter(slug) {
+export async function loadCharacter(id) {
   if (!supabase) {
     throw new Error('Supabase is not configured.')
   }
@@ -31,7 +31,7 @@ export async function loadCharacter(slug) {
   const { data, error } = await supabase
     .from(TABLE_NAME)
     .select('id, owner_id, character_data')
-    .eq('id', slug)
+    .eq('id', id)
     .maybeSingle()
 
   if (error) {
@@ -96,5 +96,25 @@ export async function deleteCharacter(id) {
 
   if (!data) {
     throw new Error('No character was deleted. Only the character owner or an administrator can delete it.')
+  }
+}
+
+export async function createCharacter(characterData, ownerId) {
+  if (!supabase) {
+    throw new Error('Supabase is not configured.')
+  }
+
+  const { data, error } = await supabase
+    .from(TABLE_NAME)
+    .insert({ character_data: characterData, owner_id: ownerId })
+    .select('id, owner_id, character_data')
+    .single()
+
+  if (error) throw error
+
+  return {
+    id: data.id,
+    _ownerId: data.owner_id,
+    ...data.character_data,
   }
 }

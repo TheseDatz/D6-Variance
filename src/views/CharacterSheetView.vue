@@ -7,6 +7,7 @@ import AttributeSkills from '../components/AttributeSkills.vue'
 import EquipmentList from '../components/EquipmentList.vue'
 import CurrencyPanel from '../components/CurrencyPanel.vue'
 import AdditionalDetailsPanel from '../components/AdditionalDetailsPanel.vue'
+import LanguagesPanel from '../components/LanguagesPanel.vue'
 
 const ATTRIBUTE_NAMES = ['Strength', 'Dexterity', 'Social', 'Intelligence', 'Luck', 'Paranormal']
 
@@ -23,10 +24,12 @@ const saveMessage = ref('')
 const saveError = ref('')
 const editingName = ref(false)
 const editingPlayerName = ref(false)
+const editingTagline = ref(false)
 const editingImage = ref(false)
 const imageUrlDraft = ref('')
 const nameInput = ref(null)
 const playerNameInput = ref(null)
+const taglineInput = ref(null)
 
 const display = computed(() => character.value || {})
 const passiveDefense = computed(() => {
@@ -38,6 +41,11 @@ const passiveDefense = computed(() => {
 
   const bonus = Math.max(0, Math.floor((Number(match[1]) - 2) / 2))
   return `+${bonus}`
+})
+const strengthDamage = computed(() => {
+  const strengthDice = character.value?.attributes?.strength?.dice
+  const match = String(strengthDice ?? '').trim().match(/^(\d+)\s*d?/i)
+  return match ? `${Math.ceil(Number(match[1]) / 2)}D` : ''
 })
 const canManageCharacter = computed(() => {
   if (!session.value || !character.value) return false
@@ -159,9 +167,18 @@ function ensureAttributes(target) {
 }
 
 function ensureEquipment(target) {
-  if (!Array.isArray(target.weapons) || target.weapons.length === 0) {
-    target.weapons = [{ name: '', difficulty: '', damage: '' }]
-  }
+  if (!Array.isArray(target.weapons)) target.weapons = []
+  const unarmedIndex = target.weapons.findIndex((weapon) => weapon?._isUnarmed || weapon?.name === 'Unarmed')
+  const unarmed = unarmedIndex >= 0
+    ? target.weapons.splice(unarmedIndex, 1)[0]
+    : { name: 'Unarmed', difficulty: 'Easy', damage: '' }
+  Object.assign(unarmed, {
+    _isUnarmed: true,
+    name: 'Unarmed',
+    difficulty: 'Easy',
+    damage: strengthDamage.value,
+  })
+  target.weapons.unshift(unarmed)
   if (!Array.isArray(target.armour) || target.armour.length === 0) {
     target.armour = [{ name: '', resistance: '', dexPenalty: '' }]
   }
@@ -179,6 +196,8 @@ function ensureEquipment(target) {
 function ensureAdditionalDetails(target) {
   if (!Array.isArray(target.specialAbilities)) target.specialAbilities = []
   if (!Array.isArray(target.paranormalDetails)) target.paranormalDetails = []
+  if (!Array.isArray(target.languages)) target.languages = []
+  if (target.movement === null || target.movement === undefined || target.movement === '') target.movement = 10
 }
 
 async function beginNameEdit() {
@@ -193,6 +212,13 @@ async function beginPlayerNameEdit() {
   editingPlayerName.value = true
   await nextTick()
   playerNameInput.value?.select()
+}
+
+async function beginTaglineEdit() {
+  if (!canManageCharacter.value) return
+  editingTagline.value = true
+  await nextTick()
+  taglineInput.value?.select()
 }
 
 function beginImageEdit() {
@@ -213,13 +239,13 @@ function cancelImageEdit() {
   imageUrlDraft.value = ''
 }
 
-async function fetchCharacter(slug) {
+async function fetchCharacter(id) {
   isLoading.value = true
   errorMessage.value = ''
   imageFailed.value = false
 
   try {
-    character.value = await loadCharacter(slug)
+    character.value = await loadCharacter(id)
     if (character.value) {
       ensureAttributes(character.value)
       ensureEquipment(character.value)
@@ -283,7 +309,11 @@ onMounted(async () => {
   session.value = result.session
 })
 
-watch(() => route.params.slug, fetchCharacter, { immediate: true })
+watch(() => route.params.id, fetchCharacter, { immediate: true })
+watch(strengthDamage, (damage) => {
+  const unarmed = character.value?.weapons?.find((weapon) => weapon?._isUnarmed)
+  if (unarmed) unarmed.damage = damage
+})
 </script>
 
 <template>
@@ -309,7 +339,7 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
 
       <section v-else-if="!character" class="mt-6 border border-amber-300/20 bg-white/[0.02] p-8 text-center">
         <h1 class="text-xl font-semibold text-amber-100">Character not found</h1>
-        <p class="mt-2 text-sm text-zinc-400">No character exists with the slug “{{ route.params.slug }}”.</p>
+        <p class="mt-2 text-sm text-zinc-400">No character exists with the ID “{{ route.params.id }}”.</p>
       </section>
 
       <article v-else class="relative mt-6 overflow-hidden border border-amber-300/40 bg-[#050807]/90 p-5 shadow-[0_0_36px_rgba(251,191,36,0.1),inset_0_0_30px_rgba(251,191,36,0.025)] sm:p-8">
@@ -357,7 +387,29 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
           </div>
 
           <div class="character-identity min-w-0">
-            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-amber-200/55">Character</p>
+            <div class="character-kicker-row">
+              <p class="text-xs font-semibold uppercase tracking-[0.28em] text-amber-200/55">Character</p>
+              <input
+                v-if="editingTagline"
+                ref="taglineInput"
+                v-model="character.tagline"
+                aria-label="Character tagline"
+                class="editable-tagline-input"
+                type="text"
+                @blur="editingTagline = false"
+                @keyup.enter="editingTagline = false"
+                @keyup.esc="editingTagline = false"
+              />
+              <button
+                v-else-if="canManageCharacter"
+                class="editable-tagline"
+                type="button"
+                @click="beginTaglineEdit"
+              >
+                {{ display.tagline || 'Add a tagline' }}
+              </button>
+              <span v-else-if="display.tagline" class="character-tagline">{{ display.tagline }}</span>
+            </div>
             <input
               v-if="editingName"
               ref="nameInput"
@@ -535,6 +587,10 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
                 <span>Weight</span>
                 <input v-model="character.weight" :disabled="!canManageCharacter" type="text" />
               </label>
+              <label class="detail-field">
+                <span>Movement</span>
+                <input v-model="character.movement" :disabled="!canManageCharacter" type="text" />
+              </label>
             </div>
 
           </div>
@@ -576,6 +632,7 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
               v-for="name in ATTRIBUTE_NAMES"
               :key="name"
               :attribute="character.attributes[name.toLowerCase()]"
+              :character-name="character.name"
               :disabled="!canManageCharacter"
               :name="name"
             />
@@ -591,7 +648,7 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
           </div>
 
           <div class="equipment-grid mt-5">
-            <EquipmentList :disabled="!canManageCharacter" :items="character.weapons" type="weapons" />
+            <EquipmentList :character-name="character.name" :disabled="!canManageCharacter" :items="character.weapons" type="weapons" />
             <EquipmentList :disabled="!canManageCharacter" :items="character.armour" type="armour" />
             <EquipmentList :disabled="!canManageCharacter" :items="character.equipment" type="equipment" />
             <CurrencyPanel :currencies="character.currencies" :disabled="!canManageCharacter" />
@@ -611,17 +668,20 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
             <AdditionalDetailsPanel :disabled="!canManageCharacter" :items="character.paranormalDetails" title="Paranormal" />
           </div>
 
-          <label v-if="canManageCharacter" class="background-field mt-4">
-            <span class="background-title">
-              Background
-              <small>(Limited visibility)</small>
-            </span>
-            <textarea
-              v-model="character.background"
-              placeholder="Record the character's history and background..."
-              rows="7"
-            ></textarea>
-          </label>
+          <div :class="{ 'private-details-grid--languages-only': !canManageCharacter }" class="private-details-grid mt-4">
+            <label v-if="canManageCharacter" class="background-field">
+              <span class="background-title">
+                Background
+                <small>(Limited visibility)</small>
+              </span>
+              <textarea
+                v-model="character.background"
+                placeholder="Record the character's history and background..."
+                rows="7"
+              ></textarea>
+            </label>
+            <LanguagesPanel :disabled="!canManageCharacter" :languages="character.languages" />
+          </div>
         </section>
       </article>
 
@@ -752,6 +812,63 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
   border-bottom: 1px solid rgb(252 211 77 / 0.6);
   background: rgb(252 211 77 / 0.035);
   outline: none;
+}
+
+.character-kicker-row {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.character-kicker-row > p {
+  flex: 0 0 auto;
+}
+
+.editable-tagline,
+.character-tagline,
+.editable-tagline-input {
+  min-width: 0;
+  flex: 1;
+  color: rgb(161 161 170);
+  font-size: 0.68rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+
+.editable-tagline {
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: text;
+}
+
+.editable-tagline:hover,
+.editable-tagline:focus-visible {
+  color: rgb(212 212 216);
+  text-decoration: underline;
+  text-decoration-color: rgb(252 211 77 / 0.4);
+  text-underline-offset: 0.2rem;
+  outline: none;
+}
+
+.editable-tagline-input {
+  border: 0;
+  border-bottom: 1px solid rgb(252 211 77 / 0.55);
+  padding: 0.15rem 0.25rem;
+  background: rgb(252 211 77 / 0.03);
+  color: rgb(228 228 231);
+  outline: none;
+}
+
+.character-tagline {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .editable-player {
@@ -918,6 +1035,11 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
   border: 1px solid rgb(252 211 77 / 0.24);
   background: rgb(255 255 255 / 0.012);
   box-shadow: inset 0 0 22px rgb(251 191 36 / 0.018);
+}
+
+.private-details-grid {
+  display: grid;
+  gap: 1rem;
 }
 
 .background-title {
@@ -1159,6 +1281,14 @@ watch(() => route.params.slug, fetchCharacter, { immediate: true })
 
   .additional-details-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .private-details-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(17rem, 1fr);
+  }
+
+  .private-details-grid--languages-only {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 

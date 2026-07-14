@@ -3,6 +3,7 @@ create table if not exists public.dice_rolls (
   created_at timestamptz not null default now(),
   roller_id uuid not null references auth.users(id) default auth.uid(),
   roller_username text not null check (roller_username ~ '^[a-z0-9_-]{1,32}$'),
+  character_name text check (char_length(character_name) between 1 and 80),
   roll_label text check (char_length(roll_label) between 1 and 80),
   source_code integer not null check (source_code in (0, 1)),
   dice_count integer not null check (dice_count between 1 and 30),
@@ -14,11 +15,12 @@ create table if not exists public.dice_rolls (
 );
 
 alter table public.dice_rolls add column if not exists roll_label text;
+alter table public.dice_rolls add column if not exists character_name text;
 
 alter table public.dice_rolls enable row level security;
 revoke all on table public.dice_rolls from anon, authenticated;
 grant insert on table public.dice_rolls to authenticated;
-grant select (id, created_at, roller_username, roll_label, source_code, dice_count, modifier, subtotal, total, wild_total, wild_status_code)
+grant select (id, created_at, roller_username, character_name, roll_label, source_code, dice_count, modifier, subtotal, total, wild_total, wild_status_code)
 on table public.dice_rolls to authenticated;
 
 drop policy if exists "Allow authenticated dice roll inserts" on public.dice_rolls;

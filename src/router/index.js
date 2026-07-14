@@ -3,6 +3,7 @@ import { getSession, isAdminSession } from '../services/auth'
 import AdminView from '../views/AdminView.vue'
 import CharactersView from '../views/CharactersView.vue'
 import CharacterSheetView from '../views/CharacterSheetView.vue'
+import CharacterCreatorView from '../views/CharacterCreatorView.vue'
 import ForbiddenView from '../views/ForbiddenView.vue'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
@@ -36,10 +37,16 @@ const router = createRouter({
       component: CharactersView,
     },
     {
-      path: '/characters/:slug',
+      path: '/characters/:id',
       name: 'character-sheet',
       component: CharacterSheetView,
       meta: { hideSiteHeader: true },
+    },
+    {
+      path: '/character-creator',
+      name: 'character-creator',
+      component: CharacterCreatorView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/rules',

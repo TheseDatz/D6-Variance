@@ -46,6 +46,14 @@ onBeforeUnmount(() => {
           Characters
         </RouterLink>
         <RouterLink
+          v-if="session"
+          class="px-1 py-2 transition hover:text-amber-100"
+          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+          to="/character-creator"
+        >
+          Create
+        </RouterLink>
+        <RouterLink
           class="px-1 py-2 transition hover:text-amber-100"
           active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
           to="/rules"

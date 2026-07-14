@@ -1,5 +1,6 @@
 <script setup>
 const props = defineProps({
+  characterName: { type: String, default: '' },
   disabled: { type: Boolean, default: false },
   items: { type: Array, required: true },
   type: { type: String, required: true },
@@ -56,7 +57,7 @@ function rollDamage(value) {
   if (!rating) return
 
   window.dispatchEvent(new CustomEvent('d6v-roll-dice', {
-    detail: { ...rating, rollLabel: 'Damage' },
+    detail: { ...rating, rollLabel: 'Damage', characterName: props.characterName },
   }))
 }
 </script>
@@ -96,7 +97,8 @@ function rollDamage(value) {
           <input
             v-model="item[field.key]"
             :aria-label="`${field.label} ${index + 1}`"
-            :disabled="disabled"
+            :disabled="disabled || (item._isUnarmed && ['name', 'difficulty', 'damage'].includes(field.key))"
+            :title="item._isUnarmed && field.key === 'damage' ? 'Calculated automatically from Strength' : undefined"
             type="text"
           />
         </label>
