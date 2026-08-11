@@ -48,9 +48,9 @@ const systems = [
           { type: 'p', text: 'D6V uses a metacurrency called Meta Dice. A player may spend Meta Dice when a roll is especially important, giving their character a chance to push beyond their normal limits.' },
           { type: 'list', items: [
             { label: 'Spend 1 Meta Die', text: 'Add +1D to the roll. Only one Meta Die option can be used on a roll.' },
-            { label: 'Spend 2 Meta Dice', text: 'Double the final result of the roll. Only one Meta Die option can be used on a roll.' },
+            { label: 'Spend 2 Meta Dice', text: 'Double the final result of the roll. A healing roll cannot be doubled. Only one Meta Die option can be used on a roll.' },
           ] },
-          { type: 'p', text: 'Spend Meta Dice after all dice, pips, advantage, disadvantage, and other modifiers have been applied. Meta Dice can affect any roll, including attacks, damage, resistance, initiative, healing, and vehicle checks. When doubling, double that final modified result.' },
+          { type: 'p', text: 'Spend Meta Dice after all dice, pips, advantage, disadvantage, and other modifiers have been applied. Meta Dice can affect attacks, damage, resistance, initiative, healing, vehicle checks, and other rolls. Spending 1 Meta Die may add +1D to healing, but spending 2 Meta Dice cannot double Health restored. When doubling any permitted roll, double its final modified result.' },
           { type: 'p', text: 'Every player character begins with two Meta Dice and may hold a maximum of five. The Storyteller decides when to award them. A character doing something especially impressive, impactful, or true to the spirit of the story is a good reason for an award. NPCs and companions may receive Meta Dice at the Storyteller\'s discretion.' },
         ],
       },
@@ -106,7 +106,7 @@ const systems = [
         category: 'Character',
         description: 'A character’s physical nature, heritage, and setting-specific capabilities.',
         content: [
-          { type: 'p', text: 'Species identifies the kind of person or creature the character is. Human is the standard option, but each setting may offer others. A species can establish attribute minimums or maximums, movement, languages, traits, or other capabilities.' },
+          { type: 'p', text: 'Species identifies the kind of person or creature the character is. Human is the standard option, but each setting may offer others. A species can establish attribute minimums or maximums, movement, traits, or other capabilities.' },
           { type: 'p', text: 'Species should support the setting rather than determine personality. Players still decide their character’s history, beliefs, appearance, and goals. Any nonstandard species must be approved by the Storyteller before its modifiers are applied.' },
         ],
       },
@@ -115,7 +115,7 @@ const systems = [
         category: 'Character',
         description: 'Advantages, disadvantages, and species features that distinguish a character.',
         content: [
-          { type: 'p', text: 'Traits represent exceptional benefits, meaningful drawbacks, and species-specific features. Each trait has a name and description explaining when it matters. Some traits also modify the dice available for attributes: advantages use a positive modifier and disadvantages use a negative modifier.' },
+          { type: 'p', text: 'Traits represent exceptional benefits, meaningful drawbacks, and species-specific features. Each trait has a name and description explaining when it matters. Advantages cost Attribute Dice and therefore use a negative allocation modifier. Disadvantages grant additional Attribute Dice and use a positive allocation modifier. Costs and grants may be expressed in full dice or pips.' },
           { type: 'p', text: 'A trait should create recognizable opportunities or complications during play. The Storyteller approves its scope, cost, and effect and may require a narrative explanation. Languages are selected alongside traits in the character creator, with the available languages determined by the setting.' },
         ],
       },
@@ -144,11 +144,11 @@ const systems = [
           { type: 'p', text: 'Skills represent a character’s training, practice, and learned expertise. Every skill is associated with an attribute. When a skill applies to an action, the character rolls the skill’s dice rating instead of the broader attribute. If the character does not possess an appropriate skill, they normally make the check using the associated attribute.' },
           { type: 'p', text: 'The available skills may vary between settings, but the following examples illustrate the kinds of training associated with each attribute:' },
           { type: 'list', items: [
-            { label: 'Strength Skills', text: 'Brawling and Climbing.' },
-            { label: 'Dexterity Skills', text: 'Archery, Dodge, and Initiative.' },
-            { label: 'Social Skills', text: 'Persuasion and Deception.' },
+            { label: 'Strength Skills', text: 'Athletics, Axes, Blunt Weapons, Brawling, Climbing, Endurance, Heavy Polearms, Labor, Might, and Wrestling.' },
+            { label: 'Dexterity Skills', text: 'Acrobatics, Archery, Dodge, Initiative, light Polearms, and precision weapon skills.' },
+            { label: 'Social Skills', text: 'Command, Deception, Etiquette, Insight, Networking, Persuasion, Resolve, and Teaching.' },
             { label: 'Intelligence Skills', text: 'Perception, Streetwise, First-Aid, and Medicine.' },
-            { label: 'Luck Skills', text: 'Gambling and Survival.' },
+            { label: 'Luck Skills', text: 'Gambling, Improvisation, Scrounging, Serendipity, and Survival.' },
             { label: 'Paranormal Skills', text: 'Occult and Channeling.' },
           ] },
           { type: 'p', text: 'These lists are examples rather than universal limits. A setting may add, remove, rename, or reassign skills to reflect its genre and assumptions. The Storyteller determines whether a skill is appropriate for a particular action.' },
@@ -167,7 +167,7 @@ const systems = [
           { type: 'p', text: 'Derived statistics are calculated after attributes, traits, and skills have been assigned. They summarize important values used during play and should be recalculated whenever their source changes.' },
           { type: 'list', items: [
             { label: 'Health', text: 'Roll the character’s Strength rating and add 20. The character creator permits one reroll; changing Strength restores that reroll. The accepted result becomes both current and maximum Health.' },
-            { label: 'Passive Defense', text: 'Derived from the number of dice in Dexterity. The character sheet calculates a +1 bonus for every two full Dexterity dice above 2D, rounded down.' },
+            { label: 'Defense Bonus', text: 'Derived from the number of dice in Dexterity. The character sheet calculates a +1 bonus for every two full Dexterity dice above 2D, rounded down. Add it whenever a rule calls for an active or full defense.' },
             { label: 'Move', text: 'A standard Human has a Move of 10 metres. A species may provide a different base Move, and traits or advancement may modify it.' },
             { label: 'Meta Dice', text: 'A new character begins with 2 available Meta Dice and can normally hold a maximum of 5.' },
             { label: 'Experience', text: 'A new character begins with 0 unspent and 0 total Experience Points unless the Storyteller is creating experienced characters.' },
@@ -415,7 +415,19 @@ const systems = [
         category: 'Exploration',
         description: 'Suggested difficulties, damage, and exposure intervals for common hazards.',
         content: [
-          { type: 'p', text: 'Detailed environmental hazard table coming soon.' },
+          { type: 'table', label: 'Environmental hazard reference', columns: ['Hazard', 'Check and Interval', 'Failure'], rows: [
+            ['Mild cold or heat', 'Easy Endurance each hour', 'Suffer 1D damage and −1 on further exposure checks until sheltered.'],
+            ['Severe cold or heat', 'Moderate Endurance every 10 minutes', 'Suffer 2D damage; increase the TN by 3 after each consecutive failure.'],
+            ['Open flame', 'No check after contact; Dodge or another appropriate action may prevent contact', 'Suffer 2D Fire damage each round until extinguished.'],
+            ['Bonfire or burning room', 'Moderate Endurance each round spent in heavy smoke', 'Direct contact causes 4D Fire damage; a failed smoke check causes 2D Suffocation damage.'],
+            ['Poison', 'Endurance against the poison’s listed TN when exposed', 'Suffer the listed Poison damage and condition; make one repeat check after its listed onset.'],
+            ['Disease', 'Endurance against the disease’s listed TN each day', 'Suffer the listed damage or symptom; the disease may prevent natural healing for that day.'],
+            ['Suffocation', 'Easy Endurance after a safe period determined by the fiction; repeat each round at +3 TN', 'Suffer 2D Suffocation damage, increasing by +1D after each failure.'],
+            ['Corrosive exposure', 'Dodge or another appropriate check to avoid contact, followed by normal resistance if exposed', 'Suffer 3D Chemical damage and another 2D on the next round unless the substance is removed.'],
+            ['Severe electrical shock', 'Endurance or an appropriate escape check to break continued contact', 'Suffer 4D Electrical damage; a complication may also cause Stunned or continued contact.'],
+          ] },
+          { type: 'p', text: 'Each named poison and disease should define its own onset, TN, damage, symptoms, and duration. Protective gear, shelter, preparation, or appropriate treatment should remove the check or grant advantage when it directly addresses the hazard.' },
+          { type: 'p', text: 'Environmental damage uses the normal damage and resistance procedure. Armour applies only when it could reasonably protect against the listed damage type.' },
         ],
       },
       {
@@ -462,7 +474,7 @@ const systems = [
         category: 'Combat',
         description: 'The action costs of frequently attempted activities.',
         content: [
-          { type: 'table', label: 'Common combat actions', columns: ['Activity', 'Cost'], rows: [['Draw or put away a weapon', 'Free'], ['Use a consumable', 'Free'], ['Pick up an accessible object', 'Free'], ['Interact with the environment', 'Free or one action, as determined by the Storyteller'], ['Reload a weapon', 'Free or one action, as listed by the weapon'], ['Throw an explosive', 'One action'], ['Attack an object', 'One action'], ['Use an improvised weapon', 'One attack action']] },
+          { type: 'table', label: 'Common combat actions', columns: ['Activity', 'Cost'], rows: [['Draw or put away a weapon', 'Free'], ['Use a consumable', 'Free'], ['Pick up an accessible object', 'Free'], ['Interact with the environment', 'Free or one action, as determined by the Storyteller'], ['Reload a weapon', 'Free, or another cost determined by the weapon'], ['Throw an explosive', 'One action'], ['Attack an object', 'One action'], ['Use an improvised weapon', 'One attack action']] },
           { type: 'p', text: 'An improvised weapon uses an appropriate skill chosen by the Storyteller and normally deals the attacker’s Strength Damage. Particularly dangerous, heavy, fragile, or unsuitable objects may modify the attack or damage.' },
           { type: 'subheading', text: 'Leaving Close Combat' },
           { type: 'p', text: 'When a character willingly flees or moves away from an enemy who can reach them in close combat, that enemy may immediately make one attack against the departing character. This attack counts as an action for the enemy’s current round and increases their multiple-action penalty normally. An enemy unable or unwilling to accept the added action makes no attack.' },
@@ -474,7 +486,7 @@ const systems = [
         description: 'Using a combat skill against the difficulty recorded for a weapon.',
         content: [
           { type: 'p', text: 'To attack, roll the skill associated with the weapon or technique. For a melee weapon, use the single difficulty recorded in its Difficulty field. For a ranged weapon, that field records its Short, Medium, and Long distances; use the difficulty assigned to the target’s current range band. The attack succeeds when its result meets or exceeds that difficulty.' },
-          { type: 'p', text: 'If the target actively defends, the defender rolls a relevant defensive skill and adds their Passive Defense value. That total becomes the new difficulty for the attack, replacing the weapon’s normal difficulty even when the new number is lower.' },
+          { type: 'p', text: 'If the target actively defends, the defender rolls a relevant defensive skill and adds their Defense Bonus. That total becomes the new difficulty for the attack, replacing the weapon’s normal difficulty even when the new number is lower. The same result applies to every relevant attack against that defender for the remainder of the round.' },
           { type: 'p', text: 'Every attack includes one Wild Die. On a hit, continue to Resolving a Hit. On a miss, the attack causes no damage unless a rule or complication says otherwise.' },
         ],
       },
@@ -483,9 +495,9 @@ const systems = [
         category: 'Combat',
         description: 'Reacting to an attack with a defensive skill.',
         content: [
-          { type: 'p', text: 'When targeted by an attack, a character may use a reaction to actively defend. Roll a relevant skill such as Dodge, Brawling, or an appropriate melee weapon skill, then add the character’s Passive Defense value. The result becomes the attacker’s new difficulty and must be used even if it is lower than the weapon’s normal difficulty.' },
+          { type: 'p', text: 'When first targeted by an attack during a round, a character may use a reaction to actively defend. Roll a relevant skill such as Dodge, Brawling, or an appropriate melee weapon skill, then add the character’s Defense Bonus. The result becomes the difficulty for every relevant attack against that character for the remainder of the round and must be used even if it is lower than the weapon’s normal difficulty.' },
           { type: 'p', text: 'Active defense counts as an action during that round and is affected by the normal multiple-action penalty. A character may spend an unused declared action to defend. If no action was reserved, the defense adds another action to the character’s round; apply the resulting penalty to the defense and to any action rolls the character makes afterward.' },
-          { type: 'p', text: 'Each active defense applies only to the triggering attack unless a trait, item, or other rule says otherwise.' },
+          { type: 'p', text: 'A character normally makes only one active-defense roll per round. A character who has spent an action to wait may use that waiting action to reroll their active defense after an attacker declares an attack but before the attack is resolved. The new result replaces the previous result for the remainder of the round, even if it is lower.' },
         ],
       },
       {
@@ -493,7 +505,7 @@ const systems = [
         category: 'Combat',
         description: 'Devoting an entire turn to avoiding harm.',
         content: [
-          { type: 'p', text: 'A character may forgo their entire turn to concentrate on defense. Roll the most relevant active-defense skill, add the character’s Passive Defense value, and add +10. Use that result as the difficulty for relevant attacks against the character until the beginning of their next turn.' },
+          { type: 'p', text: 'A character may forgo their entire turn to concentrate on defense. Roll the most relevant active-defense skill, add the character’s Defense Bonus, and add +10. Use that result as the difficulty for relevant attacks against the character until the beginning of their next turn.' },
           { type: 'p', text: 'A character using Full Defense may still take their free movement up to their Move value, but cannot run, attack, assist, activate another ability, or perform any other action. Full Defense must be declared on the character’s turn.' },
         ],
       },
@@ -503,10 +515,12 @@ const systems = [
         description: 'Resolving attacks made at a distance.',
         content: [
           { type: 'p', text: 'Ranged weapons list Short, Medium, and Long distances in metres. Determine the attack’s base difficulty from the target’s distance, then apply advantage or disadvantage for cover, visibility, weather, movement, and other circumstances.' },
+          { type: 'p', text: 'When a range band uses Strength instead of a number, first convert the character’s full Strength die code to a static value: multiply the number before the D by four, then add or subtract its pips. Treat that value as metres and apply each listed modifier. For example, Strength 3D+1 gives a base range value of 13 metres.' },
+          { type: 'p', text: 'A weapon with Blast followed by a distance applies its damage to every target within that radius of the impact point. Make the attack normally against the intended point; each affected target rolls resistance separately.' },
           { type: 'table', label: 'Ranged attack difficulties', columns: ['Range', 'Difficulty'], rows: [['Point Blank', 'Very Easy'], ['Short', 'Easy'], ['Medium', 'Moderate'], ['Long', 'Difficult'], ['Beyond Long', 'Very Difficult']] },
           { type: 'table', label: 'Cover modifiers', columns: ['Cover', 'Attacker Modifier'], rows: [['Light cover', '-1 to -2'], ['Half cover', '-3 to -5'], ['Substantial cover', '-6 to -10'], ['Near-total cover', '-11 to -15'], ['Complete cover', 'The target cannot be directly attacked']] },
           { type: 'table', label: 'Weather and environmental modifiers', columns: ['Condition', 'Suggested Attack Modifier'], rows: [['Light rain, mild wind, dim light, or light smoke', '-1 to -2'], ['Heavy rain, strong wind, fog, darkness, or unstable footing', '-3 to -5'], ['Severe storm, dense smoke, violent motion, or very poor visibility', '-6 to -10'], ['Near-zero visibility or overwhelming environmental interference', '-11 to -15']] },
-          { type: 'p', text: 'Cover always imposes disadvantage on the attacker’s roll. It never adds to Passive Defense or an Active Defense roll, regardless of whether the target chooses to defend.' },
+          { type: 'p', text: 'Cover always imposes disadvantage on the attacker’s roll. It never adds to Defense Bonus or an Active Defense roll, regardless of whether the target chooses to defend.' },
         ],
       },
       {
@@ -514,7 +528,8 @@ const systems = [
         category: 'Combat',
         description: 'Attacking at close range with weapons or the body.',
         content: [
-          { type: 'p', text: 'Melee weapons use the attack difficulty listed in their equipment entry. An unarmed attack is generally Easy. Reach, an awkward weapon, restricted space, positioning, and similar circumstances may modify the roll.' },
+          { type: 'p', text: 'Melee weapons use the attack difficulty listed in their equipment entry. An unarmed attack is generally Easy. Reach states the weapon’s practical striking distance; long weapons may gain an advantage while controlling an approach but suffer a disadvantage in restricted space or once an opponent gets inside that reach.' },
+          { type: 'p', text: 'A Strength Requirement is the minimum Strength rating needed to use a weapon normally. A character below it has disadvantage on attacks with that weapon; the Storyteller may rule that a character more than 1D below the requirement cannot use it effectively at all.' },
           { type: 'p', text: 'To determine Strength Damage for an unarmed attack, take the number before the D in Strength, divide it by two, round up, and ignore Strength pips. A character with Strength 3D has Strength Damage 2D; Strength 6D+2 produces Strength Damage 3D.' },
           { type: 'p', text: 'Some melee and thrown weapons add their listed damage to Strength Damage. Weapons with a self-contained damage rating do not add Strength unless their description says otherwise.' },
         ],
@@ -544,7 +559,7 @@ const systems = [
         category: 'Combat',
         description: 'Rendering a Grappled opponent unconscious by preventing them from breathing.',
         content: [
-          { type: 'p', text: 'A character must already have the target Grappled before beginning a choke. Starting or maintaining the choke requires an action and an opposed Strength or Brawling check. A successful check marks one consecutive round of choking; the choke causes no direct Health damage.' },
+          { type: 'p', text: 'A character must already have the target Grappled before beginning a choke. Starting or maintaining the choke requires one action and an opposed Strength or Brawling check. That same action also maintains the underlying grapple; the attacker does not spend a second action. A successful check marks one consecutive round of choking, and the choke causes no direct Health damage.' },
           { type: 'table', label: 'Choke progression', columns: ['Consecutive Successful Rounds', 'Effect'], rows: [['1', 'The target cannot speak clearly or perform actions that require speech.'], ['2', 'The target also suffers significant disadvantage on all actions.'], ['3', 'The target falls unconscious for 10D minutes and the choke ends.']] },
           { type: 'p', text: 'The target may attempt to escape the grapple normally on each turn. Escaping ends the choke. If the attacker fails a check to maintain the choke, the consecutive-round count resets to zero, though the underlying grapple remains unless the target escaped.' },
           { type: 'p', text: 'A creature that does not breathe, has protected anatomy, or is too large or differently shaped to choke may be resistant or immune.' },
@@ -600,7 +615,7 @@ const systems = [
         description: 'Restraining a target with nets, ropes, webs, and similar weapons.',
         content: [
           { type: 'p', text: 'Make the entangling weapon’s normal attack. On a success, the target becomes Entangled and cannot move freely. Unless the weapon is barbed or has another harmful property, the attack causes no damage.' },
-          { type: 'p', text: 'Escaping requires an action and either a Strength check to break the restraint or a Dexterity (Acrobatics) check to slip free. The difficulty is normally equal to the weapon’s damage or resistance rating, though its equipment entry may provide a specific escape difficulty.' },
+          { type: 'p', text: 'Escaping requires an action and either a Strength check to break the restraint or a Dexterity (Acrobatics) check to slip free. Every entangling weapon lists a numeric Escape TN. If an improvised restraint has no listed TN, the Storyteller chooses one from its material, construction, and how securely it was applied.' },
           { type: 'p', text: 'An Entangled character cannot attack with a limb or item caught by the restraint and has disadvantage on other physical actions. The exact restrictions depend on what was entangled and how the weapon functions.' },
         ],
       },
@@ -669,7 +684,7 @@ const systems = [
         content: [
           { type: 'p', text: 'When resisting applicable damage, roll Strength plus the armour’s resistance dice or pips. A character with Strength 3D and armour resistance +1D rolls 4D.' },
           { type: 'p', text: 'Some armour only protects against particular damage types. An energy shield may apply to energy damage but not a fall, while insulated gear may resist electricity without stopping a blade. This distinction is narrative and may be ignored when the Storyteller prefers a simpler game.' },
-          { type: 'table', label: 'Example damage types', columns: ['Type', 'Examples'], rows: [['Physical', 'Blades, clubs, claws, crushing, and ordinary impacts'], ['Projectile', 'Arrows, bullets, thrown weapons, and shrapnel'], ['Energy', 'Lasers, plasma, force beams, and magical bolts'], ['Fire and Heat', 'Flames, molten material, steam, and extreme heat'], ['Cold', 'Freezing weather, ice, and supernatural cold'], ['Electrical', 'Lightning, exposed power, and electrical weapons'], ['Chemical', 'Acid, corrosives, and harmful substances'], ['Poison and Disease', 'Toxins, venom, infection, and illness'], ['Psychic', 'Mental attacks, terror, and invasive telepathy'], ['Paranormal', 'Magic, miracles, curses, and supernatural forces'], ['Suffocation', 'Drowning, smoke inhalation, and lack of air'], ['Falling and Impact', 'Falls, collisions, and sudden deceleration']] },
+          { type: 'table', label: 'Example damage types', columns: ['Type', 'Examples'], rows: [['Physical', 'Blades, clubs, claws, arrows, thrown weapons, crushing, and ordinary impacts'], ['Ballistic', 'Bullets, firearm projectiles, explosive fragments, shrapnel, and comparable high-velocity penetrators'], ['Energy', 'Lasers, plasma, force beams, and magical bolts'], ['Fire and Heat', 'Flames, molten material, steam, and extreme heat'], ['Cold', 'Freezing weather, ice, and supernatural cold'], ['Electrical', 'Lightning, exposed power, and electrical weapons'], ['Chemical', 'Acid, corrosives, and harmful substances'], ['Poison and Disease', 'Toxins, venom, infection, and illness'], ['Psychic', 'Mental attacks, terror, and invasive telepathy'], ['Paranormal', 'Magic, miracles, curses, and supernatural forces'], ['Suffocation', 'Drowning, smoke inhalation, and lack of air'], ['Falling and Impact', 'Falls, collisions, and sudden deceleration']] },
         ],
       },
       {
@@ -677,7 +692,7 @@ const systems = [
         category: 'Damage & Healing',
         description: 'The effects of losing portions of maximum Health.',
         content: [
-          { type: 'table', label: 'Health conditions', columns: ['Health Remaining', 'Condition', 'Effect'], rows: [['100%', 'Healthy', 'No penalty'], ['81-99%', 'Bruised', 'No penalty'], ['60-80%', 'Stunned', '-1D to remaining actions in the current round'], ['40-59%', 'Wounded', '-1D to all actions'], ['20-39%', 'Severely Wounded', '-2D to all actions'], ['10-19%', 'Incapacitated', 'Unconscious'], ['1-9%', 'Mortally Wounded', 'Unconscious and at risk of death'], ['0%', 'Dead', 'The character has died']] },
+          { type: 'table', label: 'Health conditions', columns: ['Health Remaining', 'Condition', 'Effect'], rows: [['100%', 'Healthy', 'No penalty'], ['81-99%', 'Bruised', 'No penalty'], ['60-80%', 'Stunned', '-1D to remaining actions in the current round'], ['40-59%', 'Wounded', '-1D to all actions'], ['20-39%', 'Severely Wounded', '-2D to all actions'], ['10-19%', 'Incapacitated', 'Unconscious until stabilized; after waking, -2D to all actions'], ['1-9%', 'Mortally Wounded', 'Unconscious and at risk of death'], ['0%', 'Dead', 'The character has died']] },
           { type: 'p', text: 'Condition penalties are not cumulative. Apply only the effect of the character’s current condition.' },
         ],
       },
@@ -686,7 +701,7 @@ const systems = [
         category: 'Damage & Healing',
         description: 'What happens when Health becomes critically low.',
         content: [
-          { type: 'p', text: 'An Incapacitated character falls unconscious for 10D minutes unless revived by healing, a paranormal power, or another appropriate effect.' },
+          { type: 'p', text: 'An Incapacitated character falls unconscious for 10D minutes unless stabilized or revived by healing, a paranormal power, or another appropriate effect. Successful stabilization wakes the character, but they suffer −2D on all actions while their Health remains in the Incapacitated range.' },
           { type: 'p', text: 'A Mortally Wounded character is unconscious and dying. At the end of each round, roll Strength against difficulty 5. Increase this difficulty by +1 after every three completed rounds the character remains Mortally Wounded. Success keeps the character alive; failure causes death. Successful stabilization moves the character to Incapacitated at 10% of maximum Health.' },
           { type: 'p', text: 'A character at zero Health is dead unless the setting provides an extraordinary means of revival.' },
         ],
@@ -698,7 +713,7 @@ const systems = [
         content: [
           { type: 'p', text: 'A nearby character may use an action to stabilize an Incapacitated or Mortally Wounded character by making an Intelligence (First-Aid) check. Stabilizing an Incapacitated character is Moderate; stabilizing a Mortally Wounded character is Difficult.' },
           { type: 'p', text: 'A suitable first-aid kit or medpack grants advantage. The Medicine skill, clean conditions, assistance, or specialized equipment may provide further advantage. Poor conditions, active danger, or missing supplies may impose disadvantage.' },
-          { type: 'p', text: 'Success prevents further deterioration. Stabilization does not restore Health unless another rule or treatment says it does.' },
+          { type: 'p', text: 'Success wakes an Incapacitated character immediately and prevents further deterioration. A successfully stabilized Mortally Wounded character moves to Incapacitated at 10% of maximum Health and also wakes. Stabilization does not otherwise restore Health unless another rule or treatment says it does.' },
         ],
       },
       {
@@ -709,7 +724,7 @@ const systems = [
           { type: 'p', text: 'A character may receive First Aid once after each distinct injury or damaging scene. Roll Intelligence (First-Aid), applying advantage for a suitable first-aid kit or medpack and disadvantage for poor conditions or missing supplies.' },
           { type: 'table', label: 'First Aid recovery', columns: ['First-Aid Total', 'Health Restored'], rows: [['0', '0'], ['1-5', '2'], ['6-10', '1D'], ['11-15', '2D'], ['16-20', '3D'], ['21-25', '4D'], ['26-30', '5D'], ['31+', '6D']] },
           { type: 'p', text: 'Health cannot exceed maximum Health. A complication may consume supplies, require additional time, or leave an injury that needs proper medical treatment.' },
-          { type: 'p', text: 'A failed First-Aid attempt may be retried when another attempt is practical. Only one character can provide First Aid for the same injury at a time, though another character may assist. Receiving First Aid does not prevent the patient from later receiving a separate Medicine treatment.' },
+          { type: 'p', text: 'The First-Aid roll is the patient’s single attempt for that distinct injury or damaging scene, whether the result restores Health or not. Another character may assist that roll but cannot make a separate attempt. Receiving First Aid does not prevent the patient from later receiving a Medicine treatment.' },
         ],
       },
       {
@@ -767,6 +782,8 @@ const systems = [
             ['Beyond Long', 'Past the listed Long range', 'Very Difficult'],
           ] },
           { type: 'p', text: 'Each ranged weapon lists its Short, Medium, and Long distances in metres in its Difficulty field. The Storyteller may apply additional advantage or disadvantage for target size, visibility, cover, movement, or aiming.' },
+          { type: 'subheading', text: 'Optional Ammunition Tracking' },
+          { type: 'p', text: 'The Storyteller decides whether the campaign tracks individual ammunition. When ammunition is not tracked, a character with access to ordinary supplies is assumed to replenish arrows, bolts, shot, powder, and cartridges between scenes; reload times and weapon capacities still apply. When ammunition is tracked, expend one piece or charge for each attack. After a scene, the Storyteller may allow half of ordinary arrows and bolts to be recovered when the characters have time to search; powder, shot, and cartridges are normally expended.' },
         ],
       },
       {
@@ -807,7 +824,7 @@ const systems = [
         category: 'Equipment',
         description: 'Acquiring goods and recording their cost.',
         content: [
-          { type: 'p', text: 'Equipment and other items have a standard price range that the Storyteller can use as a basis for deciding what something should cost. The Storyteller is free to adjust a price for the setting, location, quality, scarcity, legality, demand, negotiation, or circumstances of the campaign.' },
+          { type: 'p', text: 'Equipment and other items list an approximate standard cost in copper coins. The Storyteller is free to adjust that cost for the setting, location, quality, scarcity, legality, demand, negotiation, or circumstances of the campaign. One platinum coin equals 10 gold, 100 silver, or 1,000 copper coins.' },
           { type: 'p', text: 'Some Storytellers may allow characters to purchase ordinary available items during breaks in a session. Others may require the characters to visit a settlement, merchant, market, contact, or other location where those items are actually offered for sale. Establish the campaign’s purchasing procedure before it becomes important.' },
         ],
       },
@@ -818,6 +835,7 @@ const systems = [
         content: [
           { type: 'p', text: 'Paranormal powers are setting-defined abilities that reach beyond ordinary action. To use a power, the player rolls the Paranormal skill or other trait named by that power and attempts to meet or exceed its difficulty. Success activates the listed effect; Result Points may help the Storyteller describe its quality when the power does not specify another use.' },
           { type: 'p', text: 'Known spells and similar powers are recorded in the character sheet’s Special Abilities section with their difficulty, effect, and any limits. Some powers have additional costs such as Meta Dice, Health, materials, preparation, extended time, or a required condition.' },
+          { type: 'p', text: 'With Storyteller approval, a character may begin with Paranormal at 0D in a setting where access to supernatural forces is absent, rare, sealed, or expected to awaken later. The Storyteller decides whether those unallocated dice are available elsewhere, reserved for a later awakening, or simply reflect the setting’s species limits.' },
           { type: 'p', text: 'Improving a paranormal skill costs twice as many Experience Points as improving a regular skill. First calculate the normal skill cost from the number before the D, then double it.' },
           { type: 'p', text: 'Learning a new paranormal power normally requires a source of instruction, such as a spellbook, teacher, scroll, ancient cave drawing, or another party member who already knows the power. Each power also has its own Experience Point cost for learning it. The Storyteller decides whether the source, study time, and circumstances are sufficient.' },
           { type: 'p', text: 'The Core rules provide only this common procedure. Fantasy, Space Opera, Modern, and other genres may define different paranormal traditions, skills, costs, consequences, and methods for learning powers.' },
@@ -891,7 +909,7 @@ const systems = [
         category: 'Vehicles & Mounts',
         description: 'Making attacks from, against, and between moving vehicles.',
         content: [
-          { type: 'p', text: 'Attacks involving vehicles follow the normal combat rules. Use the weapon\'s difficulty unless the target actively defends. The operator may make an active defense with the relevant control skill, adding any listed passive defense and Maneuverability. This counts as an action and is affected by multiple-action penalties.' },
+          { type: 'p', text: 'Attacks involving vehicles follow the normal combat rules. Use the weapon\'s difficulty unless the target actively defends. The operator may make an active defense with the relevant control skill, adding any listed Defense Bonus and Maneuverability. This counts as an action and is affected by multiple-action penalties. As with a character’s active defense, the result applies for the remainder of the round.' },
           { type: 'p', text: 'Speed, unstable footing, restricted firing arcs, poor visibility, and violent maneuvers may impose disadvantage. Cover always applies disadvantage to the attacker and is never added to an active defense roll. An attacker may target the vehicle, an exposed occupant, a mount, or a visible component when the shot is reasonably possible.' },
           { type: 'p', text: 'Installed weapons use their own damage, range, crew, and firing-arc rules. Apply Scale after determining whether the attack is aimed at the vehicle or an occupant.' },
         ],
@@ -983,6 +1001,28 @@ const systems = [
         ],
       },
       {
+        title: 'Creating Species',
+        category: 'Storyteller',
+        description: 'A baseline for designing new species while leaving room for setting-specific judgment.',
+        content: [
+          { type: 'p', text: 'Begin with the Human baseline: 12D of species allocation, Move 10, and attribute limits of 1D minimum and 4D maximum. The character creator adds the universal 6D used by the normal allocation procedure, producing the standard Human total of 18D.' },
+          { type: 'p', text: 'Subtract the allocation cost of every Advantage granted automatically by the species. Add the allocation grant of any true Disadvantage that is inseparable from the species. Use the same pip values as character traits.' },
+          { type: 'table', label: 'Species trait values', columns: ['Trait Level', 'Allocation Value'], rows: [['Minor', '1 pip'], ['Medium', '2 pips'], ['Major', '1D'], ['Critical', '1D+1']] },
+          { type: 'table', label: 'Current species arithmetic', columns: ['Species', 'Calculation', 'Listed Allocation'], rows: [['Human', '12D; no priced Advantage', '12D'], ['Dwarf', '12D − Hardy (Medium), worth 2 pips', '11D+1'], ['Elf', '12D − Acute Sense (Minor), worth 1 pip', '11D+2'], ['Halfling', '12D − Fortunate (Medium), worth 2 pips', '11D+1']] },
+          { type: 'p', text: 'Species features, altered attribute limits, Move, anatomy, environmental adaptations, and setting utility require judgment rather than a fully objective formula. A narrow or mostly narrative feature may need no allocation change, while flight, broad immunity, an unusually high maximum, or another consistently powerful feature may justify reducing allocation. A meaningful limitation may justify increasing it. Compare the finished species with the existing options, consider how often every feature will matter in the campaign, and adjust any number or ability that produces a fairer result.' },
+        ],
+      },
+      {
+        title: 'Equipment Budgets and Availability',
+        category: 'Storyteller',
+        description: 'Optional starting budgets and target numbers for locating equipment.',
+        content: [
+          { type: 'p', text: 'The Storyteller may approve starting equipment directly or give each character a budget. For a fantasy campaign using the listed copper-coin prices, 5,000 copper coins—50 gold—is a useful standard budget. Use roughly 2,500 copper for a low-resource campaign or 10,000 copper for a well-funded campaign. Signature Equipment and story-granted items may sit outside this budget.' },
+          { type: 'p', text: 'Rarity provides a suggested starting point for availability checks. The Storyteller selects the exact target within the named range and may change the category for location, legality, demand, contacts, or time spent searching.' },
+          { type: 'table', label: 'Suggested availability', columns: ['Rarity', 'Suggested Availability'], rows: [['Common', 'Automatic in an appropriate settlement; Very Easy when supplies are strained'], ['Uncommon', 'Easy'], ['Rare', 'Difficult']] },
+        ],
+      },
+      {
         title: 'Awarding Experience and Meta Dice',
         category: 'Storyteller',
         description: 'Rewarding progress and dramatic contributions.',
@@ -1054,7 +1094,7 @@ const systems = [
             { label: 'Standard Check', text: 'Choose a skill or attribute, include one Wild Die, roll, add pips and modifiers, and meet or exceed the difficulty.' },
             { label: 'Opposed Check', text: 'Both sides roll appropriate traits; the higher total prevails.' },
             { label: 'Untrained Check', text: 'Roll the governing attribute. The Storyteller may apply disadvantage or prohibit the attempt.' },
-            { label: 'Spend Meta Dice', text: 'Spend 1 to add +1D or 2 to double the final roll result.' },
+            { label: 'Spend Meta Dice', text: 'Spend 1 to add +1D or 2 to double the final roll result. Healing rolls cannot be doubled.' },
           ] },
         ],
       },
@@ -1063,7 +1103,7 @@ const systems = [
         category: 'Quick Glance',
         description: 'Common conditions and their principal effects.',
         content: [
-          { type: 'table', label: 'Condition reference', columns: ['Condition', 'Summary'], rows: [['Bruised', '81-99% Health; no penalty'], ['Stunned', '60-80% Health; -1D to remaining actions in the current round'], ['Wounded', '40-59% Health; -1D to all actions'], ['Severely Wounded', '20-39% Health; -2D to all actions'], ['Incapacitated', '10-19% Health; unconscious'], ['Mortally Wounded', '1-9% Health; unconscious and dying'], ['Grappled', 'Cannot move away; disadvantage on Dexterity checks and attacks against others'], ['Entangled', 'Cannot move freely; caught limbs or items cannot attack'], ['Prone', 'Cannot attack, crawls at half Move, and requires an action to stand'], ['Unconscious', 'Cannot act or actively defend'], ['Companion', 'An allied character assigned to a player during combat']] },
+          { type: 'table', label: 'Condition reference', columns: ['Condition', 'Summary'], rows: [['Bruised', '81-99% Health; no penalty'], ['Stunned', '60-80% Health; -1D to remaining actions in the current round'], ['Wounded', '40-59% Health; -1D to all actions'], ['Severely Wounded', '20-39% Health; -2D to all actions'], ['Incapacitated', '10-19% Health; unconscious until stabilized, then awake at -2D'], ['Mortally Wounded', '1-9% Health; unconscious and dying'], ['Grappled', 'Cannot move away; disadvantage on Dexterity checks and attacks against others'], ['Entangled', 'Cannot move freely; caught limbs or items cannot attack'], ['Prone', 'Cannot attack, crawls at half Move, and requires an action to stand'], ['Unconscious', 'Cannot act or actively defend'], ['Companion', 'An allied character assigned to a player during combat']] },
           { type: 'p', text: 'Apply the full rule that caused a condition when more detail is needed. Health-condition penalties are not cumulative; use only the current condition’s penalty.' },
         ],
       },
@@ -1097,6 +1137,35 @@ const systems = [
             { label: 'Paranormal Skill Advancement', text: 'Calculate the normal skill cost, then double it.' },
             { label: 'Starting Health', text: 'Roll Strength and add 20.' },
           ] },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'examples',
+    label: 'Examples',
+    rules: [
+      {
+        title: 'Complete Combat Round',
+        category: 'Combat',
+        description: 'Multiple actions, Active Defense, armour, damage resistance, and a Health threshold in one example.',
+        content: [
+          { type: 'p', text: 'Mira faces two raiders in a ruined gatehouse. Mira has Swords 4D+1, Dexterity 4D, Strength 3D, 30 maximum Health, and padded armour that grants +1D resistance. Her Dexterity gives her a +1 Defense Bonus. Each raider has Axes 4D, Dodge 3D, Strength 3D, 30 maximum Health, and hide armour that grants +2 resistance. Their Defense Bonus is +0.' },
+          { type: 'p', text: 'Mira’s longsword deals Strength Damage +2D+2. Her Strength Damage is 2D, so she rolls 4D+2 damage. A raider’s battle axe deals Strength Damage +3D, so each raider rolls 5D damage.' },
+          { type: 'subheading', text: '1. Initiative and Declarations' },
+          { type: 'p', text: 'Everyone rolls Initiative for the round. Mira acts first. She declares two actions: one attack and one wait action that she can use later in the round. Two actions impose −1D on both actions, so her sword attack is reduced from 4D+1 to 3D+1.' },
+          { type: 'subheading', text: '2. Attack and Active Defense' },
+          { type: 'p', text: 'Mira attacks the first raider. The longsword has Moderate difficulty, and the Storyteller chooses 13 from the Moderate range for this exchange.' },
+          { type: 'p', text: 'The raider reacts with Active Defense. He had planned one attack, so adding the defense gives him two actions and imposes −1D on the defense and his later attack. He rolls Dodge at 2D and gets 12. Adding his +0 Defense Bonus leaves the result at 12. Active Defense replaces the weapon difficulty even though it is lower, and 12 becomes the difficulty for every relevant attack against that raider for the rest of the round.' },
+          { type: 'p', text: 'Mira rolls 3D+1. Her Wild Die rolls 6 and then 3, producing a final attack total of 19. The attack exceeds difficulty 12 and hits.' },
+          { type: 'subheading', text: '3. Damage, Armour, and Health' },
+          { type: 'p', text: 'Mira rolls 4D+2 damage and gets 17. The raider rolls Strength 3D plus +2 from hide armour and gets 12. He loses 5 Health, falling from 30 to 25. He has about 83% of his maximum Health remaining and is Bruised, which causes no penalty.' },
+          { type: 'subheading', text: '4. Waiting to Defend' },
+          { type: 'p', text: 'The wounded raider takes his turn and attacks Mira. Because his earlier reaction gave him two actions, his Axes pool is reduced from 4D to 3D. Mira spends her waiting action to actively defend before the attack is resolved. She rolls Swords at 3D+1 because of her own two-action penalty, then adds her +1 Defense Bonus for a final defense result of 15.' },
+          { type: 'p', text: 'The raider rolls 14 and misses. Mira’s defense result of 15 now applies against every relevant attack targeting her for the remainder of the round; she does not roll again when the second raider attacks.' },
+          { type: 'subheading', text: '5. A Health Threshold' },
+          { type: 'p', text: 'The second raider attacks and rolls 16, beating Mira’s active-defense difficulty of 15. He rolls 5D damage for a total of 20. Mira rolls Strength 3D plus +1D from padded armour and gets 13, so she loses 7 Health and falls from 30 to 23.' },
+          { type: 'p', text: 'Mira has about 77% of her maximum Health remaining and becomes Stunned. She suffers −1D on any actions she still has during the round. Her declared attack and wait action have both been spent, so the round ends without another roll from her.' },
         ],
       },
     ],

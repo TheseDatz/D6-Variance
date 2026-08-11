@@ -100,7 +100,7 @@ function closeModal() {
             <p class="modal-kicker">{{ title }}</p>
             <h2>{{ items[selectedIndex]?.name || 'Unnamed detail' }}</h2>
             <p v-if="withDiceModifier && items[selectedIndex]?.diceModifier" class="modifier-display">
-              Dice modifier: <strong>{{ items[selectedIndex].diceModifier }}</strong>
+              Attribute allocation modifier: <strong>{{ items[selectedIndex].diceModifier }}</strong>
             </p>
             <p class="detail-description">{{ items[selectedIndex]?.description || 'No description provided.' }}</p>
 
@@ -121,8 +121,8 @@ function closeModal() {
               <textarea v-model="draft.description" rows="7"></textarea>
             </label>
             <label v-if="withDiceModifier" class="modal-field mt-4">
-              <span>Dice Modifier</span>
-              <input v-model="draft.diceModifier" placeholder="e.g. +1D or -2D" type="text" />
+              <span>Attribute Allocation Modifier</span>
+              <input v-model="draft.diceModifier" placeholder="e.g. −1 pip, −1D, or +2 pips" type="text" />
             </label>
 
             <div class="modal-actions">

@@ -24,7 +24,7 @@ onBeforeUnmount(() => {
 
 <template>
   <header class="sticky top-0 z-10 border-b border-amber-500/10 bg-[#050609]/55 shadow-[0_1px_0_rgba(255,255,255,0.025)] backdrop-blur-md">
-    <nav class="mx-auto flex h-16 w-full max-w-7xl items-center gap-10 px-4 sm:px-5">
+    <nav class="mx-auto flex h-16 w-full max-w-7xl items-center gap-4 px-4 sm:px-5 lg:gap-8">
       <RouterLink
         :class="[
           'relative bg-gradient-to-r from-red-600 via-orange-400 to-yellow-200 bg-clip-text pb-2 text-2xl font-black tracking-[0.12em] text-transparent drop-shadow-[0_0_18px_rgba(251,191,36,0.22)]',
@@ -37,7 +37,7 @@ onBeforeUnmount(() => {
         D6V
       </RouterLink>
 
-      <div class="hidden items-center gap-7 text-xs font-medium text-zinc-300 sm:flex">
+      <div class="hidden min-w-0 flex-1 items-center gap-3 overflow-x-auto text-xs font-medium whitespace-nowrap text-zinc-300 sm:flex lg:gap-5">
         <RouterLink
           class="px-1 py-2 transition hover:text-amber-100"
           active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
@@ -59,6 +59,41 @@ onBeforeUnmount(() => {
           to="/rules"
         >
           Rules
+        </RouterLink>
+        <RouterLink
+          class="px-1 py-2 transition hover:text-amber-100"
+          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+          to="/traits"
+        >
+          Traits
+        </RouterLink>
+        <RouterLink
+          class="px-1 py-2 transition hover:text-amber-100"
+          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+          to="/skills"
+        >
+          Skills
+        </RouterLink>
+        <RouterLink
+          class="px-1 py-2 transition hover:text-amber-100"
+          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+          to="/species"
+        >
+          Species
+        </RouterLink>
+        <RouterLink
+          class="px-1 py-2 transition hover:text-amber-100"
+          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+          to="/equipment"
+        >
+          Equipment
+        </RouterLink>
+        <RouterLink
+          class="px-1 py-2 transition hover:text-amber-100"
+          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+          to="/vehicles"
+        >
+          Vehicles
         </RouterLink>
         <RouterLink
           class="px-1 py-2 transition hover:text-amber-100"

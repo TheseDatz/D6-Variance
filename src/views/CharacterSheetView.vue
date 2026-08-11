@@ -32,7 +32,17 @@ const playerNameInput = ref(null)
 const taglineInput = ref(null)
 
 const display = computed(() => character.value || {})
-const passiveDefense = computed(() => {
+
+function parseDiceCode(value) {
+  const match = String(value ?? '').trim().match(/^(\d+)\s*d(?:\s*([+-])\s*(\d+))?$/i)
+  if (!match) return null
+
+  const dice = Number(match[1])
+  const pips = Number(match[3] || 0) * (match[2] === '-' ? -1 : 1)
+  return { dice, pips }
+}
+
+const defenseBonus = computed(() => {
   const dexterityDice = character.value?.attributes?.dexterity?.dice
   if (dexterityDice === null || dexterityDice === undefined || String(dexterityDice).trim() === '') return ''
 
@@ -43,9 +53,14 @@ const passiveDefense = computed(() => {
   return `+${bonus}`
 })
 const strengthDamage = computed(() => {
-  const strengthDice = character.value?.attributes?.strength?.dice
-  const match = String(strengthDice ?? '').trim().match(/^(\d+)\s*d?/i)
-  return match ? `${Math.ceil(Number(match[1]) / 2)}D` : ''
+  const strength = parseDiceCode(character.value?.attributes?.strength?.dice)
+  return strength ? `${Math.ceil(strength.dice / 2)}D` : ''
+})
+const strengthRange = computed(() => {
+  const strength = parseDiceCode(character.value?.attributes?.strength?.dice)
+  if (!strength) return ''
+
+  return `${Math.max(0, strength.dice * 4 + strength.pips)} m`
 })
 const canManageCharacter = computed(() => {
   if (!session.value || !character.value) return false
@@ -485,12 +500,12 @@ watch(strengthDamage, (damage) => {
               </div>
 
               <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">Passive Defense</p>
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">Defense Bonus</p>
                 <div class="mt-3">
                   <output
-                    aria-label="Passive Defense calculated from Dexterity"
+                    aria-label="Defense Bonus calculated from Dexterity"
                     class="passive-defense-box"
-                  >{{ passiveDefense }}</output>
+                  >{{ defenseBonus }}</output>
                 </div>
               </div>
             </div>
@@ -621,10 +636,20 @@ watch(strengthDamage, (damage) => {
 
         <section aria-labelledby="attributes-title">
           <div class="attributes-heading">
-            <div>
+            <div class="attributes-title">
               <p class="text-[0.62rem] font-semibold uppercase tracking-[0.25em] text-zinc-500">Character capabilities</p>
               <h2 id="attributes-title" class="mt-1 text-xl font-semibold tracking-wide text-amber-100">Attributes &amp; Skills</h2>
             </div>
+            <dl class="derived-strength-stats" aria-label="Calculated Strength statistics">
+              <div class="derived-strength-stat">
+                <dt>Strength Damage</dt>
+                <dd><output>{{ strengthDamage || '—' }}</output></dd>
+              </div>
+              <div class="derived-strength-stat">
+                <dt>Strength Range</dt>
+                <dd><output>{{ strengthRange || '—' }}</output></dd>
+              </div>
+            </dl>
           </div>
 
           <div class="attributes-grid mt-5">
@@ -1008,9 +1033,51 @@ watch(strengthDamage, (damage) => {
 
 .attributes-heading {
   display: flex;
-  align-items: end;
-  justify-content: space-between;
+  align-items: flex-end;
+  justify-content: flex-start;
   gap: 1.5rem;
+}
+
+.attributes-title {
+  flex: 0 0 auto;
+}
+
+.derived-strength-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.derived-strength-stat {
+  display: grid;
+  min-width: 8.75rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgb(125 211 252 / 0.3);
+  background: rgb(14 165 233 / 0.035);
+  box-shadow: inset 0 0 16px rgb(14 165 233 / 0.025), 0 0 14px rgb(14 165 233 / 0.04);
+}
+
+.derived-strength-stat dt {
+  color: rgb(125 211 252 / 0.65);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.derived-strength-stat dd {
+  margin: 0;
+  color: rgb(224 242 254);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .attributes-grid {
@@ -1321,12 +1388,19 @@ watch(strengthDamage, (damage) => {
   }
 
   .attributes-heading {
-    display: block;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  .attributes-heading > p {
-    margin-top: 0.5rem;
-    text-align: left;
+  .derived-strength-stats {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .derived-strength-stat {
+    min-width: 0;
   }
 }
 </style>

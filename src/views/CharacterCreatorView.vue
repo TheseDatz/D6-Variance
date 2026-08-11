@@ -25,7 +25,7 @@ const character = reactive({
   tagline: '',
   imageUrl: '',
   species: 'Human',
-  attributeDice: 12,
+  attributeDice: '12D',
   attributes: Object.fromEntries(
     ATTRIBUTE_NAMES.map((name) => [name.toLowerCase(), { dice: 2, pips: 0 }]),
   ),
@@ -55,7 +55,7 @@ const basicInformationComplete = computed(() =>
 )
 
 const attributesComplete = computed(() => {
-  const value = Number(character.attributeDice)
+  const startingPips = parseStartingAttributeDice(character.attributeDice)
   const validAllocations = ATTRIBUTE_NAMES.every((name) => {
     const attribute = character.attributes[name.toLowerCase()]
     const dice = Number(attribute.dice)
@@ -63,17 +63,40 @@ const attributesComplete = computed(() => {
     return Number.isInteger(dice) && dice >= 0 && Number.isInteger(pips) && pips >= 0 && pips <= 2
   })
 
-  return Number.isFinite(value) && value > 0 && validAllocations && remainingAttributePips.value === 0
+  return startingPips !== null && startingPips > 0 && validAllocations && remainingAttributePips.value === 0
 })
 
-function parseDiceModifier(value) {
+function parseStartingAttributeDice(value) {
   const normalized = String(value ?? '').trim()
-  if (!normalized) return 0
-  if (!/^[+-]?\d+\s*d?$/i.test(normalized)) return null
-  return Number.parseInt(normalized, 10)
+  const match = normalized.match(/^(\d+)\s*[dD]?(?:\s*\+\s*([12]))?$/)
+  if (!match) return null
+  return Number.parseInt(match[1], 10) * 3 + Number.parseInt(match[2] || '0', 10)
 }
 
-const traitDiceModifier = computed(() => character.specialAbilities.reduce((total, trait) => {
+function parseDiceModifier(value) {
+  const normalized = String(value ?? '').trim().replace(/[−–—]/g, '-').replace(/\s+/g, '')
+  if (!normalized) return 0
+
+  const parenthesized = normalized.match(/^([+-])\((\d+)d(?:\+([12]))?\)$/i)
+  if (parenthesized) {
+    const sign = parenthesized[1] === '-' ? -1 : 1
+    return sign * (Number(parenthesized[2]) * 3 + Number(parenthesized[3] || 0))
+  }
+
+  const pipsOnly = normalized.match(/^([+-]?)(\d+)(?:pips?)$/i)
+  if (pipsOnly) {
+    return (pipsOnly[1] === '-' ? -1 : 1) * Number(pipsOnly[2])
+  }
+
+  const diceCode = normalized.match(/^([+-]?)(\d+)d(?:([+-])([12]))?$/i)
+  if (!diceCode) return null
+
+  const dicePips = Number(diceCode[2]) * 3 * (diceCode[1] === '-' ? -1 : 1)
+  const extraPips = Number(diceCode[4] || 0) * (diceCode[3] === '-' ? -1 : 1)
+  return dicePips + extraPips
+}
+
+const traitPipModifier = computed(() => character.specialAbilities.reduce((total, trait) => {
   const modifier = parseDiceModifier(trait?.diceModifier)
   return total + (modifier ?? 0)
 }, 0))
@@ -82,10 +105,9 @@ const traitModifiersValid = computed(() => character.specialAbilities.every(
   (trait) => parseDiceModifier(trait?.diceModifier) !== null,
 ))
 
-const attributeDiceLimit = computed(() => {
-  const value = Number(character.attributeDice)
-  return Number.isFinite(value) ? value + 6 + traitDiceModifier.value : 6 + traitDiceModifier.value
-})
+const startingAttributePips = computed(() => parseStartingAttributeDice(character.attributeDice))
+const attributeLimitPips = computed(() => (startingAttributePips.value ?? 0) + 18 + traitPipModifier.value)
+const attributeDiceLimit = computed(() => formatDiceFromPips(attributeLimitPips.value))
 
 const characterTraitsComplete = computed(() =>
   character.specialAbilities.every((trait) => Boolean(trait?.name?.trim()))
@@ -98,9 +120,9 @@ const paranormalPowersComplete = computed(() =>
 )
 
 const traitModifierCalculation = computed(() => {
-  if (traitDiceModifier.value === 0) return ''
-  const operator = traitDiceModifier.value > 0 ? '+' : '-'
-  return ` ${operator} ${Math.abs(traitDiceModifier.value)}D`
+  if (traitPipModifier.value === 0) return ''
+  const operator = traitPipModifier.value > 0 ? '+' : '-'
+  return ` ${operator} ${formatDiceFromPips(Math.abs(traitPipModifier.value))}`
 })
 
 const assignedSkillPips = computed(() => character.skills.reduce(
@@ -153,7 +175,6 @@ const assignedAttributePips = computed(() => ATTRIBUTE_NAMES.reduce((total, name
   return total + (Number(attribute.dice) || 0) * 3 + (Number(attribute.pips) || 0)
 }, 0))
 
-const attributeLimitPips = computed(() => attributeDiceLimit.value * 3)
 const remainingAttributePips = computed(() => attributeLimitPips.value - assignedAttributePips.value)
 
 function formatDiceFromPips(pips) {
@@ -371,14 +392,14 @@ onMounted(async () => {
         <label class="creator-field mt-6 max-w-xs">
           <span>Starting Attribute Dice <b aria-hidden="true">*</b></span>
           <div class="dice-input-wrap">
-            <input v-model.number="character.attributeDice" min="1" step="1" type="number" />
-            <span aria-hidden="true">D</span>
+            <input v-model="character.attributeDice" autocomplete="off" inputmode="text" placeholder="12D or 11D+2" type="text" />
           </div>
+          <small>Enter whole dice or dice with pips, such as 12D, 11D+1, or 11D+2.</small>
         </label>
 
         <div class="attribute-calculation mt-5" aria-live="polite">
           <span>Total attribute dice:</span>
-          <strong>{{ Number(character.attributeDice) || 0 }}D + 6D{{ traitModifierCalculation }} = {{ attributeDiceLimit }}D</strong>
+          <strong>{{ startingAttributePips === null ? 'Invalid' : formatDiceFromPips(startingAttributePips) }} + 6D{{ traitModifierCalculation }} = {{ attributeDiceLimit }}</strong>
         </div>
 
         <div class="assigning-dice mt-8">
@@ -391,7 +412,7 @@ onMounted(async () => {
           </p>
 
           <div :class="{ 'allocation-summary--complete': remainingAttributePips === 0, 'allocation-summary--over': remainingAttributePips < 0 }" class="allocation-summary mt-5" aria-live="polite">
-            <strong>Assigned {{ formatDiceFromPips(assignedAttributePips) }} / {{ attributeDiceLimit }}D</strong>
+            <strong>Assigned {{ formatDiceFromPips(assignedAttributePips) }} / {{ attributeDiceLimit }}</strong>
             <span v-if="remainingAttributePips >= 0">{{ formatDiceFromPips(remainingAttributePips) }} remaining</span>
             <span v-else>{{ formatDiceFromPips(remainingAttributePips) }} over limit</span>
           </div>
@@ -424,7 +445,7 @@ onMounted(async () => {
           for available options and guidance.
         </p>
         <p class="mt-3 text-sm leading-6 text-zinc-300">
-          Add each trait with a name, description, and any dice modifier it grants or imposes. Use a positive value for an advantage and a negative value for a disadvantage, such as +1D or -1D. These modifiers change the total dice available in the Attributes section and are not displayed on the finished character sheet.
+          Add each trait with a name, description, and its attribute-allocation modifier. Advantages reduce available Attribute Dice, while Disadvantages grant additional Attribute Dice. Pips are supported: examples include −1 pip, −1D, +2 pips, and +(1D+1). These modifiers are used during creation and are not displayed on the finished character sheet.
         </p>
 
         <div class="mt-6">

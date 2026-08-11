@@ -8,11 +8,11 @@ const props = defineProps({
 
 const attributeNames = ['Strength', 'Dexterity', 'Social', 'Intelligence', 'Luck', 'Paranormal']
 const suggestions = {
-  strength: ['Brawling', 'Climbing'],
-  dexterity: ['Archery', 'Dodge', 'Initiative'],
-  social: ['Persuasion', 'Deception'],
-  intelligence: ['Perception', 'Streetwise', 'First-Aid', 'Medicine'],
-  luck: ['Gambling', 'Survival'],
+  strength: ['Athletics', 'Axes', 'Blunt Weapons', 'Brawling', 'Climbing', 'Endurance', 'Heavy Polearms', 'Labor', 'Might', 'Wrestling'],
+  dexterity: ['Acrobatics', 'Archery', 'Dodge', 'Driving', 'Flexible Weapons', 'Gunnery', 'Handguns', 'Heavy Weapons', 'Initiative', 'Machine Guns', 'Piloting', 'Polearms', 'Rifles', 'Riding', 'Sailing', 'Short Blades', 'Shotguns', 'Sleight of Hand', 'Stealth', 'Submachine Guns', 'Swords', 'Thievery', 'Throwing'],
+  social: ['Animal Handling', 'Command', 'Deception', 'Etiquette', 'Insight', 'Intimidation', 'Networking', 'Performance', 'Persuasion', 'Resolve', 'Teaching'],
+  intelligence: ['Bureaucracy', 'Commerce', 'Communications', 'Computers', 'Crafting', 'Demolitions', 'Electronic Security', 'Engineering', 'First-Aid', 'Forgery', 'Investigation', 'Medicine', 'Navigation', 'Perception', 'Scholarship', 'Sensors', 'Streetwise', 'Tactics'],
+  luck: ['Gambling', 'Improvisation', 'Scrounging', 'Serendipity', 'Survival'],
   paranormal: ['Occult', 'Channeling'],
 }
 
