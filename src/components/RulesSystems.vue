@@ -1295,6 +1295,446 @@ const systems = [
         ],
       },
       {
+        id: 'what-is-resonance',
+        category: 'Resonance',
+        title: 'What Is Resonance?',
+        introduction: [
+          {
+            segments: [
+              { text: 'Resonance', strong: true },
+              { text: ' is D6V’s framework for abilities that reach beyond the ordinary world. Depending on the setting, Resonance may represent magic, psychic phenomena, divine gifts, superpowers, supernatural techniques, alien forces, or otherworldly energies.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'The Resonance rules describe how characters attempt extraordinary effects without requiring every setting to use the same explanation, power source, or list of abilities. The setting establishes what Resonance means in its world and which forms are available.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'disciplines',
+        category: 'Resonance',
+        title: 'Disciplines',
+        introduction: [
+          {
+            segments: [
+              { text: 'A ' },
+              { text: 'Discipline', strong: true },
+              { text: ' defines the family or flavour of Resonance effects a character may attempt. Each setting may provide its own Disciplines and boundaries, with additional suggestions available on the ' },
+              { text: 'Resonance page', link: '/resonance' },
+              { text: '.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'A Discipline answers what kinds of supernatural effects are possible. Resonance Descriptors further define or limit how a character expresses that Discipline, while the linked Attribute and relevant Descriptor determine how the character rolls to produce an effect.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Discipline and Competence',
+            rules: [
+              { name: 'Discipline: Pyromancy (Intelligence)', description: 'Defines the permitted family of effects: creating, controlling, sensing, resisting, or extinguishing supernatural fire.' },
+              { name: 'Fire Mage 2D+4', description: 'Describes an ordinary practitioner’s competence when using Pyromancy.' },
+              { name: 'Great Flame Wizard 10D+4', description: 'Describes a legendary practitioner using the same broad Discipline at much greater capability.' },
+            ],
+          },
+          {
+            title: 'Freeform, Modular Powers',
+            paragraphs: [
+              'Disciplines remain freeform and modular rather than becoming individual spell lists. They represent broad, agreed-upon families of supernatural ability, allowing a setting to define several meaningful options without requiring hundreds of separate powers.',
+            ],
+          },
+          {
+            title: 'Example Disciplines',
+            rules: [
+              { name: 'Pyromancy', description: 'Create and manipulate fire; extinguish flames; resist heat; sense supernatural flame.' },
+              { name: 'Telepathy', description: 'Sense minds; communicate mentally; read surface thoughts; potentially influence minds at greater Difficulty.' },
+              { name: 'Necromancy', description: 'Perceive spirits; communicate with the dead; animate corpses; manipulate life and death energies.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'The Storyteller determines whether a proposed effect falls within a particular Discipline.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'using-other-disciplines',
+        category: 'Resonance',
+        title: 'Using Other Disciplines',
+        introduction: [
+          {
+            segments: [
+              { text: 'Attempting a Resonance effect outside the character’s Discipline is normally ' },
+              { text: 'impossible', strong: true },
+              { text: '. A Discipline establishes the supernatural boundaries the character understands and can reliably access.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Exceptional Circumstances: ', strong: true },
+              { text: 'The Storyteller may permit an out-of-Discipline attempt at −1D or −2D when the fiction strongly supports it. Failure should carry harsher consequences than an ordinary Resonance check.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'magical-side-effects',
+        category: 'Resonance',
+        title: 'Magical Side Effects',
+        introduction: [
+          {
+            segments: [
+              { text: 'A Resonance effect does more than simply succeed or fail. Use the Degree of Success to determine whether supernatural power creates an added benefit, reduced effect, price, or dangerous consequence.' },
+            ],
+          },
+        ],
+        tables: [
+          {
+            title: 'Resonance Outcomes',
+            headers: ['Outcome', 'Effect'],
+            rows: [
+              ['No, and…', 'The effect fails and something seriously worsens. Resonance may lash back, ignite something unintended, harm the user, or create an unwanted supernatural consequence.'],
+              ['No', 'Nothing happens.'],
+              ['No, but…', 'The intended effect fails, but produces a lesser benefit. A flame might briefly sputter to life or force an enemy back.'],
+              ['Yes, but…', 'The effect works at a price, such as Health loss, reduced strength or duration, collateral damage, a temporary negative Characteristic, or unwanted supernatural attention.'],
+              ['Yes', 'The effect produces exactly the intended result.'],
+              ['Yes, and…', 'The effect works exceptionally well, gaining greater area or duration, reduced collateral damage, a secondary effect, or another appropriate benefit.'],
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'This outcome structure replaces the need for separate critical-result tables for every individual supernatural effect.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'resonance-damage-and-difficulty',
+        category: 'Resonance',
+        title: 'Resonance Damage & Difficulty',
+        introduction: [
+          {
+            segments: [
+              { text: 'Offensive Resonance follows the normal rules for melee or ranged Attacks and fixed Damage. Most Resonance Attacks default to ' },
+              { text: 'Standard', strong: true },
+              { text: ' power unless the player deliberately changes the effect’s Damage, range, area, duration, precision, targets, or scale.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Each major increase raises the effect’s Difficulty by one or more Difficulty Bands. Reductions may lower the Difficulty where noted.' },
+            ],
+          },
+        ],
+        tables: [
+          {
+            title: 'Resonance Power Benchmarks',
+            headers: ['Resonance Power', 'Damage', 'Mundane Equivalent'],
+            rows: [
+              ['Minor', '4', 'Short blade'],
+              ['Standard', '7', 'Service handgun'],
+              ['Potent', '10', 'Rifle'],
+              ['Severe', '12', 'Full-power rifle'],
+              ['Devastating', '14', 'Heavy weapon'],
+              ['Catastrophic', '17+', 'Exceptional'],
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Damage Level',
+            table: {
+              headers: ['Damage Level', 'Damage', 'Difficulty'],
+              rows: [
+                ['Minor', '4', '−1 Band'],
+                ['Standard', '7', '—'],
+                ['Potent', '10', '+1 Band'],
+                ['Severe', '12', '+2 Bands'],
+                ['Devastating', '14', '+3 Bands'],
+                ['Catastrophic', '17', '+4 Bands or more'],
+              ],
+            },
+            paragraphs: [
+              'The Storyteller may permit greater power because of compelling roleplay, a strong narrative purpose, or the expenditure of a setting-specific resource such as Resonance Crystals.',
+            ],
+          },
+          {
+            title: 'Range',
+            paragraphs: [
+              'Twenty metres is the standard range for a Resonance effect. Each additional 20 metres increases the Difficulty by one Band.',
+            ],
+            table: {
+              headers: ['Maximum Range', 'Difficulty Increase'],
+              rows: [['20 m', '—'], ['40 m', '+1 Band'], ['60 m', '+2 Bands'], ['80 m', '+3 Bands'], ['100 m', '+4 Bands'], ['Each additional 20 m', '+1 Band']],
+            },
+          },
+          {
+            title: 'Armour-Piercing',
+            paragraphs: [
+              'Armour-Piercing allows a Resonance Attack to ignore a fixed amount of Armour Absorption. Armour-Piercing 2 ignores 2 points of Absorption.',
+            ],
+            table: {
+              headers: ['Effect', 'Difficulty Increase'],
+              rows: [['Ignore 2 Armour', '+1 Band'], ['Ignore 4 Armour', '+2 Bands'], ['Ignore 6 Armour', '+3 Bands']],
+            },
+          },
+          {
+            title: 'Area',
+            rules: [
+              { name: 'Small Area — +1 Band', description: 'Approximately a 3-metre radius, or 6-metre diameter. Large enough to catch a tightly grouped cluster without consuming an entire battlefield.' },
+              { name: 'Large Area — +2 Bands', description: 'Approximately an 8-metre radius, or 16-metre diameter. This area is legitimately dangerous to use around allies or civilians.' },
+            ],
+          },
+          {
+            title: 'Duration',
+            table: {
+              headers: ['Duration', 'Difficulty Increase'],
+              rows: [
+                ['Instantaneous', '— for naturally instant effects'],
+                ['Up to 2 minutes', 'Standard duration'],
+                ['Up to 10 minutes', '+1 Band'],
+                ['Up to 30 minutes', '+2 Bands'],
+                ['Up to 1 hour', '+3 Bands'],
+                ['Several hours', '+4 Bands'],
+                ['One day', '+5 Bands or Storyteller discretion'],
+                ['Permanent', 'Usually requires a special ritual'],
+              ],
+            },
+          },
+          {
+            title: 'Precision & Subtlety — +1 Band',
+            paragraphs: [
+              'Apply +1 Difficulty Band when an effect must be particularly precise, selective in its immediate application, or difficult to recognize as supernatural.',
+            ],
+            items: [
+              'Burn a rope without burning the prisoner',
+              'Remove one specific memory',
+              'Levitate a key unseen from someone’s pocket',
+              'Freeze a lock without freezing the door',
+              'Manipulate a tiny internal mechanism',
+              'Hide obvious visual manifestations',
+              'Disguise the supernatural origin of an effect',
+            ],
+          },
+          {
+            title: 'Selective Targets',
+            paragraphs: [
+              'A selective multi-target effect affects several chosen creatures while excluding others in the area.',
+            ],
+            table: {
+              headers: ['Targets', 'Difficulty Increase'],
+              rows: [['One', '—'], ['Two', '+1 Band'], ['Up to four', '+2 Bands'], ['Up to eight', '+3 Bands']],
+            },
+          },
+          {
+            title: 'Scale',
+            table: {
+              headers: ['Scale', 'Example', 'Difficulty Increase'],
+              rows: [
+                ['Minor', 'Handheld object', '−1 Band'],
+                ['Standard', 'Person-sized or ordinary effect', '—'],
+                ['Large', 'Motorcycle or large animal', '+1 Band'],
+                ['Huge', 'Car or horse-sized mass', '+2 Bands'],
+                ['Massive', 'Truck or small building component', '+3 Bands'],
+                ['Colossal', 'Building-scale', '+4 Bands or more'],
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: 'healing-with-resonance',
+        category: 'Resonance',
+        title: 'Healing with Resonance',
+        introduction: [
+          {
+            segments: [
+              { text: 'A character with an appropriate Discipline may use Resonance to restore lost Health. Roll the relevant ' },
+              { text: 'Attribute + Resonance Descriptor', strong: true },
+              { text: ' against a Difficulty determined by the amount of Health the character attempts to restore.' },
+            ],
+          },
+        ],
+        tables: [
+          {
+            title: 'Healing Intensity',
+            headers: ['Healing', 'Health Restored', 'Difficulty'],
+            rows: [
+              ['Minor Healing', '4 Health', 'Easy — TN 8'],
+              ['Standard Healing', '7 Health', 'Standard — TN 11'],
+              ['Potent Healing', '10 Health', 'Challenging — TN 14'],
+              ['Severe Healing', '12 Health', 'Hard — TN 17'],
+              ['Major Healing', '14 Health', 'Very Hard — TN 20'],
+              ['Extraordinary Healing', '17 Health', 'Extreme — TN 23'],
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'A character may receive restorative Resonance no more than twice between full daily rests. Healing a Taken Out character increases the Difficulty by one Band.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'balance',
+        category: 'Resonance',
+        title: 'Balance',
+        introduction: [
+          {
+            segments: [
+              { text: 'Resonance exists on a spectrum between ' },
+              { text: 'Dark', strong: true },
+              { text: ' and ' },
+              { text: 'Light', strong: true },
+              { text: '. Dark Resonance offers power through aggression, passion, selfishness, and desperation. Light Resonance offers power through discipline, protection, compassion, and self-control.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'When a Resonance action genuinely aligns with the character’s Balance, apply the corresponding bonus. Acting directly against that Balance applies the equivalent penalty. Neutral actions receive no Balance modifier.' },
+            ],
+          },
+        ],
+        balanceScale: [
+          { value: '−3', label: 'Desperation', alignment: 'dark' },
+          { value: '−2', label: 'Instability', alignment: 'dark' },
+          { value: '−1', label: 'Adrift', alignment: 'dark' },
+          { value: '0', label: 'Neutrality', alignment: 'neutral' },
+          { value: '+1', label: 'Attuned', alignment: 'light' },
+          { value: '+2', label: 'Composure', alignment: 'light' },
+          { value: '+3', label: 'Harmony', alignment: 'light' },
+        ],
+        tables: [
+          {
+            title: 'Balance Modifiers',
+            headers: ['Balance', 'Aligned Bonus', 'Opposed Penalty'],
+            rows: [
+              ['−3 Dark', '+1D Dark', '−1D Light'],
+              ['−2 Dark', '+2 Pips Dark', '−2 Pips Light'],
+              ['−1 Dark', '+1 Pip Dark', '−1 Pip Light'],
+              ['0 Neutral', '—', '—'],
+              ['+1 Light', '+1 Pip Light', '−1 Pip Dark'],
+              ['+2 Light', '+2 Pips Light', '−2 Pips Dark'],
+              ['+3 Light', '+1D Light', '−1D Dark'],
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Dark-Aligned Resonance',
+            items: ['Hatred', 'Fear', 'Cruelty', 'Domination', 'Selfish ambition', 'Unnecessary suffering', 'Using others as expendable tools', 'Drawing deliberately on destructive emotions'],
+          },
+          {
+            title: 'Light-Aligned Resonance',
+            items: ['Protection', 'Healing', 'Mercy', 'Self-sacrifice', 'Restoration', 'Compassion', 'Self-control', 'Preserving others at personal cost'],
+          },
+          {
+            title: '−3 Desperation — Embrace the Darkness',
+            paragraphs: [
+              'Once per scene, after failing a Resonance roll, the character may reroll the entire pool and must accept the second result.',
+              'Doing so inflicts Resonance Burn equal to 25% of maximum Health, rounded up. Armour cannot absorb Resonance Burn.',
+            ],
+          },
+          {
+            title: '+3 Harmony — Preserve the Self',
+            paragraphs: [
+              'Once per session, when Damage would reduce the character to Taken Out, the character remains at 1 Health instead.',
+            ],
+          },
+          {
+            title: 'Changing Balance',
+            paragraphs: [
+              'The Storyteller may shift a character’s Balance one step after a significant act strongly aligned with Light or Dark Resonance.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'awarding-experience-and-meta-dice',
+        category: 'Storytelling',
+        title: 'Awarding Experience & Meta Dice',
+        introduction: [
+          {
+            segments: [
+              { text: 'Award ' },
+              { text: 'Experience Points', strong: true },
+              { text: ' primarily at the end of sessions for participation, progress, discovery, and meaningful character choices. Keep awards consistent enough that players understand the expected pace of advancement.' },
+            ],
+          },
+          {
+            callout: true,
+            segments: [
+              { text: 'Current playtest pace: ', strong: true },
+              { text: 'A standard session awards approximately 5 Experience Points to each player character. This rate is provisional, and the Storyteller may adjust it for the length and significance of the session.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Award ' },
+              { text: 'Meta Dice', strong: true },
+              { text: ' during play for impressive, impactful, creative, or story-serving moments. Characters begin with two and can hold a maximum of five, so award Meta Dice freely enough that players are encouraged to spend them rather than save them indefinitely.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'creating-npcs',
+        category: 'Storytelling',
+        title: 'Creating NPCs',
+        introduction: [
+          {
+            segments: [
+              { text: 'Most non-player characters need only a name, purpose, disposition, a few relevant Attributes or Descriptors, Health if they can be harmed, and any equipment or special abilities likely to matter. Assign detail in proportion to the NPC’s importance.' },
+            ],
+          },
+        ],
+        tables: [
+          {
+            title: 'NPC Attribute & Descriptor Benchmarks',
+            headers: ['Rating', 'Benchmark'],
+            rows: [
+              ['1D', 'Below human average for an Attribute'],
+              ['2D', 'Human average for an Attribute and many Descriptors'],
+              ['3D', 'Average level of training for a human'],
+              ['4D', 'Professional level of training for a human'],
+              ['5D', 'Above-average expertise'],
+              ['6D', 'Best in a city or geographic area; approximately 1 in 100,000'],
+              ['7D', 'Among the best in a region; approximately 1 in 10,000,000'],
+              ['8D', 'Among the best in a country; approximately 1 in 100,000,000'],
+              ['9D', 'One of the best on a continent; approximately 1 in a billion'],
+              ['10D', 'One of the best in a hemisphere'],
+              ['11D', 'One of the best to ever live'],
+              ['12D+', 'Among the most legendary'],
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Use standard Difficulties for incidental opposition and full Opposed Checks for important rivals. Reuse simple profiles for groups of similar NPCs, then add one memorable trait or specialty when an individual needs distinction.' },
+            ],
+          },
+        ],
+      },
+      {
         id: 'creating-a-character',
         category: 'Character',
         title: 'Creating a Character',
@@ -1513,11 +1953,9 @@ const systems = [
             segments: [
               { text: 'The ' },
               { text: 'Storyteller', strong: true },
-              { text: ' awards Experience Points (XP) at the end of each session. A typical award is ' },
-              { text: '3–5 XP', strong: true },
-              { text: ', with roughly ' },
-              { text: '4 XP', strong: true },
-              { text: ' representing an ordinary session.' },
+              { text: ' awards Experience Points (XP) at the end of each session. A standard session currently awards approximately ' },
+              { text: '5 XP', strong: true },
+              { text: '. This is a provisional pace for playtesting and may be adjusted for the session’s length and significance.' },
             ],
           },
           {
@@ -1744,6 +2182,37 @@ function selectCategory(category) {
                   </template>
                 </p>
               </div>
+
+              <section v-if="rule.balanceScale" :aria-labelledby="`${rule.id}-scale`">
+                <h4 :id="`${rule.id}-scale`" class="text-xs font-extrabold uppercase tracking-[0.16em] text-amber-200/90">Balance Track</h4>
+                <div class="mt-3 overflow-x-auto border border-white/[0.09] bg-white/[0.018] px-5 py-5 [scrollbar-color:rgba(252,211,77,0.35)_transparent] [scrollbar-width:thin]">
+                  <div class="min-w-[44rem]">
+                    <div class="relative">
+                      <div aria-hidden="true" class="absolute top-4 right-[7%] left-[7%] h-px bg-gradient-to-r from-red-400/65 via-zinc-400/35 to-sky-300/65"></div>
+                      <ol class="relative grid grid-cols-7 gap-2">
+                        <li v-for="point in rule.balanceScale" :key="point.value" class="flex flex-col items-center text-center">
+                          <span
+                            class="relative z-[1] grid size-8 place-items-center border bg-[#07100b] text-xs font-extrabold"
+                            :class="point.alignment === 'dark'
+                              ? 'border-red-400/50 text-red-200 shadow-[0_0_14px_rgba(248,113,113,0.12)]'
+                              : point.alignment === 'light'
+                                ? 'border-sky-300/50 text-sky-100 shadow-[0_0_14px_rgba(125,211,252,0.12)]'
+                                : 'border-zinc-400/45 text-zinc-100'"
+                          >
+                            {{ point.value }}
+                          </span>
+                          <span class="mt-2 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-zinc-400">{{ point.label }}</span>
+                        </li>
+                      </ol>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 text-[0.65rem] font-bold uppercase tracking-[0.18em]">
+                      <span class="text-red-200/75">Dark Resonance</span>
+                      <span class="text-zinc-500">Neutral</span>
+                      <span class="text-sky-100/75">Light Resonance</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
 
               <template v-if="rule.concepts">
                 <section :aria-labelledby="`${rule.id}-concepts`">
