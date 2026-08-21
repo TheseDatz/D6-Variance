@@ -17,7 +17,7 @@
     >
       <div class="max-w-3xl space-y-4 leading-7">
         <p>
-          These rules provide everything needed to begin playing D6: Variance, a flexible tabletop roleplaying game inspired by OpenD6. The system is built around familiar six-sided dice, straightforward resolution, and procedures that remain quick to understand and easy to use at a physical or virtual table.
+          These rules provide everything needed to begin playing D6: Variance, a flexible tabletop roleplaying game. The system is built around familiar six-sided dice, straightforward resolution, and procedures that remain quick to understand and easy to use at a physical or virtual table.
         </p>
         <p>
           D6V separates its universal mechanics from the worlds that use them. The core rules establish a shared foundation for characters, challenges, conflict, and advancement that can be adapted to any genre. Individual settings can then introduce their own abilities, equipment, creatures, and optional subsystems without changing how the game fundamentally works.

@@ -360,9 +360,7 @@ onMounted(async () => {
             <span>Species <b aria-hidden="true">*</b></span>
             <input v-model="character.species" autocomplete="off" type="text" />
             <small>
-              Choose the species your character belongs to. Human is the standard option, though your Storyteller may allow others depending on the game. Browse the
-              <RouterLink class="helper-link" to="/species">curated species list</RouterLink>
-              for inspiration.
+              Choose the species your character belongs to. Human is the standard option, though your Storyteller may allow others depending on the game.
             </small>
           </label>
 
@@ -440,9 +438,7 @@ onMounted(async () => {
         @toggle="toggleSection('traits')"
       >
         <p class="text-sm leading-6 text-zinc-100">
-          Character traits represent species-specific abilities as well as personal advantages and disadvantages. These features help define what makes your character exceptional—or what makes their life more complicated. Browse the
-          <RouterLink class="helper-link" to="/traits">curated traits page</RouterLink>
-          for available options and guidance.
+          Character traits represent species-specific abilities as well as personal advantages and disadvantages. These features help define what makes your character exceptional—or what makes their life more complicated. Work with your Storyteller to choose available options.
         </p>
         <p class="mt-3 text-sm leading-6 text-zinc-300">
           Add each trait with a name, description, and its attribute-allocation modifier. Advantages reduce available Attribute Dice, while Disadvantages grant additional Attribute Dice. Pips are supported: examples include −1 pip, −1D, +2 pips, and +(1D+1). These modifiers are used during creation and are not displayed on the finished character sheet.
@@ -473,9 +469,7 @@ onMounted(async () => {
         @toggle="toggleSection('skills')"
       >
         <p class="text-sm leading-6 text-zinc-100">
-          Skills begin at the value of their linked attribute and can be improved by spending skill dice. You have 7D to distribute among the skills that define your character’s training and experience. Browse the
-          <RouterLink class="helper-link" to="/skills">curated skills list</RouterLink>
-          for more options.
+          Skills begin at the value of their linked attribute and can be improved by spending skill dice. You have 7D to distribute among the skills that define your character’s training and experience.
         </p>
         <p class="mt-3 text-sm leading-6 text-zinc-300">
           Quick-add a suggested skill or create your own. Each new skill begins with a 1D upgrade, which you can adjust using whole dice and pips.

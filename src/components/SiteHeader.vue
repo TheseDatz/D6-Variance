@@ -63,41 +63,6 @@ onBeforeUnmount(() => {
         <RouterLink
           class="px-1 py-2 transition hover:text-amber-100"
           active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-          to="/traits"
-        >
-          Traits
-        </RouterLink>
-        <RouterLink
-          class="px-1 py-2 transition hover:text-amber-100"
-          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-          to="/skills"
-        >
-          Skills
-        </RouterLink>
-        <RouterLink
-          class="px-1 py-2 transition hover:text-amber-100"
-          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-          to="/species"
-        >
-          Species
-        </RouterLink>
-        <RouterLink
-          class="px-1 py-2 transition hover:text-amber-100"
-          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-          to="/equipment"
-        >
-          Equipment
-        </RouterLink>
-        <RouterLink
-          class="px-1 py-2 transition hover:text-amber-100"
-          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-          to="/vehicles"
-        >
-          Vehicles
-        </RouterLink>
-        <RouterLink
-          class="px-1 py-2 transition hover:text-amber-100"
-          active-class="rounded-full border border-white/10 bg-white/[0.045] px-4 text-amber-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
           to="/styles"
         >
           Styles

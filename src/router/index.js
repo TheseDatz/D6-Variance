@@ -4,17 +4,12 @@ import AdminView from '../views/AdminView.vue'
 import CharactersView from '../views/CharactersView.vue'
 import CharacterSheetView from '../views/CharacterSheetView.vue'
 import CharacterCreatorView from '../views/CharacterCreatorView.vue'
-import EquipmentView from '../views/EquipmentView.vue'
 import ForbiddenView from '../views/ForbiddenView.vue'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import RulesView from '../views/RulesView.vue'
-import SkillsView from '../views/SkillsView.vue'
-import SpeciesView from '../views/SpeciesView.vue'
 import StylesView from '../views/StylesView.vue'
-import TraitsView from '../views/TraitsView.vue'
-import VehiclesView from '../views/VehiclesView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -57,31 +52,6 @@ const router = createRouter({
       path: '/rules',
       name: 'rules',
       component: RulesView,
-    },
-    {
-      path: '/traits',
-      name: 'traits',
-      component: TraitsView,
-    },
-    {
-      path: '/skills',
-      name: 'skills',
-      component: SkillsView,
-    },
-    {
-      path: '/species',
-      name: 'species',
-      component: SpeciesView,
-    },
-    {
-      path: '/equipment',
-      name: 'equipment',
-      component: EquipmentView,
-    },
-    {
-      path: '/vehicles',
-      name: 'vehicles',
-      component: VehiclesView,
     },
     {
       path: '/styles',
