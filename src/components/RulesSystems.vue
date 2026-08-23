@@ -8,31 +8,31 @@ const metaDiceRule = {
       segments: [
         { text: 'D6V uses a metacurrency called ' },
         { text: 'Meta Dice', strong: true },
-        { text: '. A player may spend Meta Dice when a roll is especially important, allowing their character to push beyond their normal limits.' },
+        { text: '. A player may spend one Meta Die after seeing the result of a roll, allowing anyone in the scene to push beyond their normal limits.' },
       ],
     },
   ],
   conceptsTitle: 'Spending Meta Dice',
   concepts: [
     {
-      name: 'Spend 1 Meta Die',
-      description: 'Add +1D to the roll. Only one Meta Die option can be used on a roll.',
+      name: 'Boost the Result',
+      description: 'Spend one Meta Die to roll one additional ordinary die and add it to the existing result. This additional die is not a Wild Die.',
     },
     {
-      name: 'Spend 2 Meta Dice',
-      description: 'Double the final result of the roll. Only one Meta Die option can be used on a roll.',
+      name: 'Reroll the Pool',
+      description: 'Spend one Meta Die to reroll the entire original pool, including its Wild Die, with the same modifiers. The new result must be accepted.',
     },
   ],
   relationship: [
     {
       callout: true,
       segments: [
-        { text: 'Spend Meta Dice after all Dice, Pips, Advantage, Disadvantage, and other modifiers have been applied.' },
+        { text: 'Only one Meta Die may be spent on a roll. Decide whether to spend it after the original roll has been completely resolved and its result is known.' },
       ],
     },
     {
       segments: [
-        { text: 'Every player character begins with two Meta Dice and may hold a maximum of five. The Storyteller decides when to award them. An especially impressive or impactful action, or one that is particularly true to the spirit of the story, is a good reason for an award. NPCs and Companions may receive Meta Dice at the Storyteller’s discretion.' },
+        { text: 'Meta Dice belong to the player rather than any one character. Every player begins with two and may hold a maximum of five. A player may spend a Meta Die on their own roll or on another player character, Companion, or NPC’s roll. The Storyteller decides when to award them; an impressive, impactful, creative, or story-serving action is a good reason for an award.' },
       ],
     },
   ],
@@ -76,6 +76,28 @@ const systems = [
               { text: 'Play unfolds as a conversation. The Storyteller establishes a situation, the players describe what their characters do, and the rules determine the outcome whenever success is uncertain or failure would be meaningful. The Dice introduce variance, but the choices made by the players and Storyteller determine what those results mean for the story.' },
             ],
           },
+        ],
+      },
+      {
+        id: 'roll-procedure',
+        category: 'Getting Started',
+        title: 'Roll Procedure',
+        introduction: [
+          {
+            segments: [
+              { text: 'Use the following procedure whenever the rules call for a check. The ' },
+              { text: 'Storyteller', strong: true },
+              { text: ' makes the final decision about which Attribute and Descriptor apply, though players are encouraged to explain why one of their Descriptors is relevant.' },
+            ],
+          },
+        ],
+        steps: [
+          { title: 'Choose the Attribute', description: 'Determine the Attribute that best represents the character’s approach.' },
+          { title: 'Apply One Descriptor', description: 'Add the rating of the most applicable Edge or subtract the magnitude of the most applicable Flaw. A Flaw rated −1 subtracts 1 from the pool. If no Descriptor applies, use the Attribute alone.' },
+          { title: 'Apply Modifiers', description: 'Apply injury penalties, multiple-action penalties, assistance, and situational Advantage or Disadvantage.' },
+          { title: 'Designate the Wild Die', description: 'Replace one ordinary die in the pool with the Wild Die. A pool can never be reduced below 1D, and that final die is the Wild Die.' },
+          { title: 'Roll the Pool', description: 'Roll the dice, resolve the Wild Die, and add or subtract any Pips. After seeing the completed result, decide whether to spend one Meta Die.' },
+          { title: 'Determine the Outcome', description: 'Compare the final result with the Difficulty or opposing total and determine the Degree of Outcome.' },
         ],
       },
       {
@@ -143,13 +165,13 @@ const systems = [
               { speaker: 'Mara’s player', text: '“I grab the loose rigging, run along the rail, and swing onto the frigate’s deck.”' },
               { speaker: 'Storyteller', text: '“The decks are pitching and the gap is widening. Make a Dexterity check.”' },
               { speaker: 'Mara’s player', text: '“Could I use my Pirate Captain Descriptor? Mara has spent years moving through ship rigging.”' },
-              { speaker: 'Storyteller', text: '“That fits. Roll your Descriptor against a Difficulty of 15.”' },
+              { speaker: 'Storyteller', text: '“That fits. Add Pirate Captain to your Dexterity and roll against a Difficulty of 15.”' },
             ],
           },
           {
             title: 'Resolving the Check',
             paragraphs: [
-              'Mara has Pirate Captain 4D+1. Her player rolls three ordinary Dice and one visually distinct Wild Die. The results are 2, 3, 4, and a 6 on the Wild Die. Because the Wild Die produced the 6, it explodes; she rolls it again and gets another 4. After adding the Dice and her +1 Pip, the final result is 20. If an ordinary die had rolled the 6 instead, it would not have been rerolled.',
+              'Mara has Dexterity 3D and Pirate Captain +1D+1, producing a 4D+1 pool. Her player rolls three ordinary Dice and one visually distinct Wild Die. The results are 2, 3, 4, and a 6 on the Wild Die. Because the Wild Die produced the 6, it explodes; she rolls it again and gets another 4. After adding the Dice and her +1 Pip, the final result is 20. If an ordinary die had rolled the 6 instead, it would not have been rerolled.',
             ],
           },
           {
@@ -214,7 +236,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'When increasing or decreasing a rating, three Pips convert to one full die. Increasing ' },
+              { text: 'When increasing or decreasing a rating, three Pips convert to one full die. Permanent ratings are therefore normally written with no more than +2 Pips. Increasing ' },
               { text: '2D+2', strong: true },
               { text: ' by one Pip therefore produces ' },
               { text: '3D', strong: true },
@@ -287,9 +309,9 @@ const systems = [
         introduction: [
           {
             segments: [
-              { text: 'One die in every appropriate dice pool is designated as the ' },
+              { text: 'One die in every dice pool is designated as the ' },
               { text: 'Wild Die', strong: true },
-              { text: ' before the roll. It is rolled with the rest of the pool but can produce exceptional results or serious complications.' },
+              { text: ' before the roll. It is rolled with the rest of the pool and can produce exceptional or reduced results. A pool can never be reduced below 1D; when only one die remains, it is the Wild Die.' },
             ],
           },
         ],
@@ -299,8 +321,16 @@ const systems = [
             description: 'When the Wild Die rolls a 6, add the 6 to the result and roll the Wild Die again. Each additional 6 is also added and causes another roll, so the die can continue exploding until it produces a different number.',
           },
           {
-            title: 'Complication on 1',
-            description: 'When the Wild Die rolls a 1, remove the Wild Die and the highest other die from the result. The remaining dice and Pips determine the final total.',
+            title: 'Wild 1',
+            description: 'When the Wild Die rolls a 1, remove that result and the highest other die from the total. If the Wild Die is the only die in the pool, its result is 0 before Pips are applied. Rolling a 1 removes dice only and does not automatically create a narrative complication.',
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'If the Wild Die rolls a 1 after one or more exploding 6s, remove the 1 and the highest other die result already in the roll, including an earlier exploding result when it is the highest. Initiative and random-duration rolls use the Wild Die and may explode normally.' },
+            ],
           },
         ],
       },
@@ -316,21 +346,19 @@ const systems = [
           },
         ],
         concepts: [
-          {
-            name: 'Favorable Circumstances: +1D',
-            description: 'Add one die when useful positioning, preparation, assistance, tools, or environmental conditions give the character a meaningful advantage.',
-          },
-          {
-            name: 'Unfavorable Circumstances: −1D',
-            description: 'Remove one die when poor positioning, inadequate tools, time pressure, impaired visibility, or other conditions meaningfully hinder the character.',
-          },
+          { name: 'Slight Advantage: +2', description: 'Add 2 Pips when circumstances provide a small but meaningful benefit.' },
+          { name: 'Standard Advantage: +1D', description: 'Add one die when circumstances provide a clear and substantial benefit.' },
+          { name: 'Significant Advantage: +2D', description: 'Add two dice when circumstances provide an exceptional benefit.' },
+          { name: 'Slight Disadvantage: −2', description: 'Subtract 2 Pips when circumstances create a small but meaningful hindrance.' },
+          { name: 'Standard Disadvantage: −1D', description: 'Remove one die when circumstances create a clear and substantial hindrance.' },
+          { name: 'Significant Disadvantage: −2D', description: 'Remove two dice when circumstances create an exceptional hindrance.' },
         ],
-        conceptsTitle: 'How circumstances modify a roll',
+        conceptsTitle: 'Levels of Advantage & Disadvantage',
         relationship: [
           {
             callout: true,
             segments: [
-              { text: 'Situational modifiers change the dice pool for the affected roll only. The Storyteller determines whether the circumstances are significant enough to justify a modifier.' },
+              { text: 'Advantage and Disadvantage may stack without a fixed limit, but the Storyteller should keep the combined modifier reasonable for the circumstances. Opposing modifiers cancel normally. No combination of penalties can reduce a pool below 1D, which is always the Wild Die.' },
             ],
           },
         ],
@@ -349,7 +377,7 @@ const systems = [
             segments: [
               { text: 'Use an ' },
               { text: 'Opposed Check', strong: true },
-              { text: ' when one character’s action is directly resisted by another character. Each participant rolls the Attribute or Descriptor that best represents their approach.' },
+              { text: ' when one character’s action is directly resisted by another character. Each participant rolls the Attribute plus one relevant Descriptor that best represents their approach.' },
             ],
           },
           {
@@ -363,7 +391,7 @@ const systems = [
             callout: true,
             segments: [
               { text: 'Ties: ', strong: true },
-              { text: 'If the totals are equal, the situation remains unresolved, the acting character fails to overcome the resistance, or the Storyteller calls for another check when continued uncertainty would be interesting. When the distinction matters, the Storyteller should explain how a tie will be resolved before the roll.' },
+              { text: 'If the totals are equal, the defender or the existing status quo wins. The acting character has not overcome the resistance.' },
             ],
           },
         ],
@@ -383,7 +411,7 @@ const systems = [
         concepts: [
           {
             name: 'Active Hiding',
-            description: 'When a character actively hides from another character, resolve Dexterity against Intelligence as an Opposed Check.',
+            description: 'When a character actively hides from another character, resolve Dexterity plus one relevant Descriptor against Intelligence plus one relevant Descriptor as an Opposed Check.',
           },
           {
             name: 'Groups and Observers',
@@ -391,7 +419,7 @@ const systems = [
           },
           {
             name: 'Searching for Objects',
-            description: 'Searching for a concealed object, clue, compartment, or other thing that is not actively hiding normally uses Intelligence and a relevant Investigation Descriptor against a Difficulty chosen by the Storyteller.',
+            description: 'Searching for a concealed object, clue, compartment, or other thing that is not actively hiding normally uses Intelligence plus one relevant Investigation Descriptor against a Difficulty chosen by the Storyteller.',
           },
           {
             name: 'Actively Concealed Objects',
@@ -408,7 +436,7 @@ const systems = [
             segments: [
               { text: 'Use ' },
               { text: 'Social', strong: true },
-              { text: ' and a relevant Descriptor when a character attempts to persuade, deceive, intimidate, inspire, or understand another person and the outcome is uncertain. Resolve active resistance as an Opposed Check; use a fixed Difficulty when the opposition is incidental.' },
+              { text: ' plus one relevant Descriptor when a character attempts to persuade, deceive, intimidate, inspire, or understand another person and the outcome is uncertain. Resolve active resistance as an Opposed Check; use a fixed Difficulty when the opposition is incidental.' },
             ],
           },
           {
@@ -497,7 +525,7 @@ const systems = [
           {
             title: 'Turns and Resources',
             paragraphs: [
-              'Companions roll their own Initiative and take their own turns unless a specific ability states otherwise. They do not share Actions, Meta Dice, Health, or other resources with the controlling character. When directing a Companion, a player should use only information the Companion could reasonably possess.',
+              'Companions roll their own Initiative and take their own turns unless a specific ability states otherwise. They do not share Actions, Health, or other character resources with the controlling character, and they have no separate Meta Dice pool. A player may spend their own Meta Dice on a Companion’s rolls normally. When directing a Companion, a player should use only information the Companion could reasonably possess.',
             ],
           },
           {
@@ -580,9 +608,9 @@ const systems = [
           },
           {
             segments: [
-              { text: 'Characteristics are intentionally open-ended. See the ' },
+              { text: 'See the ' },
               { text: 'Equipment page', link: '/equipment' },
-              { text: ' for a broader, non-exhaustive list.' },
+              { text: ' for the established Characteristics and their complete effects. Any additional Characteristic requires Storyteller approval and should remain similar in scope and power to an established option.' },
             ],
           },
         ],
@@ -607,6 +635,11 @@ const systems = [
               { text: 'D6V does not attempt to maintain individually balanced prices for hundreds of pieces of equipment. Instead, each equipment category has a ' },
               { text: 'base price range', strong: true },
               { text: ' appropriate to the setting.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Prices are expressed in dollars as a universal measurement. A setting may rename or convert this unit while keeping the relative values of equipment consistent.' },
             ],
           },
           {
@@ -678,10 +711,30 @@ const systems = [
           },
         ],
         steps: [
-          { title: 'Determine Initiative', description: 'Everyone involved rolls Initiative using Dexterity at the beginning of the new Round.' },
+          { title: 'Determine Initiative', description: 'Everyone involved rolls Initiative using Dexterity once, at the beginning of the combat encounter.' },
           { title: 'Resolve Turns', description: 'Participants take their turns from the highest Initiative result to the lowest.' },
           { title: 'Resolve Consequences', description: 'Apply Damage, movement, conditions, and other effects as they occur.' },
-          { title: 'Begin the Next Round', description: 'If the conflict continues, roll Initiative again and repeat the sequence.' },
+          { title: 'Begin the Next Round', description: 'If the conflict continues, retain the existing Initiative order and repeat the sequence.' },
+        ],
+        detailSections: [
+          {
+            title: 'Initiative Ties',
+            paragraphs: [
+              'When a player character and an NPC tie, the player character acts first. When two player characters tie, the character with the higher Dexterity rating acts first. If they remain tied, the players decide their order.',
+            ],
+          },
+          {
+            title: 'Late Arrivals',
+            paragraphs: [
+              'A participant who enters an ongoing combat joins at the bottom of the Initiative order. Multiple late arrivals act in the order in which they entered the encounter.',
+            ],
+          },
+          {
+            title: 'Ambush & Surprise',
+            paragraphs: [
+              'A surprised or ambushed side does not act during the first Round. A surprised character may still choose Full Defense when they are targeted, but takes no other Actions that Round.',
+            ],
+          },
         ],
         relationship: [
           {
@@ -701,7 +754,14 @@ const systems = [
             segments: [
               { text: 'On their turn, a character may move up to their ' },
               { text: 'Move', strong: true },
-              { text: ' value for free and perform one Action. Running up to twice the character’s Move value counts as an Action.' },
+              { text: ' value for free and perform one Action. Movement may be split before, between, or after Actions. Running counts as an Action and increases the character’s total movement allowance for the turn to twice their Move value.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'A character may perform up to two ' },
+              { text: 'Free Actions', strong: true },
+              { text: ' during their turn. Free Actions do not increase the multiple-action penalty. Any additional activity that would normally be free requires an Action.' },
             ],
           },
           {
@@ -751,7 +811,13 @@ const systems = [
           {
             title: 'Improvised Weapons',
             paragraphs: [
-              'An improvised weapon uses an appropriate Attribute or Descriptor as chosen by the Storyteller and normally deals the improvised Attack Damage. Particularly dangerous, heavy, fragile, or unsuitable objects may modify the Attack or Damage.',
+              'An improvised weapon uses an appropriate Attribute plus one relevant Descriptor as chosen by the Storyteller and normally deals the improvised Attack Damage. Particularly dangerous, heavy, fragile, or unsuitable objects may modify the Attack or Damage.',
+            ],
+          },
+          {
+            title: 'Attacking Objects',
+            paragraphs: [
+              'Objects do not track Health individually. The Storyteller decides whether an attack can realistically damage an object by comparing the material, construction, weapon, and intended result. Punching a steel door cannot damage it and requires no roll, while striking it with a pickaxe may damage it when the Storyteller determines the attempt is plausible.',
             ],
           },
           {
@@ -769,7 +835,7 @@ const systems = [
         introduction: [
           {
             segments: [
-              { text: 'To Attack, roll the Attribute and Descriptor associated with the weapon or technique. Unless a rule states otherwise, melee Attacks use ' },
+              { text: 'To Attack, roll the Attribute plus one relevant Descriptor associated with the weapon or technique. Unless a rule states otherwise, melee Attacks use ' },
               { text: 'Strength', strong: true },
               { text: ' and ranged Attacks use ' },
               { text: 'Dexterity', strong: true },
@@ -783,7 +849,12 @@ const systems = [
           },
           {
             segments: [
-              { text: 'If the target actively defends, the defender rolls a relevant defensive Descriptor or Dexterity and adds their Defense Bonus. That result replaces the weapon’s normal Difficulty, even when the new value is lower, and applies to every relevant Attack against that defender for the remainder of the Round.' },
+              { text: 'If the target actively defends, the defender rolls Dexterity plus one relevant defensive Descriptor and adds their Defense Bonus. That result replaces the weapon’s normal Difficulty, even when the new value is lower, and applies to every relevant Attack against that defender for the remainder of the Round.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'A normal unarmed Attack has Easy Difficulty when the opponent is unarmed and Standard Difficulty when the opponent holds a weapon they can use in close combat. Active Defense replaces this Difficulty normally.' },
             ],
           },
         ],
@@ -796,6 +867,14 @@ const systems = [
             ],
           },
         ],
+        detailSections: [
+          {
+            title: 'Firing into Close Combat',
+            paragraphs: [
+              'A ranged Attack made against a target engaged in close combat suffers no inherent penalty. On a “No, and…” result, a typical consequence is for the Attack’s Damage to strike an ally or another unintended nearby target chosen by the Storyteller.',
+            ],
+          },
+        ],
       },
       {
         id: 'active-defense',
@@ -804,9 +883,9 @@ const systems = [
         introduction: [
           {
             segments: [
-              { text: 'When first targeted by an Attack during a Round, a character may use a Reaction to actively defend. Roll a relevant defensive Descriptor or the character’s ' },
+              { text: 'When first targeted by an Attack during a Round, a character may use a Reaction to actively defend. Roll the character’s ' },
               { text: 'Dexterity', strong: true },
-              { text: ', then add the character’s Defense Bonus.' },
+              { text: ' plus one relevant defensive Descriptor, then add the character’s Defense Bonus.' },
             ],
           },
         ],
@@ -818,7 +897,38 @@ const systems = [
           },
           {
             name: 'Full Defense',
-            description: 'A character may forgo their entire turn to concentrate on defense. Roll the most relevant defensive Descriptor or Dexterity, add the Defense Bonus, then add +10. This result applies until the beginning of the character’s next turn.',
+            description: 'A character may forgo their entire turn to concentrate on defense. Roll Dexterity plus one relevant defensive Descriptor, add the Defense Bonus, then add +10. This result applies until the beginning of the character’s next turn.',
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Active Defense is a gamble. ', strong: true },
+              { text: 'Because the result replaces the normal Attack Difficulty even when it is lower, actively defending is not always the safest choice. Taking Cover is often more reliable when it is available.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'cover',
+        category: 'Combat',
+        title: 'Cover',
+        introduction: [
+          {
+            segments: [
+              { text: 'When an obstacle provides meaningful protection between an attacker and a target, the target has ' },
+              { text: 'Cover', strong: true },
+              { text: '. Attacking a target in Cover raises the applicable Attack Difficulty by one Difficulty Band, or +3 TN.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'If the target also uses Active Defense, first replace the normal Difficulty with the Active Defense result, then add +3 TN for Cover.' },
+            ],
           },
         ],
       },
@@ -871,6 +981,7 @@ const systems = [
             title: 'Weapon Characteristics',
             paragraphs: [
               'Weapons, like other equipment, may have Characteristics that modify rolls or create positive and negative effects when relevant.',
+              'Tracking ammunition is optional. When a group chooses to track it, the relevant weapon Characteristics and equipment descriptions determine capacity, reloads, and other effects.',
             ],
           },
           {
@@ -891,6 +1002,11 @@ const systems = [
               { text: 'Armour uses a fixed ' },
               { text: 'Damage Absorption', strong: true },
               { text: ' value. When a character takes a hit, subtract the armour’s Absorption from the weapon’s Damage to determine how much Health is lost.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'A character can normally benefit from only one active piece of armour at a time. Multiple pieces apply only when a specific rule permits them or the Storyteller approves the combination.' },
             ],
           },
         ],
@@ -924,12 +1040,12 @@ const systems = [
               { text: 'Health', strong: true },
               { text: ' is expressed numerically and measures how much Damage a character can withstand. Starting Health equals ' },
               { text: '20 + one Strength roll', strong: true },
-              { text: '.' },
+              { text: '. This Strength roll uses no Descriptor, Wild Die, or Meta Die.' },
             ],
           },
           {
             segments: [
-              { text: 'A character’s current condition is determined by the percentage of their maximum Health that remains. This allows characters with different maximum Health values to use the same Health Bands.' },
+              { text: 'A character’s current condition is determined by the percentage of their maximum Health that remains. Divide current Health by maximum Health, multiply by 100, and round down to the nearest whole percentage before consulting the Health Bands.' },
             ],
           },
         ],
@@ -940,7 +1056,7 @@ const systems = [
             rows: [['76–100%', 'Healthy'], ['51–75%', 'Shaken'], ['26–50%', 'Wounded'], ['1–25%', 'Critical'], ['0', 'Taken Out']],
           },
           {
-            title: 'Tentative Consequences',
+            title: 'Health Band Consequences',
             headers: ['Band', 'Effect'],
             rows: [
               ['Healthy', 'No penalty'],
@@ -962,7 +1078,14 @@ const systems = [
             callout: true,
             segments: [
               { text: 'Taken Out player characters must be stabilized within three Rounds or risk death. ', strong: true },
-              { text: 'After three Rounds, the character makes a Strength check during every subsequent Round. Each successful check increases the Difficulty by one step for the next Round. The character dies when one of these checks fails.' },
+              { text: 'After three Rounds, the character makes a Strength check during every subsequent Round, beginning at Very Easy Difficulty. Each successful check raises the next check by one Difficulty Band. The character dies when one of these checks fails.' },
+            ],
+          },
+          {
+            callout: true,
+            segments: [
+              { text: 'Taken Out NPCs: ', strong: true },
+              { text: 'The Storyteller decides whether a Taken Out NPC is dying and can be stabilized, is merely unconscious or otherwise incapacitated, or dies immediately.' },
             ],
           },
         ],
@@ -976,7 +1099,7 @@ const systems = [
             segments: [
               { text: 'Stabilizing a ' },
               { text: 'Taken Out', strong: true },
-              { text: ' character requires an Intelligence check using any relevant medical Descriptors. A normal attempt expends a medical item and has ' },
+              { text: ' character requires an Intelligence check plus one relevant medical Descriptor. A normal attempt expends a medical item and has ' },
               { text: 'Standard Difficulty', strong: true },
               { text: '. If no medical item is available, the attempt may still be made at Hard Difficulty.' },
             ],
@@ -988,7 +1111,15 @@ const systems = [
           },
           {
             segments: [
-              { text: 'On a success, the character is stabilized. On a failure, increase the Difficulty of that character’s next death check by one step.' },
+              { text: 'On a success, the character is stabilized and stops making death checks, but their current Health does not change. On a failure, increase the Difficulty of that character’s next death check by one step.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'A Taken Out character must be stabilized before any treatment, rest, or Resonance can restore their Health.' },
             ],
           },
         ],
@@ -998,7 +1129,7 @@ const systems = [
           {
             title: 'Treatment Without an Item',
             paragraphs: [
-              'A character with a medically relevant Descriptor may make a Standard check to restore 3 Health to a patient without using an item. A patient can benefit from this treatment only once per day.',
+              'A character may make an Intelligence check plus one medically relevant Descriptor at Standard Difficulty to restore 3 Health to a patient without using an item. A patient can benefit from this treatment only once per day.',
             ],
           },
           {
@@ -1041,7 +1172,7 @@ const systems = [
         introduction: [
           {
             segments: [
-              { text: 'Combat uses the standard degrees of outcome to determine more than whether an Attack hits. The outcome may introduce an added setback, compromise, or benefit. The following effects are tentative.' },
+              { text: 'Combat uses the standard degrees of outcome to determine more than whether an Attack hits. The outcome may introduce an added setback, compromise, or benefit.' },
             ],
           },
         ],
@@ -1082,8 +1213,9 @@ const systems = [
         conceptsTitle: 'While Grappled',
         concepts: [
           { name: 'Movement', description: 'A Grappled character cannot move away from the grappler.' },
-          { name: 'Restricted Actions', description: 'The Grappled character has Disadvantage on Dexterity checks and on Attacks against anyone other than the grappler.' },
-          { name: 'Maintaining the Grapple', description: 'The grappler must spend one Action during each of their turns to maintain the Grapple.' },
+          { name: 'Restricted Actions', description: 'The Grappled character has standard Disadvantage on Dexterity checks and on Attacks against anyone other than the grappler.' },
+          { name: 'Maintaining the Grapple', description: 'The grappler must spend one Action during each of their turns to maintain the Grapple. If this Action is not spent, the target immediately breaks free and the Grapple ends.' },
+          { name: 'Moving the Target', description: 'The grappler may spend one Action to move the Grappled target up to two metres.' },
           { name: 'Close Weapons', description: 'Either character may use only weapons that can reasonably be operated at extremely close range.' },
           { name: 'Release', description: 'The grappler may release the target freely at any time.' },
         ],
@@ -1091,13 +1223,19 @@ const systems = [
           {
             title: 'Escaping',
             paragraphs: [
-              'Escaping requires an Action. The restrained character makes an opposed Strength check to overpower the grappler or an opposed Dexterity check against the grappler’s Strength to slip free. On a success, the Grapple ends.',
+              'Escaping requires an Action. The Grappled character makes an opposed Strength check plus one relevant Descriptor to overpower the grappler, or an opposed Dexterity check plus one relevant Descriptor against the grappler’s Strength and relevant Descriptor to slip free. On a success, the Grapple ends.',
+            ],
+          },
+          {
+            title: 'Multiple Grapplers',
+            paragraphs: [
+              'When multiple characters Grapple the same target, designate one as the primary grappler. The primary makes all relevant Grapple rolls. Each additional participating grappler with Strength 2D or higher adds +1D to the primary grappler’s pool.',
             ],
           },
           {
             title: 'Tackle',
             paragraphs: [
-              'A Tackle combines running, Grappling, and knocking the target down. The attacker must move toward the target and make an unarmed Attack with Disadvantage. Running and Tackling count as two Actions, so the normal multiple-action penalty also applies.',
+              'A Tackle combines running, Grappling, and knocking the target down. The attacker must move toward the target and make an unarmed Attack with standard Disadvantage. Running and Tackling count as two Actions, so the normal multiple-action penalty also applies.',
               'On a success, the target becomes Grappled and both characters become Prone. On a failure, the Storyteller may leave the attacker Prone when their momentum carries them past the target or into an obstacle.',
             ],
           },
@@ -1118,7 +1256,7 @@ const systems = [
             segments: [
               { text: 'A character must already have the target ' },
               { text: 'Grappled', strong: true },
-              { text: ' before beginning a Choke. Starting or maintaining the Choke requires one Action and an opposed Strength check. That same Action also maintains the underlying Grapple; the attacker does not spend a second Action.' },
+              { text: ' before beginning a Choke. Starting or maintaining the Choke requires one Action and an opposed Strength check plus one relevant Descriptor. That same Action also maintains the underlying Grapple; the attacker does not spend a second Action.' },
             ],
           },
           {
@@ -1189,7 +1327,7 @@ const systems = [
         conceptsTitle: 'Effects of Prone',
         concepts: [
           { name: 'Standing', description: 'Standing from Prone requires an Action.' },
-          { name: 'Attacking', description: 'A Prone character cannot make Attacks.' },
+          { name: 'Attacking', description: 'A Prone character cannot make melee Attacks but may make ranged Attacks subject to the normal modifiers for being Prone.' },
           { name: 'Close Attacks', description: 'Point Blank and Short Attacks against a Prone character gain significant Advantage.' },
           { name: 'Distant Attacks', description: 'Medium and Long ranged Attacks against a Prone character suffer significant Disadvantage.' },
           { name: 'Movement', description: 'A Prone character may crawl using free movement but covers only half their normal Move value.' },
@@ -1265,18 +1403,18 @@ const systems = [
           },
           {
             title: 'Make the Attack',
-            description: 'Make a relevant Attack with Advantage. If the Attack hits, subtract Armour Absorption from Damage to determine the resulting Health loss.',
+            description: 'Make a relevant Attack with standard Advantage. If the Attack hits, subtract Armour Absorption from Damage to determine the resulting Health loss.',
           },
           {
             title: 'Resolve the Takedown',
-            description: 'If the Attack would remove at least 5% of the target’s maximum Health, the target is killed immediately or becomes unconscious for 10D minutes, according to the attacker’s declared intent.',
+            description: 'If the Attack would remove at least 10% of the target’s maximum Health, the target is killed immediately or becomes unconscious for 10D minutes, according to the attacker’s declared intent.',
           },
         ],
         relationship: [
           {
             callout: true,
             segments: [
-              { text: 'If the Attack would remove less than 5% of the target’s maximum Health, apply the Health loss normally and the Takedown fails. An unconscious target immediately awakens if they take Damage.' },
+              { text: 'If the Attack would remove less than 10% of the target’s maximum Health, apply the Health loss normally and the Takedown fails. An unconscious target immediately awakens if they take Damage.' },
             ],
           },
         ],
@@ -1289,7 +1427,6 @@ const systems = [
             rules: [
               { name: 'Automatic Success', description: 'The Attack succeeds automatically when no meaningful uncertainty exists.' },
               { name: 'Resistance', description: 'The target still uses Absorption if armour, supernatural protection, or unusual durability could matter.' },
-              { name: 'Major Characters', description: 'Major characters receive whatever final protection the Storyteller considers appropriate.' },
             ],
           },
         ],
@@ -1328,7 +1465,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'A Discipline answers what kinds of supernatural effects are possible. Resonance Descriptors further define or limit how a character expresses that Discipline, while the linked Attribute and relevant Descriptor determine how the character rolls to produce an effect.' },
+              { text: 'A Discipline answers what kinds of supernatural effects are possible and identifies how its rolls are built. Depending on the Discipline, a character rolls its linked Attribute plus one relevant Descriptor, or the Resonance Attribute plus the Discipline Descriptor. A super-soldier’s Discipline might link to Strength, while a wizard’s Discipline might use Resonance.' },
             ],
           },
         ],
@@ -1336,9 +1473,9 @@ const systems = [
           {
             title: 'Discipline and Competence',
             rules: [
-              { name: 'Discipline: Pyromancy (Intelligence)', description: 'Defines the permitted family of effects: creating, controlling, sensing, resisting, or extinguishing supernatural fire.' },
-              { name: 'Fire Mage 2D+4', description: 'Describes an ordinary practitioner’s competence when using Pyromancy.' },
-              { name: 'Great Flame Wizard 10D+4', description: 'Describes a legendary practitioner using the same broad Discipline at much greater capability.' },
+              { name: 'Discipline: Pyromancy (Resonance)', description: 'Defines the permitted family of effects: creating, controlling, sensing, resisting, or extinguishing supernatural fire, and links those effects to the Resonance Attribute.' },
+              { name: 'Fire Mage +2D+2', description: 'An ordinary practitioner adds this Descriptor to their Resonance Attribute when using Pyromancy.' },
+              { name: 'Great Flame Wizard +10D+2', description: 'A legendary practitioner adds this Descriptor to their Resonance Attribute when using the same broad Discipline.' },
             ],
           },
           {
@@ -1363,6 +1500,53 @@ const systems = [
               { text: 'The Storyteller determines whether a proposed effect falls within a particular Discipline.' },
             ],
           },
+        ],
+      },
+      {
+        id: 'using-resonance',
+        category: 'Resonance',
+        title: 'Using Resonance',
+        introduction: [
+          {
+            segments: [
+              { text: 'Using Resonance costs ' },
+              { text: 'one Action', strong: true },
+              { text: '. The base Difficulty is Standard (TN 11). When making an Attack against a target using Active Defense, that defense result replaces TN 11. Cover then raises the applicable Difficulty by one Band, or +3 TN.' },
+            ],
+          },
+        ],
+        steps: [
+          { title: 'Declare the Effect', description: 'Describe exactly what the character wants the Resonance effect to accomplish.' },
+          { title: 'Identify Discipline & Attribute', description: 'Confirm that the effect belongs to an available Discipline and identify its linked Attribute and relevant Descriptor.' },
+          { title: 'Establish the Base TN', description: 'Begin at Standard Difficulty (TN 11), or replace it with the target’s Active Defense result when making an Attack. Apply Cover when relevant.' },
+          { title: 'Apply Difficulty Bands', description: 'Apply the effect’s Damage, range, area, duration, precision, target, scale, and other modifiers. Each positive Difficulty Band adds exactly +3 TN, and each negative Band subtracts 3 TN.' },
+          { title: 'Roll the Check', description: 'Roll the Discipline-linked Attribute plus one relevant Descriptor, or Resonance plus the Discipline Descriptor, as specified by the Discipline.' },
+          { title: 'Resolve the Outcome', description: 'Compare the final result with the completed TN or opposing total and resolve the Degree of Outcome.' },
+        ],
+      },
+      {
+        id: 'prepared-resonance-effects',
+        category: 'Resonance',
+        title: 'Prepared Effects',
+        introduction: [
+          {
+            segments: [
+              { text: 'A Resonance-attuned character begins with ' },
+              { text: 'four Prepared Effect slots', strong: true },
+              { text: '. During a rest, the player may fill these slots with commonly used effects whose complete Difficulty, range, Damage, duration, and other details have been calculated in advance and approved by the Storyteller.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Prepared Effects reduce interruptions during play but receive no reduction to their calculated Difficulty. A character may revise their prepared choices during a later rest.' },
+            ],
+          },
+        ],
+        conceptsTitle: 'Prepared & Unprepared Effects',
+        concepts: [
+          { name: 'Prepared Effect', description: 'Use the pre-approved effect and its precalculated Difficulty without rebuilding it during the scene.' },
+          { name: 'Unprepared Effect: +2 Bands', description: 'An effect that is not currently prepared may still be attempted, but its final Difficulty increases by two Bands, or +6 TN.' },
+          { name: 'Additional Slot: 5 XP', description: 'A character may purchase another Prepared Effect slot for 5 XP. There is currently no maximum number of slots.' },
         ],
       },
       {
@@ -1436,7 +1620,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'Each major increase raises the effect’s Difficulty by one or more Difficulty Bands. Reductions may lower the Difficulty where noted.' },
+              { text: 'Each major increase raises the effect’s Difficulty by one or more Difficulty Bands. Every Band changes the TN by exactly 3. Reductions may lower the Difficulty where noted.' },
             ],
           },
         ],
@@ -1587,7 +1771,7 @@ const systems = [
           {
             callout: true,
             segments: [
-              { text: 'A character may receive restorative Resonance no more than twice between full daily rests. Healing a Taken Out character increases the Difficulty by one Band.' },
+              { text: 'A character may receive restorative Resonance no more than twice between full daily rests. A Taken Out character must first be stabilized; restoring Health to that stabilized character increases the Difficulty by one Band.' },
             ],
           },
         ],
@@ -1689,9 +1873,92 @@ const systems = [
             segments: [
               { text: 'Award ' },
               { text: 'Meta Dice', strong: true },
-              { text: ' during play for impressive, impactful, creative, or story-serving moments. Characters begin with two and can hold a maximum of five, so award Meta Dice freely enough that players are encouraged to spend them rather than save them indefinitely.' },
+              { text: ' during play for impressive, impactful, creative, or story-serving moments. Each player begins with two and can hold a maximum of five, so award Meta Dice freely enough that players are encouraged to spend them rather than save them indefinitely.' },
             ],
           },
+        ],
+      },
+      {
+        id: 'rewarding-flaws',
+        category: 'Storytelling',
+        title: 'Rewarding Flaws',
+        introduction: [
+          {
+            segments: [
+              { text: 'The Storyteller decides when a Flaw applies to a roll. Players may advocate for their own Flaws to come into play, especially when doing so creates an interesting complication or strengthens the story.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'When a player voluntarily brings a relevant Flaw into a meaningful scene and accepts its consequences, consider awarding that player an additional Meta Die or XP.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'stealth-takedown-guidance',
+        category: 'Storytelling',
+        title: 'Adjudicating Stealth Takedowns',
+        introduction: [
+          {
+            segments: [
+              { text: 'The optional Stealth Takedown rule works best for guards, minor opponents, and other NPCs whose immediate defeat supports the intended pace and tone. Decide during encounter preparation which NPCs can be killed or incapacitated this way.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'If an NPC should not be vulnerable to an instant Takedown, avoid presenting that NPC as unaware and helpless within reach of the Party. Establish a fictional protection before the attempt becomes available. For example, a dark wizard who must survive the scene might awaken when a Resonance alarm detects intruders rather than remaining asleep while the Party approaches the bed.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Do not wait until after a player has earned a valid Takedown opportunity to declare the target immune. Communicate exceptional protections through the fiction before the player commits to the attempt.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'starting-money',
+        category: 'Storytelling',
+        title: 'Starting Money',
+        introduction: [
+          {
+            segments: [
+              { text: 'The Storyteller chooses starting money to match the campaign. A suggested baseline is ' },
+              { text: '$5,000 per character', strong: true },
+              { text: ', which players use to purchase ordinary equipment without additional Characteristics at the average price of each equipment category.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Characters who begin attuned to Resonance should normally receive less starting money because their Discipline and Prepared Effects provide additional versatility. A suggested Resonance-attuned baseline is ' },
+              { text: '$3,000', strong: true },
+              { text: '.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'currency-conversion',
+        category: 'Storytelling',
+        title: 'Converting Currency',
+        introduction: [
+          {
+            segments: [
+              { text: 'Dollar values are a universal reference scale and may be renamed or converted to suit the setting. Preserve the relative purchasing power of equipment when choosing a conversion.' },
+            ],
+          },
+        ],
+        conceptsTitle: 'Example Conversions',
+        concepts: [
+          { name: 'Fantasy Currency', description: '$1 may equal 1 copper, $10 may equal 1 bronze, $100 may equal 1 silver, and $1,000 may equal 1 gold.' },
+          { name: 'Science-Fiction Currency', description: 'Credits, Allocates, or another setting currency may replace dollars at a 1:1 value.' },
         ],
       },
       {
@@ -1751,20 +2018,20 @@ const systems = [
             description: 'Choose a name, tagline, and optional portrait.',
           },
           {
-            title: 'Attributes',
-            description: 'A standard character has 18D in total. Each of the six Attributes begins at 2D, accounting for 12D, and the player distributes the remaining 6D. Apply any Heritage or Descriptor modifiers, then distribute the available Dice and Pips.',
+            title: 'Heritage',
+            description: 'Choose the character’s Heritage, including its starting Attribute ratings, Attribute minimums and maximums, Move, Heritage Descriptors, languages, and other defining abilities.',
           },
           {
-            title: 'Character Traits',
-            description: 'Choose the character’s Heritage, including any Heritage Descriptors, languages, and other defining abilities allowed by the Storyteller.',
+            title: 'Allocation Dice',
+            description: 'The character’s Heritage provides their Allocation Dice. Divide these Dice into individual Pips as desired; each Allocation Pip adds one Pip to an Attribute within the limits set by Heritage or to an Edge. Taking a Flaw at −1 grants one additional Allocation Pip. Every starting character must take at least one Flaw, but there is no fixed number of Edges or maximum Descriptor rating.',
           },
           {
-            title: 'Descriptors',
-            description: 'Choose three Edges and one Flaw.',
+            title: 'Resonance Attunement',
+            description: 'If the character begins attuned to Resonance, choose one Discipline and begin at Balance 0 with four Prepared Effect slots. Resonance-attuned characters normally receive less starting money.',
           },
           {
             title: 'Starting Equipment',
-            description: 'Record weapons, armour, and other equipment approved for the campaign.',
+            description: 'Use the campaign’s starting money to purchase weapons, armour, and other ordinary equipment without additional Characteristics at the average price listed for each equipment category.',
           },
           {
             title: 'Additional Information',
@@ -1788,7 +2055,7 @@ const systems = [
           {
             segments: [
               { text: 'Heritage', strong: true },
-              { text: ' identifies the kind of person or creature a character is. Human is the standard option, but each setting may offer others. A Heritage may establish a movement rate, grant Heritage-exclusive abilities, or provide Heritage-related Descriptors.' },
+              { text: ' identifies the kind of person or creature a character is. Human is the standard option, but each setting may offer others. A Heritage provides Allocation Dice, establishes starting Attribute ratings and their character-creation minimums and maximums, and may establish a movement rate, grant Heritage-exclusive abilities, or provide Heritage-related Descriptors.' },
             ],
           },
           {
@@ -1825,7 +2092,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'Every Descriptor is associated with an Attribute. When a Descriptor clearly applies to an action, the character adds the Descriptor’s dice rating to the broader Attribute. When there is no relevant ' },
+              { text: 'Every Descriptor is associated with an Attribute. When an Edge clearly applies to an action, add its rating to the broader Attribute. When a Flaw clearly applies, apply its negative rating to the Attribute. When there is no relevant ' },
               { text: 'Descriptor', strong: true },
               { text: ', the base ' },
               { text: 'Attribute', strong: true },
@@ -1839,8 +2106,8 @@ const systems = [
               { text: ' and ' },
               { text: 'Descriptor', strong: true },
               { text: ' ratings use the notation xD±y: x is the number of six-sided dice rolled, and y is the number of pips added to or subtracted from the result. For example, ' },
-              { text: '2D+3', strong: true },
-              { text: ' means two dice plus three pips, while ' },
+              { text: '2D+2', strong: true },
+              { text: ' means two dice plus two pips, while ' },
               { text: '4D−2', strong: true },
               { text: ' means four dice minus two pips.' },
             ],
@@ -1854,7 +2121,7 @@ const systems = [
           { name: 'Mechanics', description: 'Measures technical intuition, spatial reasoning, and aptitude for operating, diagnosing, and repairing machines or technological systems.' },
           { name: 'Resonance', description: 'Measures a character’s connection to forces beyond the ordinary world.' },
         ],
-        attributeGuidance: 'The Storyteller determines which Attribute best matches an action. Individual settings may emphasize, reinterpret, or place limits on particular Attributes.',
+        attributeGuidance: 'The Storyteller determines which Attribute best matches an action. A character’s Heritage establishes each Attribute’s starting rating and its minimum and maximum during character creation. Individual settings may emphasize, reinterpret, or place further limits on particular Attributes.',
         descriptorGuidance: [
           {
             segments: [
@@ -1863,13 +2130,11 @@ const systems = [
               { text: 'Edges', strong: true },
               { text: ' or ' },
               { text: 'Flaws.', strong: true },
-              { text: ' There is no fixed limit on the number of ' },
-              { text: 'Descriptors', strong: true },
-              { text: ' a character may possess, but a standard starting character usually begins with three ' },
+              { text: ' There is no fixed limit on the number or rating of ' },
               { text: 'Edges', strong: true },
-              { text: ' and one ' },
+              { text: ' a character may possess. Every starting character must have at least one ' },
               { text: 'Flaw', strong: true },
-              { text: '.' },
+              { text: ' rated at −1.' },
             ],
           },
           {
@@ -1881,11 +2146,11 @@ const systems = [
               { text: 'Flaws', strong: true },
               { text: ' represent limitations, vulnerabilities, or complications that hinder an associated ' },
               { text: 'Attribute', strong: true },
-              { text: ' or create an additional cost. A ' },
+              { text: ' or create an additional cost. Flaws affect dice pools in the same way as Edges, but negatively, and no individual Flaw can have a rating more severe than −1. A ' },
               { text: 'Descriptor', strong: true },
               { text: ' affects an action only when it meaningfully applies; the ' },
               { text: 'Storyteller', strong: true },
-              { text: ' determines its relevance.' },
+              { text: ' makes the final decision about its relevance. Players may explain or argue why a Descriptor should or should not apply.' },
             ],
           },
           {
@@ -1924,7 +2189,7 @@ const systems = [
         concepts: [
           {
             name: 'Health',
-            description: 'Roll the character’s Strength rating and add 20. The character creator permits one reroll; changing Strength restores that reroll. The accepted result becomes both current and maximum Health.',
+            description: 'Roll the character’s Strength rating without a Descriptor, Wild Die, or Meta Die, then add 20. The character creator permits one reroll; changing Strength restores that reroll. The accepted result becomes both current and maximum Health.',
           },
           {
             name: 'Defense Bonus',
@@ -1936,7 +2201,11 @@ const systems = [
           },
           {
             name: 'Meta Dice',
-            description: 'A new character begins with 2 available Meta Dice and can normally hold a maximum of 5.',
+            description: 'Meta Dice belong to the player rather than the character. Each player begins with 2 available Meta Dice and can normally hold a maximum of 5.',
+          },
+          {
+            name: 'Resonance Attunement',
+            description: 'An attuned starting character knows one Discipline, begins at Balance 0, and has 4 Prepared Effect slots.',
           },
           {
             name: 'Experience',
@@ -1975,10 +2244,10 @@ const systems = [
           {
             title: 'Descriptor Advancement',
             paragraphs: [
-              'Descriptors advance one Pip at a time. Their cost rises with the die level being reached, making early competence accessible while higher expertise becomes progressively more expensive.',
+              'Edges advance one Pip at a time. Their cost rises with the die level being reached, making early competence accessible while higher expertise becomes progressively more expensive. A new Edge begins at +1. Treat ratings below 1D as target die level 1 when calculating their cost. Flaws cannot be advanced beyond −1.',
             ],
             formula: 'Descriptor +1 Pip = 2 × target die level',
-            note: 'A new Descriptor beginning at +1D costs approximately 5 XP.',
+            note: 'A new Edge at +1 costs 2 XP. Advancing it to +2 costs another 2 XP, and advancing +2 to 1D costs another 2 XP.',
           },
           {
             title: 'Attribute Advancement',
@@ -1987,6 +2256,14 @@ const systems = [
             ],
             formula: 'Attribute +1 Pip = 4 × target die level',
             note: 'Increasing an Attribute from 2D to 3D costs approximately 28 XP: 8 XP for each of the first two Pips, then 12 XP for the final Pip that reaches 3D.',
+          },
+          {
+            title: 'Resonance Advancement',
+            paragraphs: [
+              'A Resonance-attuned character may broaden their prepared options or unlock another Discipline through advancement.',
+            ],
+            formula: 'Prepared Effect slot = 5 XP · Additional Discipline = 25 XP',
+            note: 'A new Discipline must be approved by the Storyteller and should fit the setting and the character’s development.',
           },
         ],
         detailSections: [
@@ -2007,9 +2284,9 @@ const systems = [
             },
           },
           {
-            title: 'Beyond 15 Metres',
+            title: 'Natural Move Limit',
             paragraphs: [
-              'Increasing Move beyond 15 metres requires an appropriate fictional justification approved by the Storyteller, such as:',
+              'Move cannot be increased beyond 15 metres through natural training. Exceeding 15 metres requires an appropriate fictional justification approved by the Storyteller, such as:',
             ],
             items: ['Supernatural Heritage', 'Cybernetics', 'Magical enhancement', 'Nonhuman physiology', 'Superpowers'],
           },
@@ -2096,6 +2373,15 @@ function selectCategory(category) {
       <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-200/70 to-transparent"></div>
 
       <template v-if="activeSystem.categories.length">
+        <div class="mb-5 flex items-start gap-3 border border-amber-300/35 bg-amber-300/[0.07] px-4 py-3 text-sm leading-6 text-amber-50" role="note">
+          <svg aria-hidden="true" class="mt-0.5 size-5 shrink-0 text-amber-300" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 3 2.5 20h19L12 3Z" />
+            <path d="M12 9v5" />
+            <path d="M12 17.5h.01" />
+          </svg>
+          <p><strong class="font-semibold">Playtest rules:</strong> This system is still undergoing playtesting and is subject to change with or without notice.</p>
+        </div>
+
         <div class="flex flex-col gap-3 sm:flex-row">
           <label class="relative flex-1">
             <span class="sr-only">Search {{ activeSystem.label }} rules</span>

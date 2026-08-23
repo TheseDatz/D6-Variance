@@ -17,10 +17,13 @@
     >
       <div class="max-w-3xl space-y-4 leading-7">
         <p>
-          These rules provide everything needed to begin playing D6: Variance, a flexible tabletop roleplaying game. The system is built around familiar six-sided dice, straightforward resolution, and procedures that remain quick to understand and easy to use at a physical or virtual table.
+          These core rules explain how to play D6: Variance, a flexible tabletop roleplaying game. The system is built around familiar six-sided dice, straightforward resolution, and procedures that remain quick to understand and easy to use at a physical or virtual table.
         </p>
         <p>
           D6V separates its universal mechanics from the worlds that use them. The core rules establish a shared foundation for characters, challenges, conflict, and advancement that can be adapted to any genre. Individual settings can then introduce their own abilities, equipment, creatures, and optional subsystems without changing how the game fundamentally works.
+        </p>
+        <p class="rounded-lg border border-amber-300/25 bg-amber-300/[0.055] px-4 py-3 text-amber-50/90">
+          The supporting Heritage, Descriptor, Equipment, and Resonance lists elsewhere on this website are required for play alongside these core rules.
         </p>
       </div>
     </MainTextContent>
