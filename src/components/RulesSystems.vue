@@ -50,6 +50,7 @@ const systems = [
       'Combat',
       'Resonance',
       'Storytelling',
+      'Examples',
     ],
     rules: [
       {
@@ -93,7 +94,7 @@ const systems = [
         ],
         steps: [
           { title: 'Choose the Attribute', description: 'Determine the Attribute that best represents the character’s approach.' },
-          { title: 'Apply One Descriptor', description: 'Add the rating of the most applicable Edge or subtract the magnitude of the most applicable Flaw. A Flaw rated −1 subtracts 1 from the pool. If no Descriptor applies, use the Attribute alone.' },
+          { title: 'Choose One Descriptor', description: 'If an Edge or Flaw applies, roll that Descriptor’s complete dice pool instead of the Attribute. An Edge records an improvement over its linked Attribute, while a Flaw records a degraded pool. If no Descriptor applies, roll the Attribute.' },
           { title: 'Apply Modifiers', description: 'Apply injury penalties, multiple-action penalties, assistance, and situational Advantage or Disadvantage.' },
           { title: 'Designate the Wild Die', description: 'Replace one ordinary die in the pool with the Wild Die. A pool can never be reduced below 1D, and that final die is the Wild Die.' },
           { title: 'Roll the Pool', description: 'Roll the dice, resolve the Wild Die, and add or subtract any Pips. After seeing the completed result, decide whether to spend one Meta Die.' },
@@ -119,7 +120,7 @@ const systems = [
           },
           {
             name: 'Descriptors',
-            description: 'Represent a character’s background, training, practiced expertise, or defining circumstances.',
+            description: 'Represent a character’s background, training, practiced expertise, or defining circumstances. Each Descriptor records a complete dice pool that is rolled instead of its linked Attribute when relevant.',
           },
         ],
       },
@@ -165,13 +166,13 @@ const systems = [
               { speaker: 'Mara’s player', text: '“I grab the loose rigging, run along the rail, and swing onto the frigate’s deck.”' },
               { speaker: 'Storyteller', text: '“The decks are pitching and the gap is widening. Make a Dexterity check.”' },
               { speaker: 'Mara’s player', text: '“Could I use my Pirate Captain Descriptor? Mara has spent years moving through ship rigging.”' },
-              { speaker: 'Storyteller', text: '“That fits. Add Pirate Captain to your Dexterity and roll against a Difficulty of 15.”' },
+              { speaker: 'Storyteller', text: '“That fits. Roll Pirate Captain instead of your Dexterity against a Difficulty of 15.”' },
             ],
           },
           {
             title: 'Resolving the Check',
             paragraphs: [
-              'Mara has Dexterity 3D and Pirate Captain +1D+1, producing a 4D+1 pool. Her player rolls three ordinary Dice and one visually distinct Wild Die. The results are 2, 3, 4, and a 6 on the Wild Die. Because the Wild Die produced the 6, it explodes; she rolls it again and gets another 4. After adding the Dice and her +1 Pip, the final result is 20. If an ordinary die had rolled the 6 instead, it would not have been rerolled.',
+              'Mara has Dexterity 3D and Pirate Captain 4D+1. Because Pirate Captain applies, its complete 4D+1 pool is rolled instead of Dexterity. Her player rolls three ordinary Dice and one visually distinct Wild Die. The results are 2, 3, 4, and a 6 on the Wild Die. Because the Wild Die produced the 6, it explodes; she rolls it again and gets another 4. After adding the Dice and her +1 Pip, the final result is 20. If an ordinary die had rolled the 6 instead, it would not have been rerolled.',
             ],
           },
           {
@@ -261,11 +262,11 @@ const systems = [
           },
           {
             segments: [
-              { text: 'The player rolls the relevant ' },
-              { text: 'Attribute', strong: true },
-              { text: ' plus one relevant ' },
+              { text: 'The player rolls one relevant ' },
               { text: 'Descriptor', strong: true },
-              { text: ', totals the result, and compares it with the Difficulty. Meeting or exceeding the target succeeds; rolling below it fails.' },
+              { text: ' as a complete dice pool, or the linked ' },
+              { text: 'Attribute', strong: true },
+              { text: ' when no Descriptor applies. Total the result and compare it with the Difficulty. Meeting or exceeding the target succeeds; rolling below it fails.' },
             ],
           },
           {
@@ -377,7 +378,7 @@ const systems = [
             segments: [
               { text: 'Use an ' },
               { text: 'Opposed Check', strong: true },
-              { text: ' when one character’s action is directly resisted by another character. Each participant rolls the Attribute plus one relevant Descriptor that best represents their approach.' },
+              { text: ' when one character’s action is directly resisted by another character. Each participant rolls the complete pool of the Descriptor that best represents their approach, or the relevant Attribute when no Descriptor applies.' },
             ],
           },
           {
@@ -411,7 +412,7 @@ const systems = [
         concepts: [
           {
             name: 'Active Hiding',
-            description: 'When a character actively hides from another character, resolve Dexterity plus one relevant Descriptor against Intelligence plus one relevant Descriptor as an Opposed Check.',
+            description: 'When a character actively hides from another character, roll a relevant stealth Descriptor instead of Dexterity against a relevant awareness Descriptor instead of Intelligence. If either character has no applicable Descriptor, that character rolls the corresponding Attribute.',
           },
           {
             name: 'Groups and Observers',
@@ -419,7 +420,7 @@ const systems = [
           },
           {
             name: 'Searching for Objects',
-            description: 'Searching for a concealed object, clue, compartment, or other thing that is not actively hiding normally uses Intelligence plus one relevant Investigation Descriptor against a Difficulty chosen by the Storyteller.',
+            description: 'Searching for a concealed object, clue, compartment, or other thing that is not actively hiding normally uses one relevant Investigation Descriptor as a complete pool, or Intelligence when no Descriptor applies, against a Difficulty chosen by the Storyteller.',
           },
           {
             name: 'Actively Concealed Objects',
@@ -434,9 +435,9 @@ const systems = [
         introduction: [
           {
             segments: [
-              { text: 'Use ' },
+              { text: 'When a character attempts to persuade, deceive, intimidate, inspire, or understand another person and the outcome is uncertain, roll one relevant social Descriptor as a complete pool, or ' },
               { text: 'Social', strong: true },
-              { text: ' plus one relevant Descriptor when a character attempts to persuade, deceive, intimidate, inspire, or understand another person and the outcome is uncertain. Resolve active resistance as an Opposed Check; use a fixed Difficulty when the opposition is incidental.' },
+              { text: ' when no Descriptor applies. Resolve active resistance as an Opposed Check; use a fixed Difficulty when the opposition is incidental.' },
             ],
           },
           {
@@ -623,7 +624,7 @@ const systems = [
             ],
           },
         ],
-        tags: ['Armour-Piercing', 'Accurate', 'Automatic', 'Concealable', 'Reliable', 'Rugged', 'Silent', 'Scoped', 'Lightweight', 'Unwieldy', 'Fragile', 'Incendiary'],
+        tags: ['Armour-Piercing', 'Accurate', 'Automatic', 'Concealable', 'Reliable', 'Rugged', 'Silent', 'Scoped', 'Lightweight', 'Unwieldy', 'Fragile', 'Incendiary', 'Damaged', 'Unreliable', 'Blunted'],
       },
       {
         id: 'economics',
@@ -693,6 +694,12 @@ const systems = [
             title: 'Negative Characteristics',
             paragraphs: [
               'A damaged or otherwise compromised item with an additional negative Characteristic may fall substantially below the standard price for its equipment category.',
+            ],
+          },
+          {
+            title: 'Reselling Equipment',
+            paragraphs: [
+              'Ordinary equipment in good condition normally sells for approximately 50% of its average price. A successful negotiation with a suitable buyer may raise the return to 75%. Damaged or illegal equipment, or equipment sold in urgent circumstances, may return only 25% of its average price.',
             ],
           },
         ],
@@ -768,7 +775,7 @@ const systems = [
             segments: [
               { text: 'A character may perform more than one Action during a Round. Each Action beyond the first subtracts ' },
               { text: '−1D', strong: true },
-              { text: ' from every Action roll made during that Round. Before making the first roll, the player declares how many Actions the character intends to use.' },
+              { text: ' from every Action roll made during that Round. Before taking their first Action or Reaction, the player declares how many Actions the character intends to use.' },
             ],
           },
           {
@@ -811,7 +818,7 @@ const systems = [
           {
             title: 'Improvised Weapons',
             paragraphs: [
-              'An improvised weapon uses an appropriate Attribute plus one relevant Descriptor as chosen by the Storyteller and normally deals the improvised Attack Damage. Particularly dangerous, heavy, fragile, or unsuitable objects may modify the Attack or Damage.',
+              'An improvised weapon uses one relevant Descriptor as a complete pool, or an appropriate Attribute when no Descriptor applies, as chosen by the Storyteller. It normally deals the improvised Attack Damage. Particularly dangerous, heavy, fragile, or unsuitable objects may modify the Attack or Damage.',
             ],
           },
           {
@@ -829,13 +836,45 @@ const systems = [
         ],
       },
       {
+        id: 'actions-and-reactions-procedure',
+        category: 'Combat',
+        title: 'Actions & Reactions Procedure',
+        introduction: [
+          {
+            segments: [
+              { text: 'An ' },
+              { text: 'Action', strong: true },
+              { text: ' is a significant activity performed on a character’s turn. A ' },
+              { text: 'Reaction', strong: true },
+              { text: ' is an Action performed outside the character’s turn in response to a specific event the character can perceive. Actions and Reactions both count toward the character’s multiple-action penalty for the Round.' },
+            ],
+          },
+        ],
+        steps: [
+          { title: 'Declare the Total', description: 'Before taking their first Action or Reaction in a Round, declare the total number of Actions the character expects to perform during that Round.' },
+          { title: 'Calculate the Penalty', description: 'Each Action beyond the first applies −1D to every declared Action roll for the Round.' },
+          { title: 'Resolve Actions', description: 'Take the declared Actions on the character’s turn or when an appropriate Reaction is triggered.' },
+          { title: 'Add an Undeclared Reaction', description: 'An undeclared Reaction increases the character’s Action total. Recalculate the penalty for that Reaction and every later roll, but never recalculate a roll that has already been resolved.' },
+          { title: 'Resolve Unused Actions', description: 'Taking fewer Actions than declared does not refund or reduce penalties already applied earlier in the Round.' },
+        ],
+        conceptsTitle: 'Reaction Limits & Special Cases',
+        concepts: [
+          { name: 'Active Defense', description: 'Active Defense is a Reaction and counts as one Action when determining the Round’s multiple-action penalty.' },
+          { name: 'One Reaction per Trigger', description: 'A character may take only one Reaction in response to a single triggering event.' },
+          { name: 'Awareness & Ability', description: 'A Reaction must be physically and narratively possible. A character who is unaware, unconscious, paralyzed, or otherwise incapable cannot react.' },
+          { name: 'Free Actions', description: 'A character’s two Free Actions normally occur only during their turn and cannot be used as Reactions unless a specific rule permits it.' },
+          { name: 'Full Defense', description: 'Full Defense replaces the character’s entire turn. Once chosen, the character cannot perform other Actions that Round, but may still use up to two Free Actions when the circumstances allow.' },
+          { name: 'Waiting', description: 'Waiting costs one Action. State the trigger in advance; when it occurs, the waiting Action resolves after the triggering Action is declared but before its result is resolved.' },
+        ],
+      },
+      {
         id: 'making-an-attack',
         category: 'Combat',
         title: 'Making an Attack',
         introduction: [
           {
             segments: [
-              { text: 'To Attack, roll the Attribute plus one relevant Descriptor associated with the weapon or technique. Unless a rule states otherwise, melee Attacks use ' },
+              { text: 'To Attack, roll one relevant Descriptor associated with the weapon or technique as a complete pool. When no Descriptor applies, melee Attacks use ' },
               { text: 'Strength', strong: true },
               { text: ' and ranged Attacks use ' },
               { text: 'Dexterity', strong: true },
@@ -849,7 +888,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'If the target actively defends, the defender rolls Dexterity plus one relevant defensive Descriptor and adds their Defense Bonus. That result replaces the weapon’s normal Difficulty, even when the new value is lower, and applies to every relevant Attack against that defender for the remainder of the Round.' },
+              { text: 'If the target actively defends, the defender rolls one relevant defensive Descriptor as a complete pool, or Dexterity when no Descriptor applies, and adds their Defense Bonus. That result replaces the weapon’s normal Difficulty, even when the new value is lower, and applies to every relevant Attack against that defender for the remainder of the Round.' },
             ],
           },
           {
@@ -883,9 +922,9 @@ const systems = [
         introduction: [
           {
             segments: [
-              { text: 'When first targeted by an Attack during a Round, a character may use a Reaction to actively defend. Roll the character’s ' },
+              { text: 'When first targeted by an Attack during a Round, a character may use a Reaction to actively defend. Roll one relevant defensive Descriptor as a complete pool, or the character’s ' },
               { text: 'Dexterity', strong: true },
-              { text: ' plus one relevant defensive Descriptor, then add the character’s Defense Bonus.' },
+              { text: ' when no Descriptor applies, then add the character’s Defense Bonus.' },
             ],
           },
         ],
@@ -897,7 +936,7 @@ const systems = [
           },
           {
             name: 'Full Defense',
-            description: 'A character may forgo their entire turn to concentrate on defense. Roll Dexterity plus one relevant defensive Descriptor, add the Defense Bonus, then add +10. This result applies until the beginning of the character’s next turn.',
+            description: 'A character may forgo their entire turn to concentrate on defense. Roll one relevant defensive Descriptor as a complete pool, or Dexterity when no Descriptor applies, add the Defense Bonus, then add +10. This result applies until the beginning of the character’s next turn.',
           },
         ],
         relationship: [
@@ -1099,7 +1138,7 @@ const systems = [
             segments: [
               { text: 'Stabilizing a ' },
               { text: 'Taken Out', strong: true },
-              { text: ' character requires an Intelligence check plus one relevant medical Descriptor. A normal attempt expends a medical item and has ' },
+              { text: ' character requires a relevant medical Descriptor rolled as a complete pool, or Intelligence when no Descriptor applies. A normal attempt expends a medical item and has ' },
               { text: 'Standard Difficulty', strong: true },
               { text: '. If no medical item is available, the attempt may still be made at Hard Difficulty.' },
             ],
@@ -1129,7 +1168,7 @@ const systems = [
           {
             title: 'Treatment Without an Item',
             paragraphs: [
-              'A character may make an Intelligence check plus one medically relevant Descriptor at Standard Difficulty to restore 3 Health to a patient without using an item. A patient can benefit from this treatment only once per day.',
+              'A character may roll one medically relevant Descriptor as a complete pool, or Intelligence when no Descriptor applies, at Standard Difficulty to restore 3 Health to a patient without using an item. A patient can benefit from this treatment only once per day.',
             ],
           },
           {
@@ -1166,6 +1205,136 @@ const systems = [
         ],
       },
       {
+        id: 'environmental-hazards',
+        category: 'Combat',
+        title: 'Environmental Hazards',
+        introduction: [
+          {
+            segments: [
+              { text: 'Environmental hazards use fixed Damage values based on their severity. Armour reduces this Damage only when the armour could reasonably protect against the hazard.' },
+            ],
+          },
+        ],
+        tables: [
+          {
+            title: 'Hazard Severity',
+            headers: ['Severity', 'Damage', 'Typical Examples'],
+            rows: [
+              ['Minor', '3', 'Short fall, small flame, or similar limited exposure'],
+              ['Standard', '6', 'Serious fall, burning clothing, or another dangerous exposure'],
+              ['Severe', '9', 'Long fall, engulfing fire, or a major hazard'],
+              ['Extreme', '12', 'Inferno, major industrial accident, or devastating exposure'],
+              ['Catastrophic', '15+', 'Terminal-velocity fall or similarly overwhelming force'],
+            ],
+          },
+        ],
+      },
+      {
+        id: 'falling',
+        category: 'Combat',
+        title: 'Falling',
+        introduction: [
+          {
+            segments: [
+              { text: 'A fall of three metres or less normally causes no Damage. Longer falls deal fixed Damage according to the distance fallen.' },
+            ],
+          },
+        ],
+        tables: [
+          {
+            title: 'Falling Damage',
+            headers: ['Distance', 'Severity', 'Damage'],
+            rows: [
+              ['0–3 m', 'None', '0'],
+              ['4–6 m', 'Minor', '3'],
+              ['7–12 m', 'Standard', '6'],
+              ['13–18 m', 'Severe', '9'],
+              ['19–30 m', 'Extreme', '12'],
+              ['31+ m', 'Catastrophic', '15+'],
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'When a safe landing is possible, the Storyteller may allow a relevant Dexterity-based Descriptor, or Dexterity when none applies, against a Difficulty based on the landing conditions. A success reduces the fall by one severity level.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'fire',
+        category: 'Combat',
+        title: 'Fire',
+        introduction: [
+          {
+            segments: [
+              { text: 'Fire deals Damage at the end of every Round in which the character remains exposed. A small flame deals 3 Damage, burning clothing or sustained exposure deals 6 Damage, and being engulfed by fire deals 9 Damage.' },
+            ],
+          },
+        ],
+        conceptsTitle: 'Escaping Fire',
+        concepts: [
+          { name: 'Ordinary Fire', description: 'Extinguishing burning clothing or escaping a small, accessible fire requires one Action when no meaningful uncertainty exists.' },
+          { name: 'Difficult Fire', description: 'Controlling or escaping an intense, spreading, or inaccessible fire requires an Action and an appropriate check at a Difficulty chosen by the Storyteller.' },
+          { name: 'Protection', description: 'Armour applies only when it is designed or fictionally suited to protect against fire or extreme heat.' },
+        ],
+      },
+      {
+        id: 'drowning',
+        category: 'Combat',
+        title: 'Drowning & Suffocation',
+        introduction: [
+          {
+            segments: [
+              { text: 'Under combat pressure, a character can function without air for a number of Rounds equal to 2 plus the number of full Dice shown in their Strength Attribute.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'After this time, the character makes a Standard check during every subsequent Round using a relevant Strength-based Descriptor as a complete pool, or Strength when no Descriptor applies. Each success raises the next check by one Difficulty Band. Each failure deals 5 Damage that ignores Armour. The checks and Damage continue until the character can breathe.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'poison',
+        category: 'Combat',
+        title: 'Poison',
+        introduction: [
+          {
+            segments: [
+              { text: 'Each poison lists a Resistance Difficulty, the interval between checks, its fixed Damage, and any additional effect. At each interval, the affected character rolls a relevant Strength-based Descriptor as a complete pool, or Strength when no Descriptor applies, against the poison’s Resistance Difficulty.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Resolve the Degree of Outcome according to the poison’s description. Damage from poison normally ignores Armour unless a specific protective effect states otherwise.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'conditions',
+        category: 'Combat',
+        title: 'Conditions',
+        introduction: [
+          {
+            segments: [
+              { text: 'Conditions describe restrictions that apply until their cause ends or a rule removes them.' },
+            ],
+          },
+        ],
+        conceptsTitle: 'Defined Conditions',
+        concepts: [
+          { name: 'Unconscious', description: 'The character cannot act, move, perceive their surroundings, or actively defend. They fall Prone and awaken only when the causing effect says so, the Storyteller determines sufficient time has passed, or appropriate treatment succeeds.' },
+          { name: 'Helpless', description: 'The character cannot meaningfully resist the immediate action. No Attack roll is required when the attacker has time and no uncertainty exists. A Helpless character is not necessarily unconscious.' },
+          { name: 'Restrained', description: 'The character cannot move away from the restraint and suffers Significant Disadvantage on physical Actions impeded by it. Escaping requires an Action and an appropriate fixed or Opposed Check.' },
+          { name: 'Paralyzed', description: 'The character cannot move, perform physical Actions, or take physical Reactions. Mental, social, or Resonance Actions remain possible only when they require no movement or speech. A paralyzed character is normally Helpless against physical Attacks.' },
+        ],
+      },
+      {
         id: 'degrees-of-success-in-combat',
         category: 'Combat',
         title: 'Degrees of Success in Combat',
@@ -1193,7 +1362,14 @@ const systems = [
         detailSections: [
           {
             title: 'Possible “Yes, and…” Benefits',
-            items: ['Bonus Damage', 'Reduced Armour', 'Knockdown', 'Suppression', 'Disarm', 'Improved position', 'Especially effective use of a relevant weapon Characteristic'],
+            paragraphs: [
+              'The attacker normally chooses one additional benefit for a “Yes, and…” result unless a specific weapon Characteristic permits more.',
+            ],
+            rules: [
+              { name: 'Bonus Damage', description: 'Add +2 Damage to the current hit.' },
+              { name: 'Reduced Armour', description: 'Ignore 2 points of Armour Absorption for the current hit. If the target has no applicable Armour, choose another benefit.' },
+            ],
+            items: ['Knockdown', 'Suppression', 'Disarm', 'Improved position', 'Especially effective use of a relevant weapon Characteristic'],
           },
         ],
       },
@@ -1223,7 +1399,7 @@ const systems = [
           {
             title: 'Escaping',
             paragraphs: [
-              'Escaping requires an Action. The Grappled character makes an opposed Strength check plus one relevant Descriptor to overpower the grappler, or an opposed Dexterity check plus one relevant Descriptor against the grappler’s Strength and relevant Descriptor to slip free. On a success, the Grapple ends.',
+              'Escaping requires an Action. To overpower the grappler, each participant rolls a relevant complete Descriptor pool or Strength when no Descriptor applies. To slip free, the Grappled character instead rolls a relevant Dexterity-based Descriptor or Dexterity against the grappler’s relevant Strength-based Descriptor or Strength. On a success, the Grapple ends.',
             ],
           },
           {
@@ -1256,7 +1432,7 @@ const systems = [
             segments: [
               { text: 'A character must already have the target ' },
               { text: 'Grappled', strong: true },
-              { text: ' before beginning a Choke. Starting or maintaining the Choke requires one Action and an opposed Strength check plus one relevant Descriptor. That same Action also maintains the underlying Grapple; the attacker does not spend a second Action.' },
+              { text: ' before beginning a Choke. Starting or maintaining the Choke requires one Action and an Opposed Check using a relevant Strength-based Descriptor as a complete pool, or Strength when no Descriptor applies. That same Action also maintains the underlying Grapple; the attacker does not spend a second Action.' },
             ],
           },
           {
@@ -1465,7 +1641,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'A Discipline answers what kinds of supernatural effects are possible and identifies how its rolls are built. Depending on the Discipline, a character rolls its linked Attribute plus one relevant Descriptor, or the Resonance Attribute plus the Discipline Descriptor. A super-soldier’s Discipline might link to Strength, while a wizard’s Discipline might use Resonance.' },
+              { text: 'A Discipline answers what kinds of supernatural effects are possible and identifies its linked Attribute. A relevant Discipline Descriptor records a complete dice pool derived from that Attribute and is rolled instead of the Attribute. A super-soldier’s Discipline might use Strength-based Descriptors, while a wizard’s Discipline might use Resonance-based Descriptors.' },
             ],
           },
         ],
@@ -1474,8 +1650,9 @@ const systems = [
             title: 'Discipline and Competence',
             rules: [
               { name: 'Discipline: Pyromancy (Resonance)', description: 'Defines the permitted family of effects: creating, controlling, sensing, resisting, or extinguishing supernatural fire, and links those effects to the Resonance Attribute.' },
-              { name: 'Fire Mage +2D+2', description: 'An ordinary practitioner adds this Descriptor to their Resonance Attribute when using Pyromancy.' },
-              { name: 'Great Flame Wizard +10D+2', description: 'A legendary practitioner adds this Descriptor to their Resonance Attribute when using the same broad Discipline.' },
+              { name: 'Resonance 2D', description: 'The linked base Attribute used when no Pyromancy Descriptor applies.' },
+              { name: 'Fire Mage 4D+2', description: 'An ordinary practitioner rolls this complete Resonance-based Descriptor pool when using Pyromancy.' },
+              { name: 'Great Flame Wizard 12D+2', description: 'A legendary practitioner rolls this complete Resonance-based Descriptor pool when using the same broad Discipline.' },
             ],
           },
           {
@@ -1520,7 +1697,7 @@ const systems = [
           { title: 'Identify Discipline & Attribute', description: 'Confirm that the effect belongs to an available Discipline and identify its linked Attribute and relevant Descriptor.' },
           { title: 'Establish the Base TN', description: 'Begin at Standard Difficulty (TN 11), or replace it with the target’s Active Defense result when making an Attack. Apply Cover when relevant.' },
           { title: 'Apply Difficulty Bands', description: 'Apply the effect’s Damage, range, area, duration, precision, target, scale, and other modifiers. Each positive Difficulty Band adds exactly +3 TN, and each negative Band subtracts 3 TN.' },
-          { title: 'Roll the Check', description: 'Roll the Discipline-linked Attribute plus one relevant Descriptor, or Resonance plus the Discipline Descriptor, as specified by the Discipline.' },
+          { title: 'Roll the Check', description: 'Roll one relevant Discipline Descriptor as a complete pool. If no Descriptor applies, roll the Discipline-linked Attribute.' },
           { title: 'Resolve the Outcome', description: 'Compare the final result with the completed TN or opposing total and resolve the Degree of Outcome.' },
         ],
       },
@@ -1602,6 +1779,74 @@ const systems = [
             callout: true,
             segments: [
               { text: 'This outcome structure replaces the need for separate critical-result tables for every individual supernatural effect.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'resonance-effect-severity',
+        category: 'Resonance',
+        title: 'Resonance Effect Severity',
+        introduction: [
+          {
+            segments: [
+              { text: 'Non-damaging Resonance effects increase in Difficulty according to how profoundly they alter a target, reveal information, remove agency, or change the world. Effect Severity is cumulative with range, duration, scale, precision, and other modifiers.' },
+            ],
+          },
+        ],
+        tables: [
+          {
+            title: 'Effect Severity',
+            headers: ['Severity', 'Difficulty', 'Examples'],
+            rows: [
+              ['Minor', '−1 Band', 'Cosmetic effects, harmless sensations, or retrieving obvious information'],
+              ['Standard', '—', 'Ordinary utility, simple movement, or effects on willing targets'],
+              ['Potent', '+1 Band', 'Brief restraint, significant information, or a minor transformation'],
+              ['Severe', '+2 Bands', 'Removing a specific memory, forced behaviour, teleporting through barriers, or a major transformation'],
+              ['Major', '+3 Bands', 'Lesser summoning, extensive information extraction, major environmental alteration, or long-lasting incapacitation'],
+              ['Extreme', '+4 Bands', 'Domination or mind control, identity replacement, powerful summoning, or a life-altering transformation'],
+              ['Permanent', '+5 Bands and usually a ritual', 'Permanent memory alteration, lasting transformation, or permanent creation'],
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Example: ', strong: true },
+              { text: 'Removing a specific memory is normally a Severe effect at +2 Bands. If the effect must isolate only that memory without disturbing anything else, Precision adds another +1 Band.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'resisting-resonance',
+        category: 'Resonance',
+        title: 'Resisting Resonance',
+        introduction: [
+          {
+            segments: [
+              { text: 'When Resonance directly alters an unwilling target, the target may resist with the complete Descriptor pool that best represents their defense, or the relevant Attribute when no Descriptor applies.' },
+            ],
+          },
+        ],
+        steps: [
+          { title: 'Choose the Resistance', description: 'The Storyteller chooses the Attribute and any relevant complete Descriptor pool that best represents resisting the effect.' },
+          { title: 'Roll Resistance', description: 'The target rolls the chosen Descriptor, or the Attribute when no Descriptor applies. The resistance result replaces the effect’s base TN 11.' },
+          { title: 'Apply Effect Modifiers', description: 'After replacing the base TN, apply Effect Severity and every other relevant Difficulty Band.' },
+          { title: 'Resolve the Contest', description: 'The Resonance user rolls against the final TN. A tie favors the resisting target.' },
+        ],
+        detailSections: [
+          {
+            title: 'Ongoing Loss of Agency',
+            paragraphs: [
+              'An ongoing effect that removes or controls a target’s agency allows another resistance check at the end of each of that target’s turns. A successful resistance ends the effect unless its specific rules say otherwise.',
+            ],
+          },
+          {
+            title: 'Player Characters',
+            paragraphs: [
+              'Social or mental control against a player character still leaves final authority over that character’s decisions with the player unless the group has explicitly agreed to a different approach.',
             ],
           },
         ],
@@ -1747,9 +1992,9 @@ const systems = [
         introduction: [
           {
             segments: [
-              { text: 'A character with an appropriate Discipline may use Resonance to restore lost Health. Roll the relevant ' },
-              { text: 'Attribute + Resonance Descriptor', strong: true },
-              { text: ' against a Difficulty determined by the amount of Health the character attempts to restore.' },
+              { text: 'A character with an appropriate Discipline may use Resonance to restore lost Health. Roll one relevant ' },
+              { text: 'Resonance Descriptor', strong: true },
+              { text: ' as a complete pool, or the Discipline-linked Attribute when no Descriptor applies, against a Difficulty determined by the amount of Health the character attempts to restore.' },
             ],
           },
         ],
@@ -1847,6 +2092,215 @@ const systems = [
             paragraphs: [
               'The Storyteller may shift a character’s Balance one step after a significant act strongly aligned with Light or Dark Resonance.',
             ],
+          },
+        ],
+      },
+      {
+        id: 'storyteller-consequences-and-outcomes',
+        category: 'Storytelling',
+        title: 'Consequences & Outcome Menus',
+        introduction: [
+          {
+            segments: [
+              { text: 'After determining the ' },
+              { text: 'Degree of Outcome', strong: true },
+              { text: ', describe what happens by beginning with the character’s stated intent and choosing a result that follows from the established fiction. The menus below provide prompts, not mandatory results or random tables.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'A consequence should be proportional to the degree rolled, should move the situation forward, and should never erase a success. Likewise, a benefit on a failed roll may create progress or a new opportunity, but it should not quietly grant the action’s full intended result.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Choose, do not stack by default: ', strong: true },
+              { text: 'One fitting consequence or benefit is normally enough. Use two linked minor results, or one especially serious result, only for “No, and…” or when the established danger clearly demands it.' },
+            ],
+          },
+          {
+            callout: true,
+            segments: [
+              { text: 'Telegraph serious danger: ', strong: true },
+              { text: 'Damage, lost equipment, separation, capture, or similarly severe consequences should arise from risks the players could understand before the roll whenever possible.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Storyteller Consequence Menu',
+            paragraphs: [
+              'Choose the category that most naturally follows from the action. The examples can be made lighter or more severe to fit the Degree of Outcome and the danger already established in the scene.',
+            ],
+            table: {
+              headers: ['Consequence', 'Suggestions'],
+              rows: [
+                ['Time', 'The action takes longer; a deadline advances; an enemy gains time to act; the opportunity will not remain open.'],
+                ['Resources', 'Expend supplies, ammunition, money, a favour, or a limited use; require another resource before progress can continue.'],
+                ['Position', 'End in an exposed, isolated, unstable, or otherwise disadvantageous location; surrender useful ground; become separated.'],
+                ['Exposure', 'Reveal a location, identity, intention, capability, or evidence; attract attention; trigger an alarm or suspicion.'],
+                ['Escalation', 'Introduce reinforcements, a spreading hazard, a new obstacle, increased security, or an opponent who changes tactics.'],
+                ['Reduced Effect', 'Reduce the action’s scope, quality, precision, or duration while preserving whatever the rolled outcome says was achieved.'],
+                ['Equipment', 'Jam, drain, disable, or lose access to relevant equipment; on a “No, and…” result, temporarily degrade it when the fiction supports it.'],
+                ['Relationships', 'Strain trust, create an obligation, offend an interested party, damage reputation, or reveal divided loyalties.'],
+                ['Collateral Trouble', 'Endanger an ally, bystander, clue, objective, or part of the environment without arbitrarily taking control of a player character.'],
+                ['Hard Choice', 'Offer two consequences and let the player choose; preserve one objective only by sacrificing another; succeed only by accepting a stated cost.'],
+                ['Harm or Condition', 'Apply Damage from an established source or an appropriate Condition when bodily danger was already a credible part of the action.'],
+                ['Lost Opportunity', 'Close one route, allow a target to escape, consume the element of surprise, or make a later approach more difficult.'],
+              ],
+            },
+          },
+          {
+            title: 'Failure Outcome Menu',
+            table: {
+              headers: ['Outcome', 'Core Result', 'Choose a Fitting Resolution'],
+              rows: [
+                ['No, and…', 'The intended action fails and the situation becomes worse.', 'Apply one serious consequence or two linked minor consequences; reveal a new danger; escalate an existing threat; lose an opportunity while also paying a fitting cost.'],
+                ['No', 'The intended action fails.', 'Leave the situation materially unchanged beyond the Action and time spent; show why the approach failed; allow another approach when the fiction permits it. Do not add a complication merely because a roll failed.'],
+                ['No, but…', 'The intended action fails, but something useful is gained.', 'Reveal valuable information; make partial progress; reduce the size of the obstacle; preserve a resource or ally that was at risk; open a different route that will require a clear cost.'],
+              ],
+            },
+          },
+          {
+            title: 'Success Outcome Menu',
+            table: {
+              headers: ['Outcome', 'Core Result', 'Choose a Fitting Resolution'],
+              rows: [
+                ['Yes, but…', 'The intended action succeeds with a compromise or cost.', 'Spend time or resources; attract attention; accept reduced effect, quality, duration, or scope; end in a worse position; present a hard choice. Preserve the action’s essential success.'],
+                ['Yes', 'The intended action succeeds as declared.', 'Deliver the expected result cleanly. Do not add an unrelated cost or extra benefit. Move the scene forward from the new situation.'],
+                ['Yes, and…', 'The intended action succeeds and creates an additional benefit.', 'Increase effect, quality, scope, or duration; finish faster; preserve or recover a resource; gain useful information; improve position; create Advantage for a logical follow-up; help an ally or secure an extra objective.'],
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: 'running-session-zero',
+        category: 'Storytelling',
+        title: 'Running Session Zero',
+        introduction: [
+          {
+            segments: [
+              { text: 'Session Zero', strong: true },
+              { text: ' is a conversation held before regular play begins. Use it to establish the campaign’s premise, create compatible characters, approve player-facing options, discuss boundaries, and make sure everyone understands the kind of game the group is agreeing to play.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'It may be a complete session or part of the first gathering. The goal is not to predict every issue, but to give the group a clear shared starting point and an easy way to revisit decisions later.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'A living agreement: ', strong: true },
+              { text: 'Session Zero is not the only time these subjects may be discussed. Revisit expectations, character options, Lines, and Veils whenever a new player joins, the campaign changes direction, or someone asks for a check-in.' },
+            ],
+          },
+        ],
+        steps: [
+          {
+            title: 'Present the Campaign Frame',
+            description: 'Explain the premise, setting, intended themes, expected tone, starting situation, and the kinds of challenges likely to receive attention.',
+          },
+          {
+            title: 'Agree on Table Expectations',
+            description: 'Discuss schedule, session length, attendance, communication, rules questions, spotlight sharing, player-versus-player conflict, and how absent characters are handled.',
+          },
+          {
+            title: 'Establish Boundaries',
+            description: 'Go over Lines and Veils, choose a simple way to pause or redirect uncomfortable play, and make clear that boundaries may change without requiring personal justification.',
+          },
+          {
+            title: 'Review Characters Together',
+            description: 'Confirm that each character fits the premise, has a reason to participate, can cooperate with the group, and brings opportunities for other characters to matter.',
+          },
+          {
+            title: 'Approve Descriptors',
+            description: 'Review every Edge and Flaw for its linked Attribute, complete pool rating, scope, fictional meaning, and likely applications before play begins.',
+          },
+          {
+            title: 'Approve Prepared Effects',
+            description: 'For each Resonance-attuned character, review the starting Prepared Effects and record their exact parameters, modifiers, final Difficulty, and method of resistance.',
+          },
+          {
+            title: 'Connect the Party',
+            description: 'Establish why the characters stay together, what immediate objective they share, and at least one useful relationship, obligation, or source of trust within the group.',
+          },
+          {
+            title: 'Confirm the Starting Point',
+            description: 'Summarize the agreements, resolve open questions, and tell the players where the first scene begins and what their characters already know.',
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Campaign Agreement Checklist',
+            table: {
+              headers: ['Subject', 'Questions to Settle'],
+              rows: [
+                ['Premise & Tone', 'What are the characters expected to do? Is the campaign heroic, grim, comedic, political, exploratory, horrific, or something else?'],
+                ['Character Fit', 'What kinds of characters belong in this campaign? What concepts would undermine the premise or prevent party cooperation?'],
+                ['Rules & Lethality', 'Which optional rules are in use? How common are character death, permanent injury, capture, resource scarcity, or replacement characters?'],
+                ['Player Conflict', 'Is disagreement between characters welcome? Is player-versus-player rolling allowed, and must every affected player agree before it occurs?'],
+                ['Spotlight & Authority', 'How will the group share attention? How should players raise rules questions, correct misunderstandings, or contribute setting details?'],
+                ['Logistics', 'When, where, and how long will the group play? How much notice is expected for an absence, and what happens when someone cannot attend?'],
+                ['Communication', 'Where are schedules, campaign notes, and between-session questions kept? How can players provide private feedback to the Storyteller?'],
+              ],
+            },
+          },
+          {
+            title: 'Descriptor Approval Checklist',
+            paragraphs: [
+              'Review Descriptors collaboratively. When a concept is too broad or unclear, refine or rename it with the player so its intended identity remains intact.',
+            ],
+            table: {
+              headers: ['Check', 'Approval Guidance'],
+              rows: [
+                ['Linked Attribute', 'Identify the Attribute the Descriptor improves or degrades and make sure the connection is easy to explain in the fiction.'],
+                ['Complete Rating', 'Confirm that the complete dice pool is written correctly and is above its Attribute for an Edge or below it for a Flaw as required.'],
+                ['Clear Scope', 'The Descriptor should cover a recognizable field, approach, training, relationship, or limitation—not nearly every use of an Attribute.'],
+                ['Useful Frequency', 'An Edge should be relevant often enough to be worth choosing. A Flaw should create meaningful complications without dominating every scene.'],
+                ['Distinct Purpose', 'If two Descriptors overlap, clarify the situations that distinguish them or combine them into one stronger concept.'],
+                ['Shared Interpretation', 'Ask the player for two situations where it should apply and one similar situation where it should not. Record any important ruling.'],
+                ['Campaign & Boundaries', 'Make sure the Descriptor suits the campaign and does not require content the group placed behind a Line or Veil.'],
+              ],
+            },
+          },
+          {
+            title: 'Prepared Resonance Effect Checklist',
+            paragraphs: [
+              'Calculate each starting Prepared Effect before the first session so it can be used without stopping play. Approval covers the recorded version; a meaningfully different use must be recalculated and may count as an Unprepared Effect.',
+            ],
+            table: {
+              headers: ['Record', 'Questions to Answer'],
+              rows: [
+                ['Name, Discipline & Intent', 'What does the effect normally accomplish, and why does it belong to the chosen Discipline?'],
+                ['Severity or Damage', 'What Effect Severity or Damage level does it use? Does it remove agency, impose a Condition, heal, summon, reveal, or transform?'],
+                ['Parameters', 'What are its range, area, duration, scale, precision, and number of targets?'],
+                ['Opposition', 'Is it an Attack? Can a target use Active Defense or Resist the effect? What happens when the target is unwilling?'],
+                ['Difficulty', 'List every Difficulty Band, convert the total to TN, and include any recurring or special costs.'],
+                ['Presentation', 'What does using the effect look, sound, or feel like? Is its origin obvious, and what limits should remain clear during play?'],
+              ],
+            },
+          },
+          {
+            title: 'Lines, Veils & Ongoing Safety',
+            table: {
+              headers: ['Tool', 'How to Use It'],
+              rows: [
+                ['Line', 'Content behind a Line does not appear in the game. It is not introduced as a threat, joke, backstory detail, or off-screen event.'],
+                ['Veil', 'Content behind a Veil may exist, but it is not described in detail. Fade to black, cut away, or summarize only what the group needs to know.'],
+                ['Pause or Redirect', 'Agree on a word, gesture, or message anyone can use to stop, rewind, skip, or change a scene without having to justify the request.'],
+                ['Private Boundaries', 'Provide a private way to share boundaries. Record only what is necessary to respect them and do not require anyone to disclose personal experiences.'],
+                ['Check-Ins', 'Check in after especially intense scenes and periodically during a long campaign. Silence at Session Zero is not permanent consent.'],
+                ['Leaving the Table', 'Anyone may step away when needed. Decide whether play pauses or continues, and make returning easy and free of pressure.'],
+              ],
+            },
           },
         ],
       },
@@ -1962,6 +2416,29 @@ const systems = [
         ],
       },
       {
+        id: 'equipment-degradation',
+        category: 'Storytelling',
+        title: 'Equipment Degradation',
+        introduction: [
+          {
+            segments: [
+              { text: 'Do not track routine wear or durability. Degrade equipment only when the fiction clearly warrants it or as an appropriate consequence of a “No, and…” result.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Represent degradation with a temporary negative Characteristic such as ' },
+              { text: 'Damaged', strong: true },
+              { text: ', ' },
+              { text: 'Unreliable', strong: true },
+              { text: ', or ' },
+              { text: 'Blunted', strong: true },
+              { text: '. The Characteristic remains until appropriate repairs remove it.' },
+            ],
+          },
+        ],
+      },
+      {
         id: 'creating-npcs',
         category: 'Storytelling',
         title: 'Creating NPCs',
@@ -2023,7 +2500,7 @@ const systems = [
           },
           {
             title: 'Allocation Dice',
-            description: 'The character’s Heritage provides their Allocation Dice. Divide these Dice into individual Pips as desired; each Allocation Pip adds one Pip to an Attribute within the limits set by Heritage or to an Edge. Taking a Flaw at −1 grants one additional Allocation Pip. Every starting character must take at least one Flaw, but there is no fixed number of Edges or maximum Descriptor rating.',
+            description: 'The character’s Heritage provides their Allocation Dice. Divide these Dice into individual Pips as desired. Each Allocation Pip either increases an Attribute within the limits set by Heritage or increases an Edge’s complete pool one Pip above its linked Attribute. A Flaw records a complete pool one Pip below its linked Attribute and grants one additional Allocation Pip. Every starting character must take at least one Flaw, but there is no fixed number of Edges or maximum Descriptor rating.',
           },
           {
             title: 'Resonance Attunement',
@@ -2087,23 +2564,23 @@ const systems = [
               { text: 'Attributes', strong: true },
               { text: ' measure a character’s broad, innate capabilities while ' },
               { text: 'Descriptors', strong: true },
-              { text: ' represent a character’s background, training, practiced expertise, or defining circumstances.' },
+              { text: ' represent a character’s background, training, practiced expertise, or defining circumstances. Every Descriptor is recorded as a complete dice pool derived from its linked Attribute.' },
             ],
           },
           {
             segments: [
-              { text: 'Every Descriptor is associated with an Attribute. When an Edge clearly applies to an action, add its rating to the broader Attribute. When a Flaw clearly applies, apply its negative rating to the Attribute. When there is no relevant ' },
+              { text: 'Every Descriptor is associated with an Attribute. An Edge records a complete pool higher than the linked Attribute, while a Flaw records a complete pool one Pip lower. When a Descriptor clearly applies, roll its complete pool instead of the Attribute. When there is no relevant ' },
               { text: 'Descriptor', strong: true },
               { text: ', the base ' },
               { text: 'Attribute', strong: true },
-              { text: ' is rolled instead.' },
+              { text: ' is rolled. Whenever an Attribute increases by one Pip, every Descriptor linked to it also increases by one Pip at no additional XP cost.' },
             ],
           },
           {
             callout: true,
             segments: [
               { text: 'Attribute', strong: true },
-              { text: ' and ' },
+              { text: ' and complete ' },
               { text: 'Descriptor', strong: true },
               { text: ' ratings use the notation xD±y: x is the number of six-sided dice rolled, and y is the number of pips added to or subtracted from the result. For example, ' },
               { text: '2D+2', strong: true },
@@ -2130,23 +2607,23 @@ const systems = [
               { text: 'Edges', strong: true },
               { text: ' or ' },
               { text: 'Flaws.', strong: true },
-              { text: ' There is no fixed limit on the number or rating of ' },
+              { text: ' There is no fixed limit on the number or complete pool rating of ' },
               { text: 'Edges', strong: true },
               { text: ' a character may possess. Every starting character must have at least one ' },
               { text: 'Flaw', strong: true },
-              { text: ' rated at −1.' },
+              { text: ' with a relative rating of −1 Pip below its linked Attribute.' },
             ],
           },
           {
             segments: [
               { text: 'Edges', strong: true },
-              { text: ' represent favorable qualities, experience, or circumstances that improve an associated ' },
+              { text: ' represent favorable qualities, experience, or circumstances and record a complete pool above an associated ' },
               { text: 'Attribute', strong: true },
-              { text: ' when directly relevant. ' },
+              { text: '. ' },
               { text: 'Flaws', strong: true },
-              { text: ' represent limitations, vulnerabilities, or complications that hinder an associated ' },
+              { text: ' represent limitations, vulnerabilities, or complications and record a complete pool one Pip below an associated ' },
               { text: 'Attribute', strong: true },
-              { text: ' or create an additional cost. Flaws affect dice pools in the same way as Edges, but negatively, and no individual Flaw can have a rating more severe than −1. A ' },
+              { text: '. No individual Flaw can be more severe than this relative −1 Pip. A ' },
               { text: 'Descriptor', strong: true },
               { text: ' affects an action only when it meaningfully applies; the ' },
               { text: 'Storyteller', strong: true },
@@ -2244,15 +2721,15 @@ const systems = [
           {
             title: 'Descriptor Advancement',
             paragraphs: [
-              'Edges advance one Pip at a time. Their cost rises with the die level being reached, making early competence accessible while higher expertise becomes progressively more expensive. A new Edge begins at +1. Treat ratings below 1D as target die level 1 when calculating their cost. Flaws cannot be advanced beyond −1.',
+              'Descriptors are expressed as complete dice pools and advance one Pip at a time. The cost of an increase is twice the number before D in the new complete Descriptor rating. A new Edge begins one Pip above its linked Attribute and uses the same formula. Flaws remain one Pip below their linked Attribute and cannot be advanced separately.',
             ],
-            formula: 'Descriptor +1 Pip = 2 × target die level',
-            note: 'A new Edge at +1 costs 2 XP. Advancing it to +2 costs another 2 XP, and advancing +2 to 1D costs another 2 XP.',
+            formula: 'Descriptor +1 Pip = 2 × number before D in the new complete Descriptor rating',
+            note: 'Example: Strength is 2D+2 and Wrestler is 3D+1, representing a +2 Pip improvement. Increasing Wrestler to 3D+2, a full +1D above Strength, costs 2 × 3 = 6 XP. Increasing 3D+2 to 4D would cost 2 × 4 = 8 XP.',
           },
           {
             title: 'Attribute Advancement',
             paragraphs: [
-              'Attributes apply to broad portions of a character’s capabilities and are therefore considerably more expensive to improve.',
+              'Attributes apply to broad portions of a character’s capabilities and are therefore considerably more expensive to improve. Whenever an Attribute increases by one Pip, every Descriptor linked to that Attribute also increases by one Pip without an additional cost.',
             ],
             formula: 'Attribute +1 Pip = 4 × target die level',
             note: 'Increasing an Attribute from 2D to 3D costs approximately 28 XP: 8 XP for each of the first two Pips, then 12 XP for the final Pip that reaches 3D.',
@@ -2267,6 +2744,21 @@ const systems = [
           },
         ],
         detailSections: [
+          {
+            title: 'Increasing Maximum Health',
+            paragraphs: [
+              'A character may increase maximum Health one point at a time. The XP cost equals one-tenth of the new maximum Health, rounded up. Increasing maximum Health does not restore current Health.',
+            ],
+            table: {
+              headers: ['Increase', 'XP Cost'],
+              rows: [
+                ['29 → 30 Health', '3 XP'],
+                ['30 → 31 Health', '4 XP'],
+                ['39 → 40 Health', '4 XP'],
+                ['40 → 41 Health', '5 XP'],
+              ],
+            },
+          },
           {
             title: 'Improving Move',
             paragraphs: [
@@ -2289,6 +2781,384 @@ const systems = [
               'Move cannot be increased beyond 15 metres through natural training. Exceeding 15 metres requires an appropriate fictional justification approved by the Storyteller, such as:',
             ],
             items: ['Supernatural Heritage', 'Cybernetics', 'Magical enhancement', 'Nonhuman physiology', 'Superpowers'],
+          },
+        ],
+      },
+      {
+        id: 'example-untrained-check',
+        category: 'Examples',
+        title: 'Example: Untrained Check',
+        introduction: [
+          {
+            segments: [
+              { text: 'While the ' },
+              { text: 'Starship Hercules', strong: true },
+              { text: ' charts an unclaimed system for the Human Empire, its communications relay jams. Captain Jimbo Curt attempts a field repair, but he has no relevant Descriptor.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Choose the Pool',
+            paragraphs: [
+              'The repair uses Mechanics. Captain Curt has Mechanics 2D+1 and no applicable Descriptor, so he rolls the Attribute itself. The Storyteller sets Standard Difficulty (TN 11).',
+            ],
+          },
+          {
+            title: 'Roll and Outcome',
+            paragraphs: [
+              'Curt rolls an ordinary die showing 3 and a Wild Die showing 4, then adds his +1 Pip: 3 + 4 + 1 = 8.',
+              'The result is 3 below TN 11, producing No. The relay remains jammed and Curt must find another solution.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-edge-assisted-check',
+        category: 'Examples',
+        title: 'Example: Edge-Assisted Check',
+        introduction: [
+          {
+            segments: [
+              { text: 'A gravitic surge destabilizes the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' jump drive during an Imperial survey. Ensign Porter races to bring the drive back under control.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Choose the Pool',
+            paragraphs: [
+              'Porter has Mechanics 4D, but his Starship Engineer Edge is a complete 5D+1 pool and directly applies. He rolls the Descriptor instead of adding it to Mechanics. The failing drive is Challenging (TN 14).',
+            ],
+          },
+          {
+            title: 'Roll and Outcome',
+            paragraphs: [
+              'Porter rolls four ordinary dice showing 2, 3, 4, and 4, plus a Wild Die showing 5, then adds +1: 2 + 3 + 4 + 4 + 5 + 1 = 19.',
+              'The result is 5 above TN 14, producing Yes. Porter stabilizes the jump drive before it tears the Hercules out of alignment.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-flaw-check',
+        category: 'Examples',
+        title: 'Example: Flaw Check',
+        introduction: [
+          {
+            segments: [
+              { text: 'Ensign Porter must crawl into a narrow plasma conduit aboard the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' to stop a cascade threatening the Human Empire’s expedition.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Choose the Pool',
+            paragraphs: [
+              'Porter normally has Mechanics 4D, but his Cramped-Space Panic Flaw applies inside the conduit. The Flaw is a complete 3D+2 pool, so it replaces Mechanics for this check. The repair is Standard (TN 11).',
+            ],
+          },
+          {
+            title: 'Roll and Outcome',
+            paragraphs: [
+              'Porter rolls two ordinary dice showing 1 and 3, plus a Wild Die showing 4, then adds +2: 1 + 3 + 4 + 2 = 10.',
+              'The result is 1 below TN 11, producing No, but… Porter cannot complete the repair, but he isolates the conduit before the cascade spreads to the rest of the ship.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-opposed-check',
+        category: 'Examples',
+        title: 'Example: Opposed Check',
+        introduction: [
+          {
+            segments: [
+              { text: 'Captain Jimbo Curt negotiates for alien star charts that could advance the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' mission on behalf of the Human Empire. A wary Veyran envoy intends to keep the charts secret.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Both Sides Roll',
+            paragraphs: [
+              'Curt uses his complete Imperial Captain Descriptor of 4D+1. He rolls ordinary dice showing 2, 4, and 4, plus a Wild Die showing 4, then adds +1: 15.',
+              'The envoy uses Suspicious Diplomat 4D. The envoy rolls ordinary dice showing 3, 3, and 4, plus a Wild Die showing 5: 15.',
+            ],
+          },
+          {
+            title: 'Resolve the Tie',
+            paragraphs: [
+              'Neither side compares its result with a fixed Difficulty. Their opposed totals are equal, so the defender or existing status quo wins. The envoy politely refuses to surrender the star charts.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-group-stealth',
+        category: 'Examples',
+        title: 'Example: Group Stealth',
+        introduction: [
+          {
+            segments: [
+              { text: 'The crew of the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' crosses a derelict alien vessel while a Kharon security drone searches the passage. Each crew member rolls separately to remain hidden.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'The Observer',
+            paragraphs: [
+              'The drone rolls its Sensor Sweep 3D+2 once for this search: ordinary dice of 3 and 4, a Wild Die of 3, and +2 Pips total 12. That search total is compared with each crew member’s individual result.',
+            ],
+          },
+          {
+            title: 'The Crew',
+            table: {
+              headers: ['Crew Member', 'Pool and Roll', 'Result'],
+              rows: [
+                ['Captain Curt', 'Dexterity 3D: 4 + 5 + Wild 4 = 13', 'Hidden; 13 beats 12'],
+                ['Dr Sport', 'Dexterity 2D+2: 3 + Wild 4 + 2 = 9', 'Detected; 9 loses to 12'],
+                ['Ensign Ashley', 'Security Infiltration 4D+1: 3 + 4 + 4 + Wild 4 + 1 = 16', 'Hidden; 16 beats 12'],
+                ['Ensign Porter', 'Maintenance Crawler 3D: 3 + 4 + Wild 5 = 12', 'Detected; the observer wins the tie'],
+              ],
+            },
+            paragraphs: [
+              'The drone spots Dr Sport and Ensign Porter. Even though Curt and Ashley remain personally hidden, the detected crew members compromise the group’s attempt to pass unseen.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-grappling',
+        category: 'Examples',
+        title: 'Example: Grappling',
+        introduction: [
+          {
+            segments: [
+              { text: 'A Kharon raider boards the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' with a shock baton. Ensign Ashley attempts to seize the armed intruder before it reaches the Imperial navigation archive.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Start the Grapple',
+            paragraphs: [
+              'Because the raider is armed, Ashley makes an unarmed Attack against Standard Difficulty (TN 11). She uses Close-Quarters Security 4D+2 and rolls ordinary dice of 2, 4, and 5, a Wild Die of 3, and +2 Pips for a total of 16.',
+              'The result is 5 above the TN, producing Yes. The raider becomes Grappled, but the Attack deals no Damage.',
+            ],
+          },
+          {
+            title: 'Escape and Maintenance',
+            paragraphs: [
+              'On its turn, the raider tries to slip free with Slippery Raider 3D+1 and totals 10. Ashley opposes with Close-Quarters Security 4D+2 and totals 15. The raider fails to escape.',
+              'On Ashley’s next turn, she spends one Action to maintain the Grapple and another Action to drag the raider 2 metres. Because she is taking two Actions, any Action rolls she makes that turn suffer −1D.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-multiple-actions',
+        category: 'Examples',
+        title: 'Example: Multiple Actions',
+        introduction: [
+          {
+            segments: [
+              { text: 'During a boarding emergency aboard the ' },
+              { text: 'Hercules', strong: true },
+              { text: ', Ensign Porter declares three Actions before acting: reroute the shields, seal a bulkhead, and Run toward engineering.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Apply the Penalty',
+            paragraphs: [
+              'Three declared Actions impose −2D on every Action roll that turn. Running requires no roll in this situation, but it still counts as an Action and raises Porter’s total movement allowance from his Move of 10 metres to 20 metres.',
+            ],
+          },
+          {
+            title: 'Resolve Each Action',
+            paragraphs: [
+              'Starship Engineer 5D+1 becomes 3D+1. Porter rolls 3, 4, Wild 5, and +1 for 13 against Standard TN 11: Yes, but… The shields return, but the rushed rerouting drains a sensor bank.',
+              'Damage Control 4D+2 becomes 2D+2. Porter rolls 2, Wild 5, and +2 for 9 against Easy TN 8: Yes, but… The bulkhead seals, but its manual controls burn out.',
+              'Porter then Runs toward engineering. The two successful checks retain their complications; taking several Actions does not merge them into one roll.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-active-defense',
+        category: 'Examples',
+        title: 'Example: Active Defense',
+        introduction: [
+          {
+            segments: [
+              { text: 'A Veyran mercenary fires a plasma rifle at Ensign Ashley across the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' hangar. At Long range, the Attack would normally face Challenging Difficulty (TN 14).' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Make the Reaction',
+            paragraphs: [
+              'Ashley takes Active Defense as a Reaction. It is her only Action or Reaction this Round, so there is no multiple-action penalty. Her Defense Bonus is 0, and she rolls Evasive Security 4D+2: ordinary dice of 2, 4, and 5, a Wild Die of 3, and +2 Pips total 16.',
+            ],
+          },
+          {
+            title: 'Replace the Difficulty',
+            paragraphs: [
+              'Ashley’s Active Defense result replaces the normal TN 14. The mercenary’s Attack totals 15 and misses because it does not meet the new Difficulty of 16.',
+              'Active Defense replaces the normal Difficulty even when the defense roll is lower. If Ashley had rolled 12, the mercenary would have needed only 12 to hit, making Active Defense a calculated risk.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-damage-stabilization',
+        category: 'Examples',
+        title: 'Example: Damage and Stabilization',
+        introduction: [
+          {
+            segments: [
+              { text: 'While defending the ' },
+              { text: 'Hercules', strong: true },
+              { text: ', Ensign Porter is struck by a plasma carbine. He has 6 of 30 Health remaining and wears Armour with Absorption 2.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Apply Damage',
+            paragraphs: [
+              'The plasma carbine deals Damage 8. Armour reduces it by 2, so Porter loses 6 Health: 8 − 2 = 6. He falls to 0 Health and is Taken Out.',
+            ],
+          },
+          {
+            title: 'Stabilize the Patient',
+            paragraphs: [
+              'Dr Sport uses a medical item and rolls his complete Ship’s Doctor Descriptor of 5D+1 against Standard TN 11. His ordinary dice show 2, 3, 4, and 5, his Wild Die shows 4, and the +1 Pip produces 19.',
+              'The stabilization succeeds. Porter stops making death checks, but stabilization restores no Health; he remains at 0 Health. The medical item used for the attempt is expended.',
+            ],
+          },
+          {
+            title: 'Restore Health',
+            paragraphs: [
+              'Dr Sport then uses a second medical item with Treatment 6. His 5D+1 roll totals 14 against TN 11, producing Yes and restoring the full 6 Health.',
+              'Porter now has 6 of 30 Health. That is 20%, rounded down, so he is in the Critical Health Band.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-modified-resonance',
+        category: 'Examples',
+        title: 'Example: Modified Resonance Effect',
+        introduction: [
+          {
+            segments: [
+              { text: 'A shuttle from the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' is caught in an alien debris storm during an Imperial survey. Captain Jimbo Curt invokes his prepared Gravitic Barrier to protect it.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Build the Difficulty',
+            table: {
+              headers: ['Element', 'Difficulty'],
+              rows: [
+                ['Base Resonance Difficulty', 'TN 11'],
+                ['Standard Effect Severity', 'No change'],
+                ['40-metre Range', '+1 Band'],
+                ['Large Scale: shuttle-sized', '+1 Band'],
+                ['Duration: up to 10 minutes', '+1 Band'],
+                ['Final Difficulty', 'TN 20'],
+              ],
+            },
+            paragraphs: [
+              'The three positive Difficulty Bands add +9 to TN 11. Gravitic Barrier is prepared, so it receives no unprepared-effect increase.',
+            ],
+          },
+          {
+            title: 'Roll and Outcome',
+            paragraphs: [
+              'Curt rolls Gravitic Commander 5D+2. His ordinary dice show 3, 4, 4, and 5, his Wild Die shows 2, and the +2 Pips bring the total to 20.',
+              'Meeting TN 20 produces Yes, but… The barrier protects the shuttle, but its power draw dims the Hercules sensor array at a dangerous moment.',
+              'Had Gravitic Barrier been unprepared, it would have gained another +2 Bands, raising the final Difficulty to TN 26.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-drowning',
+        category: 'Examples',
+        title: 'Example: Drowning',
+        introduction: [
+          {
+            segments: [
+              { text: 'An alien specimen ruptures a water tank in the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' xenobiology lab, trapping Dr Sport beneath a jammed emergency hatch.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Hold Breath',
+            paragraphs: [
+              'Dr Sport has Strength 2D, so under combat pressure he can function without air for 2 + 2 = 4 Rounds. He begins making Drowning checks on Round 5.',
+            ],
+          },
+          {
+            title: 'Escalating Checks',
+            paragraphs: [
+              'On Round 5, Sport rolls Zero-G Survival 2D+2 against Standard TN 11. His ordinary die shows 3. His Wild Die rolls 6 and explodes for another 4. Adding +2 gives 3 + 6 + 4 + 2 = 15. He succeeds, so the next check rises one Band to Challenging TN 14.',
+              'On Round 6, he rolls an ordinary 4, a Wild 3, and +2 for 9. He fails the TN 14 check and takes 5 Damage that ignores Armour. The checks would continue each Round until he could breathe, but he forces open the emergency air hatch before the next one.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-stealth-kill',
+        category: 'Examples',
+        title: 'Example: Stealth Kill',
+        introduction: [
+          {
+            segments: [
+              { text: 'A minor Kharon sentry guards a navigation core needed by the ' },
+              { text: 'Hercules', strong: true },
+              { text: ' expedition. Before Ensign Ashley approaches, the Storyteller establishes that the isolated sentry is a valid target for a Stealth Takedown.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Make the Attack',
+            paragraphs: [
+              'The sentry is unaware and within reach, so Ashley declares a lethal Stealth Takedown with a vibroknife. The knife uses fixed Easy Difficulty (TN 8) and Damage 4. Ashley’s Security Infiltration 4D+1 gains Standard Advantage, becoming 5D+1.',
+              'She rolls ordinary dice of 2, 3, 4, and 5, a Wild Die of 3, and +1 Pip for a total of 18. The result is 10 above TN 8, producing Yes, and…',
+            ],
+          },
+          {
+            title: 'Check the Threshold',
+            paragraphs: [
+              'The sentry has maximum Health 20 and Armour Absorption 1. The vibroknife deals 4 − 1 = 3 Damage after Armour. Ten percent of 20 Health is 2, and 3 is at least 2, so Ashley’s declared kill succeeds immediately.',
+              'If the post-Armour Damage had been less than 2, the sentry would have lost Health normally and the instant takedown would have failed.',
+            ],
           },
         ],
       },
