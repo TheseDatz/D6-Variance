@@ -48,6 +48,7 @@ const systems = [
       'Character',
       'Equipment',
       'Combat',
+      'Vehicles & Mounts',
       'Resonance',
       'Storytelling',
       'Examples',
@@ -1608,6 +1609,172 @@ const systems = [
         ],
       },
       {
+        id: 'vehicles-and-mounts',
+        category: 'Vehicles & Mounts',
+        title: 'Vehicles & Mounts',
+        introduction: [
+          {
+            segments: [
+              { text: 'Vehicles and mounts use short profiles rather than complete character sheets. A frequently used or especially complex vehicle may have its own sheet, but it needs only the statistics, weapons, crew positions, and Characteristics that matter during play.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Characters operate vehicles with their own Descriptors and Attributes. The vehicle supplies its capabilities and Handling modifier rather than a second pool of Attributes.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Routine travel requires no roll. ', strong: true },
+              { text: 'Make an operation or Riding check only when the outcome is uncertain, meaningful, and affected by the operator’s control.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Vehicle and Mount Profiles',
+            table: {
+              headers: ['Statistic', 'Purpose'],
+              rows: [
+                ['Scale', 'Relative size, from a person or horse to a capital ship'],
+                ['Handling', 'Agile grants +1D, Ordinary has no modifier, and Unwieldy imposes −1D'],
+                ['Movement', 'Tactical Move plus any relevant travel speed or movement modes'],
+                ['Structure or Health', 'Vehicles use Structure; living mounts use normal Health'],
+                ['Armour', 'Fixed Damage Absorption'],
+                ['Crew & Capacity', 'Required operators, passengers, cargo, or carried craft'],
+                ['Weapons & Characteristics', 'Only the equipment and special rules likely to matter'],
+              ],
+            },
+          },
+          {
+            title: 'Operating a Vehicle',
+            paragraphs: [
+              'When control is uncertain, roll a relevant complete Descriptor such as Midshipman, Cavalry Officer, or Yachter, or Dexterity when no Descriptor applies. Apply the vehicle or mount’s Handling modifier to that pool.',
+              'Maintaining ordinary movement is free. A difficult manoeuvre, stunt, regaining control, or Active Defense requires one Action. Active Defense uses the operator’s modified control pool and replaces the normal Attack Difficulty as usual.',
+              'A small vehicle’s operator may also fire its weapons, but an operation check and an Attack are separate Actions. If the same character does both during one turn, apply the normal multiple-action penalty.',
+            ],
+          },
+          {
+            title: 'Crewed Vehicles',
+            paragraphs: [
+              'Larger vehicles allow different characters to operate the helm, weapons, sensors, engineering, command, or other systems. Each crew member uses their own Actions and relevant pools, so a pilot steering the vehicle does not penalize a separate gunner’s Attack.',
+              'When ordinary NPC crew operate a system, use the relevant crew pool recorded in the vehicle’s profile. If too few characters are available, one character may operate several systems by taking multiple Actions, while systems that cannot reasonably be reached or controlled remain unavailable.',
+            ],
+          },
+          {
+            title: 'Mounts',
+            paragraphs: [
+              'A mount remains a creature with its own Attributes, Descriptors, Health, attacks, and abilities. It provides movement while the rider uses their own Actions.',
+              'Commanding a trained mount to Attack costs one of the rider’s Actions, but the mount rolls its own Attack pool. If the rider also attacks during that turn, apply the normal multiple-action penalty to both rolls.',
+              'Riding checks are required only for difficult manoeuvres, frightened or unwilling mounts, remaining mounted after an impact, or similar uncertainty. An intelligent mount acting independently, such as a dragon ally, receives its own turn as an NPC or Companion.',
+            ],
+          },
+          {
+            title: 'Scale',
+            table: {
+              headers: ['Scale', 'Examples'],
+              rows: [
+                ['0 — Personal', 'Person, horse, motorcycle, small cart'],
+                ['1 — Light', 'Car, wagon, large dragon, small boat, fighter craft'],
+                ['2 — Heavy', 'Tank, sailing ship, airliner, small starship'],
+                ['3 — Massive', 'Warship, large freighter, corvette'],
+                ['4 — Capital', 'Aircraft carrier, fortress ship, capital warship, space station'],
+                ['5 — Colossal', 'Artificial moon, city-sized vessel, worldship, planetary superstructure'],
+              ],
+            },
+            paragraphs: [
+              'Anything larger can remain Scale 5 because further distinctions rarely improve play. A vehicle or mount may also have an NPC Threat Tier and Role; its Threat represents its entire profile, including crew, weapons, Armour, and abilities.',
+            ],
+          },
+          {
+            title: 'Structure',
+            paragraphs: [
+              'Vehicles use the normal Health Band percentages, replacing Health with Structure and Taken Out with Disabled. Penalties from the Wounded and Critical Bands apply to operation and vehicle-system checks. A vehicle’s profile supplies its current and maximum Structure; it is not derived from Strength.',
+              'At 0 Structure, the vehicle cannot move or operate its major systems. The circumstances determine whether it is disabled, wrecked, sinking, drifting, captured, or destroyed.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'vehicle-combat-collisions-and-repairs',
+        category: 'Vehicles & Mounts',
+        title: 'Vehicle Combat, Collisions & Repairs',
+        introduction: [
+          {
+            segments: [
+              { text: 'Vehicle Attacks use the normal combat rules. The gunner rolls a relevant complete Descriptor or Dexterity, range establishes the base Difficulty, Active Defense may replace that Difficulty, and Armour subtracts from Damage normally.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Every vehicle weapon lists fixed Damage and a ' },
+              { text: 'Weapon Scale', strong: true },
+              { text: '. Weapon Scale normally matches the vehicle carrying it, but specialized weapons such as Point Defense guns or anti-capital torpedoes may use another Scale.' },
+            ],
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Local targets: ', strong: true },
+              { text: 'Characters inside or standing upon an enormous vehicle may attack accessible doors, consoles, engines, weapons, crew, or other components at their appropriate local Scale instead of attacking the entire vehicle.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Scale and Damage',
+            paragraphs: [
+              'For every Scale step the weapon is larger than its target, add 5 Damage. For every Scale step it is smaller, subtract 5 Damage. Adjusted Damage cannot fall below 0 before Armour is applied.',
+            ],
+            rules: [
+              { name: 'Adjusted Damage', description: 'Listed Damage + 5 × (Weapon Scale − Target Scale), then subtract Armour.' },
+              { name: 'Accuracy', description: 'Use ordinary Advantage or Disadvantage when relative size meaningfully affects accuracy. Large targets are generally easier to hit, while very small targets may be difficult for capital weapons to track.' },
+            ],
+            table: {
+              headers: ['Attack', 'Adjusted Damage Before Armour'],
+              rows: [
+                ['Damage 7 personal weapon against a Scale 1 car', '7 − 5 = 2'],
+                ['Damage 10 Scale 1 dragon breath against a Scale 0 person', '10 + 5 = 15'],
+                ['Damage 12 Scale 3 torpedo against a Scale 4 capital ship', '12 − 5 = 7'],
+                ['Damage 12 Scale 4 capital weapon against a Scale 1 fighter', '12 + 15 = 27'],
+              ],
+            },
+          },
+          {
+            title: 'Vehicles and Occupants',
+            paragraphs: [
+              'Ordinary Attacks against a vehicle reduce its Structure and do not automatically Damage protected occupants. Exposed crew may be targeted normally. Occupants face direct danger when an Attack reaches them, the vehicle crashes, a compartment is breached, or another established consequence applies.',
+              'Mounts take Damage against their normal Health. Damage to a mount does not automatically Damage its rider, though the rider may need to remain mounted or deal with the mount becoming Prone or Taken Out.',
+            ],
+          },
+          {
+            title: 'Collisions',
+            paragraphs: [
+              'A deliberate collision is an Attack using the operator’s modified control pool. The target may use Active Defense when able. On a hit, each participant takes Collision Damage based on the other object’s Scale, and Armour applies normally.',
+              'If a collision disables a vehicle, its occupants face an appropriate environmental consequence. A rider may need a Riding or Dexterity check to avoid being thrown and becoming Prone.',
+            ],
+            rules: [
+              { name: 'Collision Damage', description: '5 + 5 × the other object’s Scale.' },
+              { name: 'Head-On or Exceptional Speed', description: 'Add 5 Damage to both participants.' },
+              { name: 'Slow or Partially Avoided Impact', description: 'Subtract 5 Damage from both participants, to a minimum of 0 before Armour.' },
+            ],
+          },
+          {
+            title: 'Repairs',
+            paragraphs: [
+              'Mounts recover through the normal medicine, healing, and rest rules. Vehicles require appropriate tools, parts, time, and a relevant Mechanics Descriptor or Mechanics.',
+              'Routine repairs outside pressure may not require a roll. Repairs made under pressure use a repair item with a fixed Repair value and the medical-item outcome table, replacing Treatment with Repair and Health with Structure. If an outcome would stabilize a patient, it instead prevents further failure or resolves one immediate vehicle danger. A repair attempt expends the item, but vehicles do not use the medical treatment-per-day limits.',
+              'A successful repair may restore Structure or remove an appropriate temporary problem such as Damaged Engine or Jammed Controls. A vehicle at 0 Structure requires appropriate parts and a successful repair before it can operate again.',
+            ],
+          },
+        ],
+      },
+      {
         id: 'what-is-resonance',
         category: 'Resonance',
         title: 'What Is Resonance?',
@@ -2445,27 +2612,114 @@ const systems = [
         introduction: [
           {
             segments: [
-              { text: 'Most non-player characters need only a name, purpose, disposition, a few relevant Attributes or Descriptors, Health if they can be harmed, and any equipment or special abilities likely to matter. Assign detail in proportion to the NPC’s importance.' },
+              { text: 'Before creating a new NPC, check the ' },
+              { text: 'Bestiary', link: '/bestiary' },
+              { text: '. It contains premade NPCs useful for many common purposes. Reusing a suitable profile and changing its name, appearance, equipment, or description is usually faster than building another NPC from the beginning.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'If none of those profiles fit, use this guidance to create one. Most non-player characters need only the details that could matter during their scene. Begin with the NPC’s purpose and behaviour, then assign a few relevant pools rather than completing an entire character sheet.' },
             ],
           },
         ],
-        tables: [
+        steps: [
+          {
+            title: 'Define Their Purpose',
+            description: 'Write one sentence explaining what the NPC wants and how they normally pursue it.',
+          },
+          {
+            title: 'Choose Tier & Role',
+            description: 'Threat Tier determines the NPC’s overall power and encounter value. Role describes how the NPC applies that power.',
+          },
+          {
+            title: 'Assign Relevant Pools',
+            description: 'Give the NPC one best pool, one or two secondary pools, and any obvious weakness. These may be complete Descriptors or Attributes.',
+          },
+          {
+            title: 'Assign Combat Values',
+            description: 'When physical conflict is likely, record Health, Armour, Move, weapons, Damage, and any relevant defensive pool.',
+          },
+          {
+            title: 'Add Defining Abilities',
+            description: 'Give the NPC only the special rules necessary to make it distinctive and fulfil its intended role.',
+          },
+          {
+            title: 'Decide Their Behaviour',
+            description: 'Record how the NPC begins a confrontation, when it changes tactics, and whether it retreats, surrenders, bargains, or fights to the end.',
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Only assign a statistic when it becomes relevant. ', strong: true },
+              { text: 'An incidental merchant does not need Health or combat pools until the fiction makes them necessary.' },
+            ],
+          },
+          {
+            callout: true,
+            segments: [
+              { text: 'Use standard Difficulties for incidental opposition and full Opposed Checks for important rivals. Reuse simple profiles for groups of similar NPCs, then add one memorable trait or specialty when an individual needs distinction.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'NPC Profile Checklist',
+            table: {
+              headers: ['Element', 'Record'],
+              rows: [
+                ['Identity', 'Name, appearance, affiliation, and one memorable detail'],
+                ['Motivation', 'What the NPC wants from the current situation'],
+                ['Threat', 'Tier, Role, and Threat value'],
+                ['Capabilities', 'Best pool, secondary pools, and an important weakness'],
+                ['Combat', 'Health, Armour, Move, Attacks, and Damage when relevant'],
+                ['Abilities', 'One to three rules that distinguish the NPC'],
+                ['Behaviour', 'Preferred tactics and response to changing circumstances'],
+                ['Morale', 'Conditions under which the NPC retreats, surrenders, or bargains'],
+                ['Alternatives', 'Ways the characters might deceive, persuade, avoid, or otherwise overcome the NPC'],
+              ],
+            },
+          },
           {
             title: 'NPC Attribute & Descriptor Benchmarks',
-            headers: ['Rating', 'Benchmark'],
-            rows: [
-              ['1D', 'Below human average for an Attribute'],
-              ['2D', 'Human average for an Attribute and many Descriptors'],
-              ['3D', 'Average level of training for a human'],
-              ['4D', 'Professional level of training for a human'],
-              ['5D', 'Above-average expertise'],
-              ['6D', 'Best in a city or geographic area; approximately 1 in 100,000'],
-              ['7D', 'Among the best in a region; approximately 1 in 10,000,000'],
-              ['8D', 'Among the best in a country; approximately 1 in 100,000,000'],
-              ['9D', 'One of the best on a continent; approximately 1 in a billion'],
-              ['10D', 'One of the best in a hemisphere'],
-              ['11D', 'One of the best to ever live'],
-              ['12D+', 'Among the most legendary'],
+            table: {
+              headers: ['Rating', 'Benchmark'],
+              rows: [
+                ['1D', 'Below human average for an Attribute'],
+                ['2D', 'Human average for an Attribute and many Descriptors'],
+                ['3D', 'Average level of training for a human'],
+                ['4D', 'Professional level of training for a human'],
+                ['5D', 'Above-average expertise'],
+                ['6D', 'Best in a city or geographic area; approximately 1 in 100,000'],
+                ['7D', 'Among the best in a region; approximately 1 in 10,000,000'],
+                ['8D', 'Among the best in a country; approximately 1 in 100,000,000'],
+                ['9D', 'One of the best on a continent; approximately 1 in a billion'],
+                ['10D', 'One of the best in a hemisphere'],
+                ['11D', 'One of the best to ever live'],
+                ['12D+', 'Among the most legendary'],
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: 'npc-threat-tiers-and-roles',
+        category: 'Storytelling',
+        title: 'NPC Threat Tiers & Roles',
+        introduction: [
+          {
+            segments: [
+              { text: 'Threat Tier', strong: true },
+              { text: ' estimates an NPC’s overall impact and provides its Threat value for encounter building. ' },
+              { text: 'Role', strong: true },
+              { text: ' describes how that NPC applies its power. Tier and Role are separate, so two NPCs with the same Threat value can create very different challenges.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'These profiles are preparation shortcuts rather than mandatory limits. Important recurring NPCs may use complete character rules, while unusual creatures may exchange one suggested strength for another.' },
             ],
           },
         ],
@@ -2473,8 +2727,154 @@ const systems = [
           {
             callout: true,
             segments: [
-              { text: 'Use standard Difficulties for incidental opposition and full Opposed Checks for important rivals. Reuse simple profiles for groups of similar NPCs, then add one memorable trait or specialty when an individual needs distinction.' },
+              { text: 'Do not maximize every defense. ', strong: true },
+              { text: 'An NPC with exceptional accuracy, Damage, Armour, and Health will be substantially more dangerous than its listed Tier. Major opponents should gain interesting abilities and weaknesses instead of relying entirely on inflated numbers.' },
             ],
+          },
+          {
+            callout: true,
+            segments: [
+              { text: 'Armour 4 or higher should be visibly formidable and have a discoverable counter, such as Armour-Piercing equipment, an exposed component, an environmental hazard, or another approach established by the fiction.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'NPC Threat Tiers',
+            paragraphs: [
+              'The suggested profiles are initial playtest values. Best pools represent the NPC’s defining specialty, not every roll they make.',
+            ],
+            table: {
+              headers: ['Tier', 'Threat', 'Suggested Profile'],
+              rows: [
+                ['Minion', '1', 'Best pool 3D; Health 8–12; Damage 3–5; Armour 0–1; one simple ability'],
+                ['Regular', '2', 'Best pool 4D; Health 20–30; Damage 5–7; Armour 0–2; one defining ability'],
+                ['Elite', '4', 'Best pool 5D; Health 30–45; Damage 7–9; Armour 1–3; two abilities or a useful Reaction'],
+                ['Major', '8', 'Best pool 5D–6D; Health 45–60 or distinct phases; Damage 8–12; Armour 2–4; several abilities and an exploitable weakness'],
+                ['Apex', '16', 'A custom, campaign-defining opponent with 6D–7D specialties, changing phases, objectives, counters, or environmental effects'],
+              ],
+            },
+          },
+          {
+            title: 'NPC Roles',
+            paragraphs: [
+              'Roles do not normally change Threat value because their advantages should be offset by limitations elsewhere in the profile.',
+            ],
+            table: {
+              headers: ['Role', 'Design Direction'],
+              rows: [
+                ['Bruiser', 'Durable close-range pressure with limited mobility or ranged capability'],
+                ['Striker', 'High Damage or precision with reduced durability'],
+                ['Skirmisher', 'Strong movement and Active Defense with limited staying power'],
+                ['Controller', 'Conditions, hazards, forced movement, or area denial with modest direct Damage'],
+                ['Support', 'Protection, healing, coordination, or reinforcement abilities; vulnerable when isolated'],
+                ['Specialist', 'Exceptional technical, social, investigative, or Resonance capability with weaker combat statistics'],
+              ],
+            },
+          },
+        ],
+      },
+      {
+        id: 'building-encounters',
+        category: 'Storytelling',
+        title: 'Building Encounters',
+        introduction: [
+          {
+            segments: [
+              { text: 'An ' },
+              { text: 'encounter', strong: true },
+              { text: ' is a situation in which opposition or danger stands between the characters and an objective. Not every encounter must become combat, and not every combat must end with one side destroyed.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Threat budgets help estimate pressure during preparation. They are guidelines rather than guarantees: objectives, terrain, preparation, action economy, equipment, Resonance, and player decisions can substantially change the actual danger.' },
+            ],
+          },
+        ],
+        steps: [
+          {
+            title: 'Define the Objective',
+            description: 'Establish what the characters and opposition want to accomplish. Include any reason the encounter cannot be solved by simply defeating every opponent.',
+          },
+          {
+            title: 'Choose the Pressure',
+            description: 'Decide whether the encounter should create Low, Standard, Hard, or Extreme pressure.',
+          },
+          {
+            title: 'Calculate the Budget',
+            description: 'Multiply the number of player characters by the Threat per character for the chosen pressure.',
+          },
+          {
+            title: 'Choose Opposition',
+            description: 'Spend the budget using NPC Threat values, mixing Tiers and Roles to create the intended kind of challenge.',
+          },
+          {
+            title: 'Add the Environment',
+            description: 'Establish Cover, hazards, distances, movement routes, useful objects, and features either side can exploit.',
+          },
+          {
+            title: 'Account for Circumstances',
+            description: 'Adjust the expected pressure for surprise, preparation, reinforcements, special objectives, attrition, and action economy.',
+          },
+          {
+            title: 'Provide Alternatives',
+            description: 'Consider how stealth, negotiation, investigation, retreat, or interaction with the environment might change or resolve the encounter.',
+          },
+          {
+            title: 'Communicate the Danger',
+            description: 'Give the players enough fictional information to recognize overwhelming opposition, unusual defenses, and viable alternatives.',
+          },
+        ],
+        relationship: [
+          {
+            callout: true,
+            segments: [
+              { text: 'Threat budgets are preparation tools, not restrictions. ', strong: true },
+              { text: 'The world may contain opposition the characters cannot defeat directly, but the danger and possible alternatives should be communicated through the fiction.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Encounter Budgets',
+            table: {
+              headers: ['Pressure', 'Threat per Character', 'Expected Experience'],
+              rows: [
+                ['Low', '1', 'Characters are strongly favoured; limited injury or expenditure is expected'],
+                ['Standard', '2', 'Meaningful opposition that should consume some Health, equipment, or Meta Dice'],
+                ['Hard', '3', 'Strong tactics matter and one or more characters may become Taken Out'],
+                ['Extreme', '4', 'Defeat, capture, retreat, or death is credible and should be clearly telegraphed'],
+              ],
+            },
+          },
+          {
+            title: 'Example Budgets for Four Characters',
+            table: {
+              headers: ['Pressure', 'Budget', 'Example Opposition'],
+              rows: [
+                ['Low', '4', 'Four Minions, two Regulars, or one Elite'],
+                ['Standard', '8', 'Four Regulars, two Elites, one Major, or one Elite and two Regulars'],
+                ['Hard', '12', 'One Major and one Elite, three Elites, or six Regulars'],
+                ['Extreme', '16', 'Two Majors, one Apex, or another suitably varied combination'],
+              ],
+            },
+          },
+          {
+            title: 'Encounter Adjustments',
+            table: {
+              headers: ['Circumstance', 'Guidance'],
+              rows: [
+                ['Superior Enemy Numbers', 'Substantially more meaningful enemy Actions can make the encounter one pressure level harder.'],
+                ['Lone Conventional Enemy', 'Without special actions, defenses, or environmental support, one opponent may perform as though it were one Tier lower.'],
+                ['Ambush or Fortification', 'Surprise, strong Cover, inaccessible positions, or prepared hazards may make the encounter one pressure level harder until overcome.'],
+                ['Strong Character Preparation', 'Useful intelligence, surprise, specialized equipment, or an exploited weakness may reduce the effective pressure.'],
+                ['Complicated Objective', 'Protecting civilians, stopping a ritual, completing a repair, or racing a deadline increases pressure without adding NPCs.'],
+                ['Reinforcements', 'Include opponents likely to arrive before the encounter is decided. Later waves create less immediate danger but greater attrition.'],
+                ['Continued Attrition', 'Evaluate consecutive encounters together when the characters lack enough time or resources to recover between them.'],
+                ['Escape or Surrender', 'Dangerous opposition may be less punishing when failure can lead to retreat, capture, negotiation, or another continuing consequence.'],
+              ],
+            },
           },
         ],
       },
@@ -3158,6 +3558,49 @@ const systems = [
             paragraphs: [
               'The sentry has maximum Health 20 and Armour Absorption 1. The vibroknife deals 4 − 1 = 3 Damage after Armour. Ten percent of 20 Health is 2, and 3 is at least 2, so Ashley’s declared kill succeeds immediately.',
               'If the post-Armour Damage had been less than 2, the sentry would have lost Health normally and the instant takedown would have failed.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-starfighters-versus-larger-ship',
+        category: 'Examples',
+        title: 'Example: Starfighters Against a Larger Ship',
+        introduction: [
+          {
+            segments: [
+              { text: 'Two Kharon starfighters attack the ' },
+              { text: 'Starship Hercules', strong: true },
+              { text: ' during its mission for the Human Empire. Each starfighter is Scale 1. The Hercules is a Scale 3 exploration ship with 50 Structure and Armour Absorption 2.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Make the Attacks',
+            paragraphs: [
+              'Captain Jimbo Curt holds the Hercules on course through a narrow debris gap and does not use Active Defense. Both Attacks are made at Medium range against Standard Difficulty (TN 11). Because the Scale 3 ship presents such a large target to the Scale 1 starfighters, the Storyteller grants each attacker Standard Advantage.',
+              'Each pilot has the complete Kharon Wing Officer Descriptor at 4D. Standard Advantage raises each Attack pool to 5D. The first rolls ordinary dice of 2, 3, 4, and 4 plus a Wild Die of 3 for 16. The second rolls ordinary dice of 2, 2, 3, and 4 plus a Wild Die of 4 for 15. Both Attacks hit with Yes results.',
+            ],
+          },
+          {
+            title: 'Ordinary Starfighter Cannons',
+            paragraphs: [
+              'The first starfighter fires Damage 12 cannons with Weapon Scale 1. Against the Scale 3 Hercules, the Scale difference reduces Damage by 10: 12 + 5 × (1 − 3) = 2.',
+              'The Hercules then subtracts Armour 2, reducing the hit to 0 Damage. The Attack hits and scorches the hull, but it causes no Structure loss.',
+            ],
+          },
+          {
+            title: 'Anti-Ship Torpedo',
+            paragraphs: [
+              'The second Scale 1 starfighter carries a specialized Damage 12 torpedo with Weapon Scale 3. The weapon matches the Hercules in Scale, so its Damage is unchanged: 12 + 5 × (3 − 3) = 12.',
+              'After Armour 2, the torpedo deals 10 Damage and reduces the Hercules from 50 to 40 Structure. It retains 80% of its maximum Structure and therefore remains in the highest Health Band with no penalty.',
+            ],
+          },
+          {
+            title: 'What the Example Shows',
+            paragraphs: [
+              'A vehicle’s Scale does not prevent it from carrying a weapon of another Scale. Ordinary fighter weapons may be ineffective against a much larger hull, while a specialized anti-ship weapon can threaten it normally. Relative size may also justify situational Advantage or Disadvantage on the Attack, but the Storyteller applies that modifier according to the circumstances rather than automatically.',
             ],
           },
         ],
