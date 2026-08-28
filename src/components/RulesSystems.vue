@@ -27,7 +27,7 @@ const metaDiceRule = {
     {
       callout: true,
       segments: [
-        { text: 'Only one Meta Die may be spent on a roll. Decide whether to spend it after the original roll has been completely resolved and its result is known.' },
+        { text: 'Only one Meta Die may be spent on a roll. Decide whether to spend it after the original total and provisional Degree of Outcome are known, but before Damage, progress, consequences, or narration are finalized.' },
       ],
     },
     {
@@ -167,7 +167,7 @@ const systems = [
               { speaker: 'Mara’s player', text: '“I grab the loose rigging, run along the rail, and swing onto the frigate’s deck.”' },
               { speaker: 'Storyteller', text: '“The decks are pitching and the gap is widening. Make a Dexterity check.”' },
               { speaker: 'Mara’s player', text: '“Could I use my Pirate Captain Descriptor? Mara has spent years moving through ship rigging.”' },
-              { speaker: 'Storyteller', text: '“That fits. Roll Pirate Captain instead of your Dexterity against a Difficulty of 15.”' },
+              { speaker: 'Storyteller', text: '“That fits. Roll Pirate Captain instead of your Dexterity against Very Hard Difficulty, TN 20.”' },
             ],
           },
           {
@@ -182,7 +182,7 @@ const systems = [
               { speaker: 'Storyteller', text: '“Mara swings through the rain and lands hard on the frigate’s rail. An officer turns in surprise—you made it across, but now you are face-to-face with the enemy crew.”' },
             ],
             paragraphs: [
-              'The roll determined whether Mara crossed the gap. The Storyteller then used the successful result to move the scene forward and present the Party with a new situation.',
+              'Mara’s result of 20 meets TN 20 exactly, producing Yes, but… She crosses the gap as intended, but lands in a compromised position directly before an enemy officer. The Storyteller uses the Degree of Outcome to move the scene forward and present the Party with a new situation.',
             ],
           },
         ],
@@ -474,23 +474,8 @@ const systems = [
           },
           {
             segments: [
-              { text: 'The assistant makes an appropriate check against a Difficulty chosen by the Storyteller, usually one step easier than the lead character’s task.' },
+              { text: 'The assistant makes an appropriate check against a Difficulty chosen by the Storyteller, usually one Band easier than the lead character’s task. A successful check grants the lead character +1D. A Yes, and… result may increase this bonus to +1D+1 at the Storyteller’s discretion. A failed check grants no assistance bonus. Resolve the assistant’s Degree of Outcome normally.' },
             ],
-          },
-        ],
-        conceptsTitle: 'Assistance Results',
-        concepts: [
-          {
-            name: 'Success: +1D',
-            description: 'On a successful assistance check, the lead character adds +1D to their check.',
-          },
-          {
-            name: 'Yes, and…: Up to +1D+1',
-            description: 'A Yes, and result on the assistant’s roll may increase the bonus to +1D+1 at the Storyteller’s discretion.',
-          },
-          {
-            name: 'Failure',
-            description: 'A failed assistance check grants no bonus and may introduce an unforeseen consequence.',
           },
         ],
         relationship: [
@@ -719,7 +704,7 @@ const systems = [
           },
         ],
         steps: [
-          { title: 'Determine Initiative', description: 'Everyone involved rolls Initiative using Dexterity once, at the beginning of the combat encounter.' },
+          { title: 'Determine Initiative', description: 'Each participant rolls Initiative using Dexterity once at the beginning of the combat encounter. The Storyteller may roll once for a group of similar NPCs.' },
           { title: 'Resolve Turns', description: 'Participants take their turns from the highest Initiative result to the lowest.' },
           { title: 'Resolve Consequences', description: 'Apply Damage, movement, conditions, and other effects as they occur.' },
           { title: 'Begin the Next Round', description: 'If the conflict continues, retain the existing Initiative order and repeat the sequence.' },
@@ -729,6 +714,12 @@ const systems = [
             title: 'Initiative Ties',
             paragraphs: [
               'When a player character and an NPC tie, the player character acts first. When two player characters tie, the character with the higher Dexterity rating acts first. If they remain tied, the players decide their order.',
+            ],
+          },
+          {
+            title: 'Group Initiative',
+            paragraphs: [
+              'To keep a large combat moving, the Storyteller may make one Initiative roll for a group of similar NPCs. Every member of that group acts at the resulting position, in whatever order the Storyteller chooses. Important NPCs, Companions, and distinct groups may still roll separately.',
             ],
           },
           {
@@ -774,7 +765,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'A character may perform more than one Action during a Round. Each Action beyond the first subtracts ' },
+              { text: 'A character may perform more than one Action during a Round, to a maximum of five total Actions and Reactions. Free Actions do not count toward this maximum. Each Action beyond the first subtracts ' },
               { text: '−1D', strong: true },
               { text: ' from every Action roll made during that Round. Before taking their first Action or Reaction, the player declares how many Actions the character intends to use.' },
             ],
@@ -806,7 +797,7 @@ const systems = [
               headers: ['Activity', 'Cost'],
               rows: [
                 ['Draw or put away a weapon', 'Free'],
-                ['Use a consumable', 'Free'],
+                ['Consume a generic consumable not covered by another rule', 'Free'],
                 ['Pick up an accessible object', 'Free'],
                 ['Interact with the environment', 'Free or one Action, as determined by the Storyteller'],
                 ['Reload a weapon', 'Free, or another cost determined by the weapon'],
@@ -852,10 +843,10 @@ const systems = [
           },
         ],
         steps: [
-          { title: 'Declare the Total', description: 'Before taking their first Action or Reaction in a Round, declare the total number of Actions the character expects to perform during that Round.' },
+          { title: 'Declare the Total', description: 'Before taking their first Action or Reaction in a Round, declare the total number of Actions the character expects to perform during that Round, to a maximum of five. Free Actions do not count toward this maximum.' },
           { title: 'Calculate the Penalty', description: 'Each Action beyond the first applies −1D to every declared Action roll for the Round.' },
           { title: 'Resolve Actions', description: 'Take the declared Actions on the character’s turn or when an appropriate Reaction is triggered.' },
-          { title: 'Add an Undeclared Reaction', description: 'An undeclared Reaction increases the character’s Action total. Recalculate the penalty for that Reaction and every later roll, but never recalculate a roll that has already been resolved.' },
+          { title: 'Add an Undeclared Reaction', description: 'An undeclared Reaction increases the character’s Action total. It cannot be taken if it would raise the total above five. Recalculate the penalty for that Reaction and every later roll, but never recalculate a roll that has already been resolved.' },
           { title: 'Resolve Unused Actions', description: 'Taking fewer Actions than declared does not refund or reduce penalties already applied earlier in the Round.' },
         ],
         conceptsTitle: 'Reaction Limits & Special Cases',
@@ -967,7 +958,7 @@ const systems = [
           {
             callout: true,
             segments: [
-              { text: 'If the target also uses Active Defense, first replace the normal Difficulty with the Active Defense result, then add +3 TN for Cover.' },
+              { text: 'If the target also uses Active Defense or Full Defense, first calculate the applicable defense result, then add +3 TN for Cover.' },
             ],
           },
         ],
@@ -1054,7 +1045,7 @@ const systems = [
           {
             callout: true,
             segments: [
-              { text: 'Damage Taken = Weapon Damage − Armour Absorption', strong: true },
+              { text: 'Damage Taken = Weapon Damage − Armour Absorption, to a minimum of 0', strong: true },
             ],
           },
         ],
@@ -1080,12 +1071,17 @@ const systems = [
               { text: 'Health', strong: true },
               { text: ' is expressed numerically and measures how much Damage a character can withstand. Starting Health equals ' },
               { text: '20 + one Strength roll', strong: true },
-              { text: '. This Strength roll uses no Descriptor, Wild Die, or Meta Die.' },
+              { text: '. This Strength roll uses no Descriptor, Wild Die, or Meta Die. At character creation, the roll may be rerolled once; the accepted result becomes both current and maximum Health.' },
             ],
           },
           {
             segments: [
               { text: 'A character’s current condition is determined by the percentage of their maximum Health that remains. Divide current Health by maximum Health, multiply by 100, and round down to the nearest whole percentage before consulting the Health Bands.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'Current Health cannot fall below 0 or exceed maximum Health. After character creation, increasing or decreasing Strength does not change current or maximum Health.' },
             ],
           },
         ],
@@ -1118,7 +1114,7 @@ const systems = [
             callout: true,
             segments: [
               { text: 'Taken Out player characters must be stabilized within three Rounds or risk death. ', strong: true },
-              { text: 'After three Rounds, the character makes a Strength check during every subsequent Round, beginning at Very Easy Difficulty. Each successful check raises the next check by one Difficulty Band. The character dies when one of these checks fails.' },
+              { text: 'Death checks occur at the point in Initiative when the character would normally take their turn. The character has their first three such turns to be stabilized; beginning on the fourth, they make a Strength check each turn at Very Easy Difficulty. Each success raises the Difficulty by one Band. All increases to a character’s death-check Difficulty are cumulative and last until the character is stabilized or dies. The character dies when one of these checks fails.' },
             ],
           },
           {
@@ -1139,7 +1135,7 @@ const systems = [
             segments: [
               { text: 'Stabilizing a ' },
               { text: 'Taken Out', strong: true },
-              { text: ' character requires a relevant medical Descriptor rolled as a complete pool, or Intelligence when no Descriptor applies. A normal attempt expends a medical item and has ' },
+              { text: ' character requires one Action and a relevant medical Descriptor rolled as a complete pool, or Intelligence when no Descriptor applies. A normal attempt expends a medical item and has ' },
               { text: 'Standard Difficulty', strong: true },
               { text: '. If no medical item is available, the attempt may still be made at Hard Difficulty.' },
             ],
@@ -1151,7 +1147,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'On a success, the character is stabilized and stops making death checks, but their current Health does not change. On a failure, increase the Difficulty of that character’s next death check by one step.' },
+              { text: 'On a success, the character is stabilized and stops making death checks, but their current Health does not change. On a failure, increase that character’s death-check Difficulty by one Band. This increase stacks with any existing increases and lasts until the character is stabilized or dies.' },
             ],
           },
         ],
@@ -1162,20 +1158,26 @@ const systems = [
               { text: 'A Taken Out character must be stabilized before any treatment, rest, or Resonance can restore their Health.' },
             ],
           },
+          {
+            callout: true,
+            segments: [
+              { text: 'A stabilized character restored above 0 Health is no longer mechanically Taken Out. They may remain unconscious or subject to another consequence when narratively supported.' },
+            ],
+          },
         ],
         tagsTitle: 'Example Medical Descriptors',
-        tags: ['First Aid', 'Combat Medic', 'Surgeon', 'Veterinarian', 'Emergency Physician'],
+        tags: ['Former Paramedic', 'Combat Medic', 'Ship’s Surgeon', 'Veterinarian', 'Emergency Physician'],
         detailSections: [
           {
             title: 'Treatment Without an Item',
             paragraphs: [
-              'A character may roll one medically relevant Descriptor as a complete pool, or Intelligence when no Descriptor applies, at Standard Difficulty to restore 3 Health to a patient without using an item. A patient can benefit from this treatment only once per day.',
+              'A character may spend one Action and roll one medically relevant Descriptor as a complete pool, or Intelligence when no Descriptor applies, at Standard Difficulty to restore 3 Health to a patient without using an item. A patient can benefit from this treatment only once per day.',
             ],
           },
           {
             title: 'Using Medical Items',
             paragraphs: [
-              'Any character may use a medical item on themselves or someone else by making a Standard check. Medical items have a fixed Treatment value listed in their description, which determines how much Health they can restore.',
+              'Any character may spend one Action to use a medical item on themselves or someone else by making a Standard check. Medical items have a fixed Treatment value listed in their description, which determines how much Health they can restore.',
               'The Degree of Success determines the result of treatment:',
             ],
             table: {
@@ -1639,7 +1641,7 @@ const systems = [
             table: {
               headers: ['Statistic', 'Purpose'],
               rows: [
-                ['Scale', 'Relative size, from a person or horse to a capital ship'],
+                ['Scale', 'Relative size, from a handheld object to a planetary construct'],
                 ['Handling', 'Agile grants +1D, Ordinary has no modifier, and Unwieldy imposes −1D'],
                 ['Movement', 'Tactical Move plus any relevant travel speed or movement modes'],
                 ['Structure or Health', 'Vehicles use Structure; living mounts use normal Health'],
@@ -1652,7 +1654,7 @@ const systems = [
           {
             title: 'Operating a Vehicle',
             paragraphs: [
-              'When control is uncertain, roll a relevant complete Descriptor such as Midshipman, Cavalry Officer, or Yachter, or Dexterity when no Descriptor applies. Apply the vehicle or mount’s Handling modifier to that pool.',
+              'When control is uncertain, the Storyteller chooses the Attribute that best matches the immediate approach. Dexterity suits rapid reactions and evasive handling, Mechanics suits technical operation or damaged controls, and another Attribute may apply when the approach supports it. Roll a relevant complete Descriptor such as Midshipman, Cavalry Officer, or Yachter instead of that Attribute when one applies; otherwise roll the chosen Attribute. Apply the vehicle or mount’s Handling modifier to the resulting pool.',
               'Maintaining ordinary movement is free. A difficult manoeuvre, stunt, regaining control, or Active Defense requires one Action. Active Defense uses the operator’s modified control pool and replaces the normal Attack Difficulty as usual.',
               'A small vehicle’s operator may also fire its weapons, but an operation check and an Attack are separate Actions. If the same character does both during one turn, apply the normal multiple-action penalty.',
             ],
@@ -1675,18 +1677,20 @@ const systems = [
           {
             title: 'Scale',
             table: {
-              headers: ['Scale', 'Examples'],
+              headers: ['Scale', 'Examples', 'Resonance Difficulty'],
               rows: [
-                ['0 — Personal', 'Person, horse, motorcycle, small cart'],
-                ['1 — Light', 'Car, wagon, large dragon, small boat, fighter craft'],
-                ['2 — Heavy', 'Tank, sailing ship, airliner, small starship'],
-                ['3 — Massive', 'Warship, large freighter, corvette'],
-                ['4 — Capital', 'Aircraft carrier, fortress ship, capital warship, space station'],
-                ['5 — Colossal', 'Artificial moon, city-sized vessel, worldship, planetary superstructure'],
+                ['Minor', 'Handheld object or tiny drone', '−1 Band'],
+                ['Standard', 'Person-sized object', '—'],
+                ['Large', 'Motorcycle, horse, large creature, or small cart', '+1 Band'],
+                ['Huge', 'Car, wagon, large dragon, small boat, or fighter craft', '+2 Bands'],
+                ['Massive', 'Tank, sailing ship, airliner, or small starship', '+3 Bands'],
+                ['Colossal', 'Warship, large freighter, corvette, or building-scale structure', '+4 Bands'],
+                ['Titanic', 'Aircraft carrier, fortress ship, capital warship, space station, or city-sized vessel', '+5 Bands'],
+                ['Planetary', 'Artificial moon, worldship, or planetary superstructure', '+6 Bands'],
               ],
             },
             paragraphs: [
-              'Anything larger can remain Scale 5 because further distinctions rarely improve play. A vehicle or mount may also have an NPC Threat Tier and Role; its Threat represents its entire profile, including crew, weapons, Armour, and abilities.',
+              'These rows form one ordered Scale ladder used by vehicles, mounts, weapons, collisions, and Resonance. Anything larger can remain Planetary because further distinctions rarely improve play. A vehicle or mount may also have an NPC Threat Tier and Role; its Threat represents its entire profile, including crew, weapons, Armour, and abilities.',
             ],
           },
           {
@@ -1732,16 +1736,16 @@ const systems = [
               'For every Scale step the weapon is larger than its target, add 5 Damage. For every Scale step it is smaller, subtract 5 Damage. Adjusted Damage cannot fall below 0 before Armour is applied.',
             ],
             rules: [
-              { name: 'Adjusted Damage', description: 'Listed Damage + 5 × (Weapon Scale − Target Scale), then subtract Armour.' },
+              { name: 'Adjusted Damage', description: 'Add or subtract 5 Damage per Scale step between the weapon and target, then subtract Armour.' },
               { name: 'Accuracy', description: 'Use ordinary Advantage or Disadvantage when relative size meaningfully affects accuracy. Large targets are generally easier to hit, while very small targets may be difficult for capital weapons to track.' },
             ],
             table: {
               headers: ['Attack', 'Adjusted Damage Before Armour'],
               rows: [
-                ['Damage 7 personal weapon against a Scale 1 car', '7 − 5 = 2'],
-                ['Damage 10 Scale 1 dragon breath against a Scale 0 person', '10 + 5 = 15'],
-                ['Damage 12 Scale 3 torpedo against a Scale 4 capital ship', '12 − 5 = 7'],
-                ['Damage 12 Scale 4 capital weapon against a Scale 1 fighter', '12 + 15 = 27'],
+                ['Damage 7 Standard weapon against a Huge car', 'Two steps smaller: 7 − 10 = 0'],
+                ['Damage 10 Large dragon breath against a Standard person', 'One step larger: 10 + 5 = 15'],
+                ['Damage 12 Colossal torpedo against a Titanic capital ship', 'One step smaller: 12 − 5 = 7'],
+                ['Damage 12 Titanic weapon against a Huge fighter', 'Three steps larger: 12 + 15 = 27'],
               ],
             },
           },
@@ -1759,7 +1763,7 @@ const systems = [
               'If a collision disables a vehicle, its occupants face an appropriate environmental consequence. A rider may need a Riding or Dexterity check to avoid being thrown and becoming Prone.',
             ],
             rules: [
-              { name: 'Collision Damage', description: '5 + 5 × the other object’s Scale.' },
+              { name: 'Collision Damage', description: '5 Damage at Standard Scale, plus or minus 5 per Scale step of the other object, to a minimum of 0 before Armour.' },
               { name: 'Head-On or Exceptional Speed', description: 'Add 5 Damage to both participants.' },
               { name: 'Slow or Partially Avoided Impact', description: 'Subtract 5 Damage from both participants, to a minimum of 0 before Armour.' },
             ],
@@ -1768,7 +1772,7 @@ const systems = [
             title: 'Repairs',
             paragraphs: [
               'Mounts recover through the normal medicine, healing, and rest rules. Vehicles require appropriate tools, parts, time, and a relevant Mechanics Descriptor or Mechanics.',
-              'Routine repairs outside pressure may not require a roll. Repairs made under pressure use a repair item with a fixed Repair value and the medical-item outcome table, replacing Treatment with Repair and Health with Structure. If an outcome would stabilize a patient, it instead prevents further failure or resolves one immediate vehicle danger. A repair attempt expends the item, but vehicles do not use the medical treatment-per-day limits.',
+              'Routine repairs outside pressure may not require a roll. Using a repair item to make a field repair costs one Action. The item has a fixed Repair value and uses the medical-item outcome table, replacing Treatment with Repair and Health with Structure. If an outcome would stabilize a patient, it instead prevents further failure or resolves one immediate vehicle danger. A repair attempt expends the item, but vehicles do not use the medical treatment-per-day limits.',
               'A successful repair may restore Structure or remove an appropriate temporary problem such as Damaged Engine or Jammed Controls. A vehicle at 0 Structure requires appropriate parts and a successful repair before it can operate again.',
             ],
           },
@@ -1867,6 +1871,15 @@ const systems = [
           { title: 'Roll the Check', description: 'Roll one relevant Discipline Descriptor as a complete pool. If no Descriptor applies, roll the Discipline-linked Attribute.' },
           { title: 'Resolve the Outcome', description: 'Compare the final result with the completed TN or opposing total and resolve the Degree of Outcome.' },
         ],
+        detailSections: [
+          {
+            title: 'Area and Multiple Targets',
+            paragraphs: [
+              'Roll once for an effect that has multiple targets or covers an area. Compare that same result separately against each target’s applicable fixed Difficulty, Active Defense, or resistance-based final TN, then resolve the Degree of Outcome for each target individually.',
+              'A nonselective area affects everyone within it, including allies and bystanders. Apply the Selective Targets modifier when the effect excludes chosen creatures from its area.',
+            ],
+          },
+        ],
       },
       {
         id: 'prepared-resonance-effects',
@@ -1877,12 +1890,12 @@ const systems = [
             segments: [
               { text: 'A Resonance-attuned character begins with ' },
               { text: 'four Prepared Effect slots', strong: true },
-              { text: '. During a rest, the player may fill these slots with commonly used effects whose complete Difficulty, range, Damage, duration, and other details have been calculated in advance and approved by the Storyteller.' },
+              { text: '. During a rest that would narratively constitute at least two hours, the player may fill these slots with commonly used effects whose complete Difficulty, range, Damage, duration, and other details have been calculated in advance and approved by the Storyteller.' },
             ],
           },
           {
             segments: [
-              { text: 'Prepared Effects reduce interruptions during play but receive no reduction to their calculated Difficulty. A character may revise their prepared choices during a later rest.' },
+              { text: 'Prepared Effects reduce interruptions during play but receive no reduction to their calculated Difficulty. A character may revise their prepared choices during such a rest when there is enough time between sessions for the player and Storyteller to complete and approve the changes.' },
             ],
           },
         ],
@@ -1970,8 +1983,8 @@ const systems = [
               ['Standard', '—', 'Ordinary utility, simple movement, or effects on willing targets'],
               ['Potent', '+1 Band', 'Brief restraint, significant information, or a minor transformation'],
               ['Severe', '+2 Bands', 'Removing a specific memory, forced behaviour, teleporting through barriers, or a major transformation'],
-              ['Major', '+3 Bands', 'Lesser summoning, extensive information extraction, major environmental alteration, or long-lasting incapacitation'],
-              ['Extreme', '+4 Bands', 'Domination or mind control, identity replacement, powerful summoning, or a life-altering transformation'],
+              ['Major', '+3 Bands', 'Extensive information extraction, major environmental alteration, or long-lasting incapacitation'],
+              ['Extreme', '+4 Bands', 'Domination or mind control, identity replacement, or a life-altering transformation'],
               ['Permanent', '+5 Bands and usually a ritual', 'Permanent memory alteration, lasting transformation, or permanent creation'],
             ],
           },
@@ -1982,6 +1995,51 @@ const systems = [
             segments: [
               { text: 'Example: ', strong: true },
               { text: 'Removing a specific memory is normally a Severe effect at +2 Bands. If the effect must isolate only that memory without disturbing anything else, Precision adds another +1 Band.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'summoning-with-resonance',
+        category: 'Resonance',
+        title: 'Summoning with Resonance',
+        introduction: [
+          {
+            segments: [
+              { text: 'A successful summoning effect creates a ' },
+              { text: 'temporary Companion', strong: true },
+              { text: ' with a short profile determined by its Summoning Rank. The summon follows the normal Companion rules and acts on its own Initiative with its own Actions.' },
+            ],
+          },
+          {
+            segments: [
+              { text: 'The Summoning Rank replaces ordinary Effect Severity for the effect; do not apply both. Range, duration, Scale, preparation, and other Resonance modifiers apply normally.' },
+            ],
+          },
+        ],
+        tables: [
+          {
+            title: 'Summoning Ranks',
+            headers: ['Rank', 'Difficulty', 'Threat', 'Best / Other / Weak Pools', 'Health', 'Damage', 'Armour'],
+            rows: [
+              ['Lesser', '+3 Bands', 'Minion 1', '3D / 2D / 1D', '10', '4', '0'],
+              ['Standard', '+4 Bands', 'Regular 2', '4D / 3D / 2D', '20', '7', '1'],
+              ['Greater', '+5 Bands', 'Elite 4', '5D / 4D / 3D', '35', '9', '2'],
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'The Summon’s Profile',
+            paragraphs: [
+              'Give the summon one broad Descriptor that describes what it is. Use its Best pool when that Descriptor directly applies, its Other pool for ordinary actions, and its Weak pool for actions to which it is notably unsuited. The profile’s Damage and Armour are fixed, and the summon appears at its maximum Health.',
+            ],
+          },
+          {
+            title: 'Duration and Limits',
+            paragraphs: [
+              'A character may have only one summoned Companion at a time. Summoning another immediately dismisses the first. The summon disappears when the effect’s duration ends or when it reaches 0 Health.',
+              'Permanent summoned beings fall outside these rules and normally require a ritual, setting-specific ability, or explicit Storyteller approval.',
             ],
           },
         ],
@@ -2005,9 +2063,16 @@ const systems = [
         ],
         detailSections: [
           {
+            title: 'Choosing the Primary Defense',
+            paragraphs: [
+              'A physical projectile, aimed blast, or similar effect that must strike its target uses the normal Attack and Active Defense rules. A direct internal alteration of an unwilling target uses Resistance instead.',
+              'Use only one primary defense against an effect. Do not require both Active Defense and Resistance unless a Prepared Effect explicitly defines a two-stage procedure.',
+            ],
+          },
+          {
             title: 'Ongoing Loss of Agency',
             paragraphs: [
-              'An ongoing effect that removes or controls a target’s agency allows another resistance check at the end of each of that target’s turns. A successful resistance ends the effect unless its specific rules say otherwise.',
+              'When an ongoing effect removes or controls a target’s agency, record the Resonance user’s original casting total and all modifiers applied to the effect. At the end of each of the target’s turns, the target rerolls the same resistance pool. Replace the base TN 11 with this new resistance result, apply the original Effect Severity and all other effect modifiers, and compare the recorded casting total with the new final TN. If the recorded total no longer meets that TN, the effect ends.',
             ],
           },
           {
@@ -2141,12 +2206,14 @@ const systems = [
             table: {
               headers: ['Scale', 'Example', 'Difficulty Increase'],
               rows: [
-                ['Minor', 'Handheld object', '−1 Band'],
-                ['Standard', 'Person-sized or ordinary effect', '—'],
-                ['Large', 'Motorcycle or large animal', '+1 Band'],
-                ['Huge', 'Car or horse-sized mass', '+2 Bands'],
-                ['Massive', 'Truck or small building component', '+3 Bands'],
-                ['Colossal', 'Building-scale', '+4 Bands or more'],
+                ['Minor', 'Handheld object or tiny drone', '−1 Band'],
+                ['Standard', 'Person-sized object', '—'],
+                ['Large', 'Motorcycle, horse, large creature, or small cart', '+1 Band'],
+                ['Huge', 'Car, wagon, large dragon, small boat, or fighter craft', '+2 Bands'],
+                ['Massive', 'Tank, sailing ship, airliner, or small starship', '+3 Bands'],
+                ['Colossal', 'Warship, large freighter, corvette, or building-scale structure', '+4 Bands'],
+                ['Titanic', 'Aircraft carrier, fortress ship, capital warship, space station, or city-sized vessel', '+5 Bands'],
+                ['Planetary', 'Artificial moon, worldship, or planetary superstructure', '+6 Bands'],
               ],
             },
           },
@@ -2750,7 +2817,7 @@ const systems = [
                 ['Minion', '1', 'Best pool 3D; Health 8–12; Damage 3–5; Armour 0–1; one simple ability'],
                 ['Regular', '2', 'Best pool 4D; Health 20–30; Damage 5–7; Armour 0–2; one defining ability'],
                 ['Elite', '4', 'Best pool 5D; Health 30–45; Damage 7–9; Armour 1–3; two abilities or a useful Reaction'],
-                ['Major', '8', 'Best pool 5D–6D; Health 45–60 or distinct phases; Damage 8–12; Armour 2–4; several abilities and an exploitable weakness'],
+                ['Major', '8', 'Best pool 5D–6D; Health 45–60; Damage 8–12; Armour 2–4; several abilities and an exploitable weakness'],
                 ['Apex', '16', 'A custom, campaign-defining opponent with 6D–7D specialties, changing phases, objectives, counters, or environmental effects'],
               ],
             },
@@ -2834,6 +2901,13 @@ const systems = [
               { text: 'The world may contain opposition the characters cannot defeat directly, but the danger and possible alternatives should be communicated through the fiction.' },
             ],
           },
+          {
+            callout: true,
+            segments: [
+              { text: 'An encounter budget is meaningful only when the characters can affect the opposition. ', strong: true },
+              { text: 'If they cannot meaningfully harm, hinder, or overcome a vehicle or other threat, treat it as an environmental objective, infiltration site, escape threat, or narrative hazard rather than as a conventional combatant.' },
+            ],
+          },
         ],
         detailSections: [
           {
@@ -2854,9 +2928,9 @@ const systems = [
               headers: ['Pressure', 'Budget', 'Example Opposition'],
               rows: [
                 ['Low', '4', 'Four Minions, two Regulars, or one Elite'],
-                ['Standard', '8', 'Four Regulars, two Elites, one Major, or one Elite and two Regulars'],
+                ['Standard', '8', 'Four Regulars, two Elites, or one Elite and two Regulars'],
                 ['Hard', '12', 'One Major and one Elite, three Elites, or six Regulars'],
-                ['Extreme', '16', 'Two Majors, one Apex, or another suitably varied combination'],
+                ['Extreme', '16', 'Two Majors, four Elites, one Major and two Elites, or another suitably varied combination'],
               ],
             },
           },
@@ -2866,7 +2940,8 @@ const systems = [
               headers: ['Circumstance', 'Guidance'],
               rows: [
                 ['Superior Enemy Numbers', 'Substantially more meaningful enemy Actions can make the encounter one pressure level harder.'],
-                ['Lone Conventional Enemy', 'Without special actions, defenses, or environmental support, one opponent may perform as though it were one Tier lower.'],
+                ['Lone Conventional Enemy', 'A lone opponent counts at full Threat only when its profile provides sufficient Actions, Reactions, environmental support, or objective pressure. Otherwise it may perform as though it were one Tier lower.'],
+                ['Companions & Independent Mounts', 'Count each combat-capable Companion or independent mount with its own turn as an additional party member when calculating the encounter budget.'],
                 ['Ambush or Fortification', 'Surprise, strong Cover, inaccessible positions, or prepared hazards may make the encounter one pressure level harder until overcome.'],
                 ['Strong Character Preparation', 'Useful intelligence, surprise, specialized equipment, or an exploited weakness may reduce the effective pressure.'],
                 ['Complicated Objective', 'Protecting civilians, stopping a ritual, completing a repair, or racing a deadline increases pressure without adding NPCs.'],
@@ -2900,7 +2975,7 @@ const systems = [
           },
           {
             title: 'Allocation Dice',
-            description: 'The character’s Heritage provides their Allocation Dice. Divide these Dice into individual Pips as desired. Each Allocation Pip either increases an Attribute within the limits set by Heritage or increases an Edge’s complete pool one Pip above its linked Attribute. A Flaw records a complete pool one Pip below its linked Attribute and grants one additional Allocation Pip. Every starting character must take at least one Flaw, but there is no fixed number of Edges or maximum Descriptor rating.',
+            description: 'The character’s Heritage provides their Allocation Dice. Divide these Dice into individual Pips as desired. Each Allocation Pip either increases an Attribute within the limits set by Heritage or increases an Edge’s complete pool one Pip above its linked Attribute. A Flaw records a complete pool one Pip below its linked Attribute, to a minimum of 1D, and grants one additional Allocation Pip. Every starting character must take at least one Flaw, but there is no fixed number of Edges or maximum Descriptor rating.',
           },
           {
             title: 'Resonance Attunement',
@@ -2969,7 +3044,7 @@ const systems = [
           },
           {
             segments: [
-              { text: 'Every Descriptor is associated with an Attribute. An Edge records a complete pool higher than the linked Attribute, while a Flaw records a complete pool one Pip lower. When a Descriptor clearly applies, roll its complete pool instead of the Attribute. When there is no relevant ' },
+              { text: 'Every Descriptor is associated with an Attribute. An Edge records a complete pool higher than the linked Attribute, while a Flaw records a complete pool one Pip lower unless the Attribute is already 1D. When a Descriptor clearly applies, roll its complete pool instead of the Attribute. When there is no relevant ' },
               { text: 'Descriptor', strong: true },
               { text: ', the base ' },
               { text: 'Attribute', strong: true },
@@ -3011,7 +3086,7 @@ const systems = [
               { text: 'Edges', strong: true },
               { text: ' a character may possess. Every starting character must have at least one ' },
               { text: 'Flaw', strong: true },
-              { text: ' with a relative rating of −1 Pip below its linked Attribute.' },
+              { text: ' with a relative rating of −1 Pip below its linked Attribute, unless that Attribute is already at the 1D minimum.' },
             ],
           },
           {
@@ -3023,7 +3098,7 @@ const systems = [
               { text: 'Flaws', strong: true },
               { text: ' represent limitations, vulnerabilities, or complications and record a complete pool one Pip below an associated ' },
               { text: 'Attribute', strong: true },
-              { text: '. No individual Flaw can be more severe than this relative −1 Pip. A ' },
+              { text: '. Attributes and Flaws cannot fall below 1D. A Flaw linked to a 1D Attribute is therefore also recorded as 1D; the character is already flawed enough in that area. No individual Flaw can be more severe than a relative −1 Pip. A ' },
               { text: 'Descriptor', strong: true },
               { text: ' affects an action only when it meaningfully applies; the ' },
               { text: 'Storyteller', strong: true },
@@ -3051,22 +3126,22 @@ const systems = [
         flaws: ['Painful Scars', 'Alcoholic', 'Overtly Arrogant', 'Severely Asthmatic'],
       },
       {
-        id: 'derived-statistics',
+        id: 'additional-statistics',
         category: 'Character',
-        title: 'Derived Statistics',
+        title: 'Additional Statistics',
         introduction: [
           {
             segments: [
-              { text: 'Derived Statistics', strong: true },
-              { text: ' are calculated after Attributes, traits, and Descriptors have been assigned. They summarize important values used during play and must be recalculated whenever a source value changes.' },
+              { text: 'Additional Statistics', strong: true },
+              { text: ' are recorded after Attributes, traits, and Descriptors have been assigned. Some are calculated values, while others are starting resources or setting choices. Recalculate a value only when its own rule says it changes.' },
             ],
           },
         ],
-        conceptsTitle: 'Derived Values',
+        conceptsTitle: 'Additional Values',
         concepts: [
           {
             name: 'Health',
-            description: 'Roll the character’s Strength rating without a Descriptor, Wild Die, or Meta Die, then add 20. The character creator permits one reroll; changing Strength restores that reroll. The accepted result becomes both current and maximum Health.',
+            description: 'At character creation, roll the character’s Strength rating without a Descriptor, Wild Die, or Meta Die, then add 20. The character creator permits one reroll. The accepted result becomes both current and maximum Health. Later changes to Strength do not change Health; only XP or a rule that specifically modifies Health does so.',
           },
           {
             name: 'Defense Bonus',
@@ -3121,10 +3196,10 @@ const systems = [
           {
             title: 'Descriptor Advancement',
             paragraphs: [
-              'Descriptors are expressed as complete dice pools and advance one Pip at a time. The cost of an increase is twice the number before D in the new complete Descriptor rating. A new Edge begins one Pip above its linked Attribute and uses the same formula. Flaws remain one Pip below their linked Attribute and cannot be advanced separately.',
+              'Descriptors are expressed as complete dice pools and advance one Pip at a time. The cost of an increase is twice the number before D in the new complete Descriptor rating. A new Edge begins one Pip above its linked Attribute and uses the same formula. Flaws remain one Pip below their linked Attribute where possible, never fall below 1D, and cannot be advanced separately.',
             ],
             formula: 'Descriptor +1 Pip = 2 × number before D in the new complete Descriptor rating',
-            note: 'Example: Strength is 2D+2 and Wrestler is 3D+1, representing a +2 Pip improvement. Increasing Wrestler to 3D+2, a full +1D above Strength, costs 2 × 3 = 6 XP. Increasing 3D+2 to 4D would cost 2 × 4 = 8 XP.',
+            note: 'Example: Strength is 2D+2 and Professional Wrestler is 3D+1, representing a +2 Pip improvement. Increasing Professional Wrestler to 3D+2, a full +1D above Strength, costs 2 × 3 = 6 XP. Increasing 3D+2 to 4D would cost 2 × 4 = 8 XP.',
           },
           {
             title: 'Attribute Advancement',
@@ -3317,7 +3392,7 @@ const systems = [
           {
             title: 'The Observer',
             paragraphs: [
-              'The drone rolls its Sensor Sweep 3D+2 once for this search: ordinary dice of 3 and 4, a Wild Die of 3, and +2 Pips total 12. That search total is compared with each crew member’s individual result.',
+              'The drone rolls its Kharon Security Drone Descriptor at 3D+2 once for this search: ordinary dice of 3 and 4, a Wild Die of 3, and +2 Pips total 12. That search total is compared with each crew member’s individual result.',
             ],
           },
           {
@@ -3327,8 +3402,8 @@ const systems = [
               rows: [
                 ['Captain Curt', 'Dexterity 3D: 4 + 5 + Wild 4 = 13', 'Hidden; 13 beats 12'],
                 ['Dr Sport', 'Dexterity 2D+2: 3 + Wild 4 + 2 = 9', 'Detected; 9 loses to 12'],
-                ['Ensign Ashley', 'Security Infiltration 4D+1: 3 + 4 + 4 + Wild 4 + 1 = 16', 'Hidden; 16 beats 12'],
-                ['Ensign Porter', 'Maintenance Crawler 3D: 3 + 4 + Wild 5 = 12', 'Detected; the observer wins the tie'],
+                ['Ensign Ashley', 'Imperial Security Officer 4D+2: 3 + 4 + 4 + Wild 4 + 2 = 17', 'Hidden; 17 beats 12'],
+                ['Ensign Porter', 'Raised in Orbital Habitats 3D: 3 + 4 + Wild 5 = 12', 'Detected; the observer wins the tie'],
               ],
             },
             paragraphs: [
@@ -3354,14 +3429,14 @@ const systems = [
           {
             title: 'Start the Grapple',
             paragraphs: [
-              'Because the raider is armed, Ashley makes an unarmed Attack against Standard Difficulty (TN 11). She uses Close-Quarters Security 4D+2 and rolls ordinary dice of 2, 4, and 5, a Wild Die of 3, and +2 Pips for a total of 16.',
+              'Because the raider is armed, Ashley makes an unarmed Attack against Standard Difficulty (TN 11). She uses Imperial Security Officer 4D+2 and rolls ordinary dice of 2, 4, and 5, a Wild Die of 3, and +2 Pips for a total of 16.',
               'The result is 5 above the TN, producing Yes. The raider becomes Grappled, but the Attack deals no Damage.',
             ],
           },
           {
             title: 'Escape and Maintenance',
             paragraphs: [
-              'On its turn, the raider tries to slip free with Slippery Raider 3D+1 and totals 10. Ashley opposes with Close-Quarters Security 4D+2 and totals 15. The raider fails to escape.',
+              'On its turn, the raider tries to slip free with Kharon Boarding Raider 3D+1 and totals 10. Ashley opposes with Imperial Security Officer 4D+2 and totals 15. The raider fails to escape.',
               'On Ashley’s next turn, she spends one Action to maintain the Grapple and another Action to drag the raider 2 metres. Because she is taking two Actions, any Action rolls she makes that turn suffer −1D.',
             ],
           },
@@ -3391,7 +3466,7 @@ const systems = [
             title: 'Resolve Each Action',
             paragraphs: [
               'Starship Engineer 5D+1 becomes 3D+1. Porter rolls 3, 4, Wild 5, and +1 for 13 against Standard TN 11: Yes, but… The shields return, but the rushed rerouting drains a sensor bank.',
-              'Damage Control 4D+2 becomes 2D+2. Porter rolls 2, Wild 5, and +2 for 9 against Easy TN 8: Yes, but… The bulkhead seals, but its manual controls burn out.',
+              'The same broad Starship Engineer 5D+1 Descriptor applies to sealing the bulkhead and again becomes 3D+1. Porter rolls 2, 2, Wild 3, and +1 for 8 against Easy TN 8: Yes, but… The bulkhead seals, but its manual controls burn out.',
               'Porter then Runs toward engineering. The two successful checks retain their complications; taking several Actions does not merge them into one roll.',
             ],
           },
@@ -3414,7 +3489,7 @@ const systems = [
           {
             title: 'Make the Reaction',
             paragraphs: [
-              'Ashley takes Active Defense as a Reaction. It is her only Action or Reaction this Round, so there is no multiple-action penalty. Her Defense Bonus is 0, and she rolls Evasive Security 4D+2: ordinary dice of 2, 4, and 5, a Wild Die of 3, and +2 Pips total 16.',
+              'Ashley takes Active Defense as a Reaction. It is her only Action or Reaction this Round, so there is no multiple-action penalty. Her Defense Bonus is 0, and she rolls Imperial Security Officer 4D+2: ordinary dice of 2, 4, and 5, a Wild Die of 3, and +2 Pips total 16.',
             ],
           },
           {
@@ -3484,21 +3559,68 @@ const systems = [
                 ['Base Resonance Difficulty', 'TN 11'],
                 ['Standard Effect Severity', 'No change'],
                 ['40-metre Range', '+1 Band'],
-                ['Large Scale: shuttle-sized', '+1 Band'],
+                ['Massive Scale: shuttle-sized', '+3 Bands'],
                 ['Duration: up to 10 minutes', '+1 Band'],
-                ['Final Difficulty', 'TN 20'],
+                ['Final Difficulty', 'TN 26'],
               ],
             },
             paragraphs: [
-              'The three positive Difficulty Bands add +9 to TN 11. Gravitic Barrier is prepared, so it receives no unprepared-effect increase.',
+              'The five positive Difficulty Bands add +15 to TN 11. Gravitic Barrier is prepared, so it receives no unprepared-effect increase.',
             ],
           },
           {
             title: 'Roll and Outcome',
             paragraphs: [
-              'Curt rolls Gravitic Commander 5D+2. His ordinary dice show 3, 4, 4, and 5, his Wild Die shows 2, and the +2 Pips bring the total to 20.',
-              'Meeting TN 20 produces Yes, but… The barrier protects the shuttle, but its power draw dims the Hercules sensor array at a dangerous moment.',
-              'Had Gravitic Barrier been unprepared, it would have gained another +2 Bands, raising the final Difficulty to TN 26.',
+              'Curt rolls Resonant Imperial Captain 5D+2. His ordinary dice show 4, 5, 5, and 6, his Wild Die shows 4, and the +2 Pips bring the total to 26.',
+              'Meeting TN 26 produces Yes, but… The barrier protects the shuttle, but its power draw dims the Hercules sensor array at a dangerous moment.',
+              'Had Gravitic Barrier been unprepared, it would have gained another +2 Bands, raising the final Difficulty to TN 32.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'example-summoning',
+        category: 'Examples',
+        title: 'Example: Summoning a Polar Bear',
+        introduction: [
+          {
+            segments: [
+              { text: 'While visiting the ' },
+              { text: 'Starship Hercules', strong: true },
+              { text: ', the Veyran alien Irix is cornered in a cargo bay by hostile boarding creatures. Irix uses a prepared Resonance effect to summon a polar bear between the creatures and Ensign Ashley.' },
+            ],
+          },
+        ],
+        detailSections: [
+          {
+            title: 'Build the Difficulty',
+            table: {
+              headers: ['Element', 'Difficulty'],
+              rows: [
+                ['Base Resonance Difficulty', 'TN 11'],
+                ['Standard Summoning Rank', '+4 Bands'],
+                ['Range: within 20 metres', 'No change'],
+                ['Duration: up to 2 minutes', 'No change'],
+                ['Large Scale: polar bear', '+1 Band'],
+                ['Prepared Effect', 'No change'],
+                ['Final Difficulty', 'TN 26'],
+              ],
+            },
+            paragraphs: [
+              'Standard Summoning adds four Bands and the bear’s Large Scale adds one more. Five Bands add +15 to the base TN 11, producing a final Difficulty of TN 26.',
+            ],
+          },
+          {
+            title: 'Roll and Outcome',
+            paragraphs: [
+              'Irix rolls Veyran Resonance Adept 5D+2. The ordinary dice show 4, 5, 5, and 6, the Wild Die shows 4, and +2 Pips produce a total of 26.',
+              'Meeting TN 26 produces Yes, but… The polar bear appears and protects the cargo bay, but its roar alerts another group of boarders. Because this was prepared, the effect does not receive the +2-Band unprepared penalty.',
+            ],
+          },
+          {
+            title: 'Use the Summon',
+            paragraphs: [
+              'The polar bear is a temporary Companion with the Standard profile: Polar Bear 4D as its Best pool, Other 3D, Weak 2D, 20 Health, Damage 7, and Armour 1. It rolls its own Initiative, takes its own Actions, and disappears after two minutes or upon reaching 0 Health.',
             ],
           },
         ],
@@ -3526,7 +3648,7 @@ const systems = [
           {
             title: 'Escalating Checks',
             paragraphs: [
-              'On Round 5, Sport rolls Zero-G Survival 2D+2 against Standard TN 11. His ordinary die shows 3. His Wild Die rolls 6 and explodes for another 4. Adding +2 gives 3 + 6 + 4 + 2 = 15. He succeeds, so the next check rises one Band to Challenging TN 14.',
+              'On Round 5, Sport rolls Veteran Spacefarer 2D+2 against Standard TN 11. His ordinary die shows 3. His Wild Die rolls 6 and explodes for another 4. Adding +2 gives 3 + 6 + 4 + 2 = 15. He succeeds, so the next check rises one Band to Challenging TN 14.',
               'On Round 6, he rolls an ordinary 4, a Wild 3, and +2 for 9. He fails the TN 14 check and takes 5 Damage that ignores Armour. The checks would continue each Round until he could breathe, but he forces open the emergency air hatch before the next one.',
             ],
           },
@@ -3549,8 +3671,8 @@ const systems = [
           {
             title: 'Make the Attack',
             paragraphs: [
-              'The sentry is unaware and within reach, so Ashley declares a lethal Stealth Takedown with a vibroknife. The knife uses fixed Easy Difficulty (TN 8) and Damage 4. Ashley’s Security Infiltration 4D+1 gains Standard Advantage, becoming 5D+1.',
-              'She rolls ordinary dice of 2, 3, 4, and 5, a Wild Die of 3, and +1 Pip for a total of 18. The result is 10 above TN 8, producing Yes, and…',
+              'The sentry is unaware and within reach, so Ashley declares a lethal Stealth Takedown with a vibroknife. The knife uses fixed Easy Difficulty (TN 8) and Damage 4. Ashley’s Imperial Security Officer 4D+2 gains Standard Advantage, becoming 5D+2.',
+              'She rolls ordinary dice of 2, 3, 4, and 5, a Wild Die of 3, and +2 Pips for a total of 19. The result is 11 above TN 8, producing Yes, and…',
             ],
           },
           {
@@ -3571,7 +3693,7 @@ const systems = [
             segments: [
               { text: 'Two Kharon starfighters attack the ' },
               { text: 'Starship Hercules', strong: true },
-              { text: ' during its mission for the Human Empire. Each starfighter is Scale 1. The Hercules is a Scale 3 exploration ship with 50 Structure and Armour Absorption 2.' },
+              { text: ' during its mission for the Human Empire. Each starfighter is Huge Scale. The Hercules is a Colossal Scale exploration ship with 50 Structure and Armour Absorption 2.' },
             ],
           },
         ],
@@ -3579,21 +3701,21 @@ const systems = [
           {
             title: 'Make the Attacks',
             paragraphs: [
-              'Captain Jimbo Curt holds the Hercules on course through a narrow debris gap and does not use Active Defense. Both Attacks are made at Medium range against Standard Difficulty (TN 11). Because the Scale 3 ship presents such a large target to the Scale 1 starfighters, the Storyteller grants each attacker Standard Advantage.',
+              'Captain Jimbo Curt holds the Hercules on course through a narrow debris gap and does not use Active Defense. Both Attacks are made at Medium range against Standard Difficulty (TN 11). Because the Colossal ship presents such a large target to the Huge starfighters, the Storyteller grants each attacker Standard Advantage.',
               'Each pilot has the complete Kharon Wing Officer Descriptor at 4D. Standard Advantage raises each Attack pool to 5D. The first rolls ordinary dice of 2, 3, 4, and 4 plus a Wild Die of 3 for 16. The second rolls ordinary dice of 2, 2, 3, and 4 plus a Wild Die of 4 for 15. Both Attacks hit with Yes results.',
             ],
           },
           {
             title: 'Ordinary Starfighter Cannons',
             paragraphs: [
-              'The first starfighter fires Damage 12 cannons with Weapon Scale 1. Against the Scale 3 Hercules, the Scale difference reduces Damage by 10: 12 + 5 × (1 − 3) = 2.',
+              'The first starfighter fires Damage 12 Huge Scale cannons. Huge is two Scale steps below the Colossal Hercules, so the difference reduces Damage by 10: 12 − 10 = 2.',
               'The Hercules then subtracts Armour 2, reducing the hit to 0 Damage. The Attack hits and scorches the hull, but it causes no Structure loss.',
             ],
           },
           {
             title: 'Anti-Ship Torpedo',
             paragraphs: [
-              'The second Scale 1 starfighter carries a specialized Damage 12 torpedo with Weapon Scale 3. The weapon matches the Hercules in Scale, so its Damage is unchanged: 12 + 5 × (3 − 3) = 12.',
+              'The second Huge starfighter carries a specialized Damage 12 Colossal Scale torpedo. The weapon matches the Hercules in Scale, so its Damage is unchanged at 12.',
               'After Armour 2, the torpedo deals 10 Damage and reduces the Hercules from 50 to 40 Structure. It retains 80% of its maximum Structure and therefore remains in the highest Health Band with no penalty.',
             ],
           },
